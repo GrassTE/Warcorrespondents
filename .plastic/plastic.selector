@@ -1,0 +1,4 @@
+repository "Warcorrespondents@ssl://wechat_os_qy0wymg3o5bmocmvqrwnfqqhe@sh01-plasticscm.unity.cn:8787"
+  path "/"
+    smartbranch "/main/grasste0403" 
+     
