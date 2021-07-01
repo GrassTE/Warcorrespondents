@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class Machine : Interactive
 {
     // Start is called before the first frame update
+
+
+    public Text codeTextView;
     void Start()
     {
-        Debug.Log("hello");
-        Debug.Log("hello2");
+        //m_interface = GameObject.Find("MachinePanel");
     }
 
     // Update is called once per frame
@@ -16,4 +19,12 @@ public class Player : MonoBehaviour
     {
         
     }
+
+
+    public override void Coding(string temp)
+    {
+        codeTextView.text += temp;
+    }
+
+
 }
