@@ -11,9 +11,11 @@ public class IndexRecoder : MonoBehaviour
     public float runSpeedMultiple;//角色跑步的时候，速度是普通状态的多少倍
 
     public float dotRoLineTime;//判定输入为点还是横线的界限时间
+    public Dictionary<string, string> codeBook = new Dictionary<string, string>();
     void Start()
     {
-        
+        GameObject.DontDestroyOnLoad(gameObject);
+        codeBook.Add("..--","123");
     }
 
     // Update is called once per frame
