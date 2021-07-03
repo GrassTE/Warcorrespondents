@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class M_Player : MonoBehaviour
 {
-    // Start is called before the first frame update
+    //玩家类，主要用来控制玩家
     private IndexRecoder indexRecoder;//记录组件，内存方便修改的参数
     private Vector2 velocity;//逻辑速度，通过计算获得，最后加在理论速度上
     private Rigidbody2D m_rigidbody;//自身刚体组件
@@ -15,7 +15,6 @@ public class M_Player : MonoBehaviour
     //public GameObject bullet;//子弹预制体
     private int faceDir;//面部朝向，-1、1
     private float runSpeedMultiple = 1f;//速度倍率，在按下和释放跑步后被修改
-
     public Interactive catched;//所捕捉到的可交互对象
     void Start()
     {
@@ -101,9 +100,19 @@ public class M_Player : MonoBehaviour
     {
         if(context.started)
         {
+            //可交互对象都有UI界面。当按下交互键后，显示交互界面
             if(catched != null)
             {
-                catched.ShowInfo();
+                catched.OnCall();
+            }
+        }
+
+        if(context.canceled)
+        {
+            //可交互对象电话线比较特殊，需要额外检测按钮松开的瞬间
+            if(catched != null)
+            {
+                catched.StopRepareTheTelephoneLine();
             }
         }
     }
