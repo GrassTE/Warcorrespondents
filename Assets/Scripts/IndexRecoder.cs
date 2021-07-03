@@ -12,6 +12,7 @@ public class IndexRecoder : MonoBehaviour
 
     public float dotRoLineTime;//判定输入为点还是横线的界限时间
     public Dictionary<string, string> codeBook = new Dictionary<string, string>();
+    public float TelephoneNeedTime;
     void Start()
     {
         GameObject.DontDestroyOnLoad(gameObject);

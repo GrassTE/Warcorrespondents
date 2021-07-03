@@ -10,17 +10,37 @@ public class Machine : Interactive
 
     private Text codeTextView;
     private IndexRecoder indexRecoder;
+    private AllLinesInfo linesChecker;
     void Start()
     {
         //m_interface = GameObject.Find("MachinePanel");
         codeTextView = m_interface.GetComponentInChildren<Text>();
         indexRecoder = FindObjectOfType<IndexRecoder>();
+        linesChecker = FindObjectOfType<AllLinesInfo>();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public override void OnCall()
+    {
+        if(LinesCheck())//如果线路全通
+        {
+            m_interface.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("还有线路没通");
+        }
+    }
+
+    private bool LinesCheck()
+    {
+        if(linesChecker.needCount == linesChecker.OKCount) return true;
+        else return false;
     }
 
 
