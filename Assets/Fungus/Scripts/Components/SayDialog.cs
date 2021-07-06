@@ -109,6 +109,7 @@ namespace Fungus
 		protected virtual void OnDestroy()
 		{
 			activeSayDialogs.Remove(this);
+            
 		}
 			
 		protected virtual Writer GetWriter()
@@ -534,6 +535,7 @@ namespace Fungus
         {
             fadeWhenDone = true;
             GetWriter().Stop();
+            
         }
 
         /// <summary>
