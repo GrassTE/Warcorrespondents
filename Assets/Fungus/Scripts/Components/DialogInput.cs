@@ -3,6 +3,9 @@
 
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+//我加的，引入新的输入系统，来监听下一步的指令
+using UnityEngine.InputSystem;
+//
 
 namespace Fungus
 {
@@ -18,7 +21,10 @@ namespace Fungus
         /// <summary> Click anywhere on Say Dialog to advance. </summary>
         ClickOnDialog,
         /// <summary> Click on continue button to advance. </summary>
-        ClickOnButton
+        ClickOnButton,
+        ClikeAsMyself
+        /// <summary> 我自己设计的点击模式，用来响应键盘按键和鼠标 </summary>
+
     }
 
     /// <summary>
@@ -47,12 +53,15 @@ namespace Fungus
         protected StandaloneInputModule currentStandaloneInputModule;
 
         protected Writer writer;
+        private Gamepad gamepad;
+
 
         protected virtual void Awake()
         {
             writer = GetComponent<Writer>();
 
             CheckEventSystem();
+            gamepad = Gamepad.current;
         }
 
         // There must be an Event System in the scene for Say and Menu input to work.
@@ -112,6 +121,22 @@ namespace Fungus
                     dialogClickedFlag = false;
                 }
                 break;
+            case ClickMode.ClikeAsMyself:
+                if(gamepad!=null)
+                {
+                    if(gamepad.aButton.wasPressedThisFrame || Input.GetKeyDown(KeyCode.J))
+                    {
+                        SetNextLineFlag();
+                    }
+                }
+                else
+                {
+                    if(Input.GetKeyDown(KeyCode.J))
+                    {
+                        SetNextLineFlag();
+                    }
+                }
+                 break;
             }
 
             if (ignoreClickTimer > 0f)

@@ -19,7 +19,6 @@ public class NormalInvestableItems : Interactive
 
     public override void OnCall()
     {
-
         Debug.Log("我触发了"+ gameObject.name +"的对话");
         Flowchart.BroadcastFungusMessage("谈论" + gameObject.name);
     }
