@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fungus;
 
-public class NormalInvestableItems : Interactive
+public class Father : NormalInvestableItems
 {
     // Start is called before the first frame update
-    public string itemName;
     void Start()
     {
         
@@ -20,7 +19,7 @@ public class NormalInvestableItems : Interactive
 
     public override void OnCall()
     {
-        Debug.Log("我触发了"+ gameObject.name +"的对话");
-        Flowchart.BroadcastFungusMessage("谈论" + itemName);
+        Debug.Log("我触发了和父亲的对话");
+        Flowchart.BroadcastFungusMessage("与父亲对话");
     }
 }
