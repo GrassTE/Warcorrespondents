@@ -4134,7 +4134,7 @@ MonoBehaviour:
     m_ActionId: f7af9390-5dad-4c80-a4a7-83d8314f8e88
     m_ActionName: PlayerNormal/Codeing[/XInputControllerWindows/rightTrigger,/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Player
   m_DefaultActionMap: PlayerNormal
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
