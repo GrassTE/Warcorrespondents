@@ -12,6 +12,8 @@ public class Shell : MonoBehaviour
     private float fallingTime;
     private bool isDroping = false;
     private Transform m_shadow;
+    public GameObject boomObj;
+    
     void Start()
     {
         indexRecoder = FindObjectOfType<IndexRecoder>();
@@ -36,6 +38,8 @@ public class Shell : MonoBehaviour
         {
             transform.position -= new Vector3(0,shellSpeed*Time.deltaTime,0);
         }
+
+        
     }
 
     private void ShadowShock()
@@ -64,8 +68,10 @@ public class Shell : MonoBehaviour
             case "地面":
                 Destroy(m_shadow.gameObject);
                 Destroy(gameObject);
+                Instantiate(boomObj, new Vector2(transform.position.x, transform.position.y),Quaternion.identity);
                 break;
         }
     }
+    
 
 }

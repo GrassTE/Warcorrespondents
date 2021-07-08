@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shadow: {fileID: 3566358762308528686, guid: 73f23d723f100f54db8c58c86da940eb, type: 3}
+  boomObj: {fileID: 7911349319489194765, guid: 299f21a72c405984780245234d765a50, type: 3}
 --- !u!61 &7607195361720575763
 BoxCollider2D:
   m_ObjectHideFlags: 0
