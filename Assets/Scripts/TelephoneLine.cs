@@ -9,7 +9,7 @@ public class TelephoneLine : Interactive
     private float allNeedTime;
     private float hasReparedTime = 0f;
     private bool isReparing = false;
-    private bool isRepared = false;
+    public bool isRepared = false;
     IndexRecoder indexRecoder;
     private float process = 0f;
 
