@@ -29,7 +29,7 @@ public class BoomShader : MonoBehaviour
     {
         boomPos = Camera.main.WorldToViewportPoint(new Vector2(transform.position.x, transform.position.y));
         boomMaterial.SetVector("Center",boomPos);
-        boomMaterial.SetFloat("WaveSpread_Value",boomMaterial.GetFloat("WaveSpread_Value")+0.05f);
+        boomMaterial.SetFloat("WaveSpread_Value",boomMaterial.GetFloat("WaveSpread_Value")+0.2f);
     }
 
     private void setBoom()
