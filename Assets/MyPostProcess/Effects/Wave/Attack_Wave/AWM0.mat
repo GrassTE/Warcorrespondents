@@ -36,7 +36,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - MaxWaveRange: 0.822
+    - MaxWaveRange: 1
     - Ratios: 1.5
     - SingleWaveWidth: 0.1
     - WaveCount: 50
@@ -44,6 +44,6 @@ Material:
     - WaveIntensity_2: 1
     - WaveSpread_Value: 0
     m_Colors:
-    - Center: {r: -1.0658159, g: 0.27947176, b: 0, a: 0}
+    - Center: {r: 0.24355605, g: 0.29367954, b: 0, a: 0}
     - Vector2_d2d098295fc146f08b921b231b2e5199: {r: 1.6, g: 0.9, b: 0, a: 0}
   m_BuildTextureStacks: []
