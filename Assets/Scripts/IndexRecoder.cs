@@ -37,7 +37,19 @@ public class IndexRecoder : MonoBehaviour
     void Start()
     {
         GameObject.DontDestroyOnLoad(gameObject);
-        codeBook.Add("..--","123");
+        //开发者捷径
+        codeBook.Add("..--.","123");
+        //
+        codeBook.Add(".----","1");
+        codeBook.Add("..---","2");
+        codeBook.Add("...--","3");
+        codeBook.Add("....-","4");
+        codeBook.Add(".....","5");
+        codeBook.Add("-....","6");
+        codeBook.Add("--...","7");
+        codeBook.Add("---..","8");
+        codeBook.Add("----.","9");
+        codeBook.Add("-----","0");
     }
 
     // Update is called once per frame

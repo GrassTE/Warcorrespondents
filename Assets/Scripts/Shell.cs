@@ -58,7 +58,7 @@ public class Shell : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.name);
+        //Debug.Log(other.name);
         //当玩家被炮弹击中
         switch (other.tag)
         {
