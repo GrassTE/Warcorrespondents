@@ -38,7 +38,8 @@ public class IndexRecoder : MonoBehaviour
     {
         GameObject.DontDestroyOnLoad(gameObject);
         //开发者捷径
-        codeBook.Add("..--.","123");
+        codeBook.Add("..--.","864246511");
+        codeBook.Add("--..-","02948");
         //
         codeBook.Add(".----","1");
         codeBook.Add("..---","2");
