@@ -185,6 +185,175 @@ public class @Player : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""NullMap"",
+            ""id"": ""c4624120-51ed-40d4-859d-23407e1af549"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""beabb251-6f14-495d-9364-88119e0f9bf0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""ae26865a-51e7-44ff-aea5-7c92da228cef"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""PlayerInThrowing"",
+            ""id"": ""ce68185c-0387-41f3-b3e6-fa39ba2919e5"",
+            ""actions"": [
+                {
+                    ""name"": ""Quit"",
+                    ""type"": ""Button"",
+                    ""id"": ""078b3370-2cb6-4574-9156-0146ae814573"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Throw"",
+                    ""type"": ""Button"",
+                    ""id"": ""6bab4454-55d6-409c-9736-d1640a407628"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""AdjustTheAngle"",
+                    ""type"": ""Value"",
+                    ""id"": ""fddd4068-5ae8-4c1a-8498-4c8c30327f57"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""4c3ccd32-0010-4273-951a-4280201b6418"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player"",
+                    ""action"": ""Quit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e28bf435-0e2c-4e22-887e-66dc54eb99c2"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player"",
+                    ""action"": ""Quit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""72d81a4a-c61f-4b02-8495-19d0fe279d6c"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player"",
+                    ""action"": ""Throw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""42108f89-0858-4a1e-8ca9-f92d541b2328"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player"",
+                    ""action"": ""Throw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""ea410c6c-a556-403c-8a68-002f5b70e7c0"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AdjustTheAngle"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""96e2ca69-cab5-4c52-8bf7-8e3e98800a2f"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player"",
+                    ""action"": ""AdjustTheAngle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""c016c203-a320-411b-9ec1-2dadd19d628a"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player"",
+                    ""action"": ""AdjustTheAngle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""85e86d8c-ef51-4e91-9833-416f07830ef7"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AdjustTheAngle"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""dbde76be-6fa4-4ffa-b56c-889e98ce208a"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player"",
+                    ""action"": ""AdjustTheAngle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""b0d81269-947f-44bf-9dc6-4f11746d6eb2"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player"",
+                    ""action"": ""AdjustTheAngle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -212,6 +381,14 @@ public class @Player : IInputActionCollection, IDisposable
         m_PlayerNormal_Run = m_PlayerNormal.FindAction("Run", throwIfNotFound: true);
         m_PlayerNormal_Interaction = m_PlayerNormal.FindAction("Interaction", throwIfNotFound: true);
         m_PlayerNormal_Coding = m_PlayerNormal.FindAction("Coding", throwIfNotFound: true);
+        // NullMap
+        m_NullMap = asset.FindActionMap("NullMap", throwIfNotFound: true);
+        m_NullMap_Newaction = m_NullMap.FindAction("New action", throwIfNotFound: true);
+        // PlayerInThrowing
+        m_PlayerInThrowing = asset.FindActionMap("PlayerInThrowing", throwIfNotFound: true);
+        m_PlayerInThrowing_Quit = m_PlayerInThrowing.FindAction("Quit", throwIfNotFound: true);
+        m_PlayerInThrowing_Throw = m_PlayerInThrowing.FindAction("Throw", throwIfNotFound: true);
+        m_PlayerInThrowing_AdjustTheAngle = m_PlayerInThrowing.FindAction("AdjustTheAngle", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -314,6 +491,88 @@ public class @Player : IInputActionCollection, IDisposable
         }
     }
     public PlayerNormalActions @PlayerNormal => new PlayerNormalActions(this);
+
+    // NullMap
+    private readonly InputActionMap m_NullMap;
+    private INullMapActions m_NullMapActionsCallbackInterface;
+    private readonly InputAction m_NullMap_Newaction;
+    public struct NullMapActions
+    {
+        private @Player m_Wrapper;
+        public NullMapActions(@Player wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Newaction => m_Wrapper.m_NullMap_Newaction;
+        public InputActionMap Get() { return m_Wrapper.m_NullMap; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(NullMapActions set) { return set.Get(); }
+        public void SetCallbacks(INullMapActions instance)
+        {
+            if (m_Wrapper.m_NullMapActionsCallbackInterface != null)
+            {
+                @Newaction.started -= m_Wrapper.m_NullMapActionsCallbackInterface.OnNewaction;
+                @Newaction.performed -= m_Wrapper.m_NullMapActionsCallbackInterface.OnNewaction;
+                @Newaction.canceled -= m_Wrapper.m_NullMapActionsCallbackInterface.OnNewaction;
+            }
+            m_Wrapper.m_NullMapActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Newaction.started += instance.OnNewaction;
+                @Newaction.performed += instance.OnNewaction;
+                @Newaction.canceled += instance.OnNewaction;
+            }
+        }
+    }
+    public NullMapActions @NullMap => new NullMapActions(this);
+
+    // PlayerInThrowing
+    private readonly InputActionMap m_PlayerInThrowing;
+    private IPlayerInThrowingActions m_PlayerInThrowingActionsCallbackInterface;
+    private readonly InputAction m_PlayerInThrowing_Quit;
+    private readonly InputAction m_PlayerInThrowing_Throw;
+    private readonly InputAction m_PlayerInThrowing_AdjustTheAngle;
+    public struct PlayerInThrowingActions
+    {
+        private @Player m_Wrapper;
+        public PlayerInThrowingActions(@Player wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Quit => m_Wrapper.m_PlayerInThrowing_Quit;
+        public InputAction @Throw => m_Wrapper.m_PlayerInThrowing_Throw;
+        public InputAction @AdjustTheAngle => m_Wrapper.m_PlayerInThrowing_AdjustTheAngle;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerInThrowing; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerInThrowingActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerInThrowingActions instance)
+        {
+            if (m_Wrapper.m_PlayerInThrowingActionsCallbackInterface != null)
+            {
+                @Quit.started -= m_Wrapper.m_PlayerInThrowingActionsCallbackInterface.OnQuit;
+                @Quit.performed -= m_Wrapper.m_PlayerInThrowingActionsCallbackInterface.OnQuit;
+                @Quit.canceled -= m_Wrapper.m_PlayerInThrowingActionsCallbackInterface.OnQuit;
+                @Throw.started -= m_Wrapper.m_PlayerInThrowingActionsCallbackInterface.OnThrow;
+                @Throw.performed -= m_Wrapper.m_PlayerInThrowingActionsCallbackInterface.OnThrow;
+                @Throw.canceled -= m_Wrapper.m_PlayerInThrowingActionsCallbackInterface.OnThrow;
+                @AdjustTheAngle.started -= m_Wrapper.m_PlayerInThrowingActionsCallbackInterface.OnAdjustTheAngle;
+                @AdjustTheAngle.performed -= m_Wrapper.m_PlayerInThrowingActionsCallbackInterface.OnAdjustTheAngle;
+                @AdjustTheAngle.canceled -= m_Wrapper.m_PlayerInThrowingActionsCallbackInterface.OnAdjustTheAngle;
+            }
+            m_Wrapper.m_PlayerInThrowingActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Quit.started += instance.OnQuit;
+                @Quit.performed += instance.OnQuit;
+                @Quit.canceled += instance.OnQuit;
+                @Throw.started += instance.OnThrow;
+                @Throw.performed += instance.OnThrow;
+                @Throw.canceled += instance.OnThrow;
+                @AdjustTheAngle.started += instance.OnAdjustTheAngle;
+                @AdjustTheAngle.performed += instance.OnAdjustTheAngle;
+                @AdjustTheAngle.canceled += instance.OnAdjustTheAngle;
+            }
+        }
+    }
+    public PlayerInThrowingActions @PlayerInThrowing => new PlayerInThrowingActions(this);
     private int m_PlayerSchemeIndex = -1;
     public InputControlScheme PlayerScheme
     {
@@ -329,5 +588,15 @@ public class @Player : IInputActionCollection, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnInteraction(InputAction.CallbackContext context);
         void OnCoding(InputAction.CallbackContext context);
+    }
+    public interface INullMapActions
+    {
+        void OnNewaction(InputAction.CallbackContext context);
+    }
+    public interface IPlayerInThrowingActions
+    {
+        void OnQuit(InputAction.CallbackContext context);
+        void OnThrow(InputAction.CallbackContext context);
+        void OnAdjustTheAngle(InputAction.CallbackContext context);
     }
 }

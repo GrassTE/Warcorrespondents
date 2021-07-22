@@ -15,26 +15,49 @@ public class M_Player : MonoBehaviour
     //public GameObject bullet;//子弹预制体
     private int faceDir;//面部朝向，-1、1
     private float runSpeedMultiple = 1f;//速度倍率，在按下和释放跑步后被修改
+    [Tooltip("所捕捉到的可交互对象,不要手动赋值，这个会自己捕捉")]
     public Interactive catched;//所捕捉到的可交互对象
+    private bool throwingState = false;//记录当前是否在投掷状态
+    private PlayerInput playerInput;//自身输入组件，用来切换操控地图
+    private bool canAdjustTheAngle = false;//记录此时自己是否能调整投掷角度
+    private float throwingAngle = 45f;//记录投掷的角度.默认是45°
+    private float throwingAngleDir;//记录此时投掷角度变化的速度，包括大小和方向，-1~1表示
+    [Tooltip("投掷物的预制体")]
+    public GameObject missile;//投掷物的预制体
+    [Tooltip("投掷物抛出点")]
+    public Transform throwOffset;//记录一下抛出点的位置
     void Start()
     {
-        //获取数值记录组件，方便策划修改暴露参数
-        indexRecoder = FindObjectOfType<IndexRecoder>();
-        //获取自身刚体组件
-        m_rigidbody = GetComponent<Rigidbody2D>();
-        //默认面部朝右
-        faceDir = 1;
+        indexRecoder = FindObjectOfType<IndexRecoder>();//获取数值记录组件，方便策划修改暴露参数    
+        m_rigidbody = GetComponent<Rigidbody2D>();//获取自身刚体组件
+        faceDir = 1;//默认面部朝右
+        playerInput = GetComponent<PlayerInput>(); //获取自身输入组件
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        AdjustTheAngle();
     }
 
     void FixedUpdate()
     {
         Move();
+    }
+
+    private void AdjustTheAngle()
+    {
+        if(canAdjustTheAngle)//如果玩家正在调整角度
+        {
+            throwingAngle += throwingAngleDir//则让现在的抛出角度加上变化的速度
+                             * indexRecoder.rateOfChangeOfThrowingAngle//乘以变化的速率
+                             * Time.deltaTime;//使其与时间无关
+            Debug.DrawLine(transform.position,
+                            new Vector3(transform.position.x + 100*Mathf.Cos(throwingAngle),
+                                        transform.position.y + 100*Mathf.Sin(throwingAngle),
+                                        transform.position.z),
+                            Color.red);
+        }
     }
 
     //当水平轴有输入
@@ -61,12 +84,6 @@ public class M_Player : MonoBehaviour
             transform.localScale.z);
     }
 
-    public void OnFire()
-    {
-        // GameObject temp = Instantiate(bullet,m_rigidbody.position,Quaternion.identity);
-        // temp.GetComponent<Bullet>().SetDir(faceDir);
-    }
-
     private void Move()
     {
         //指定水平方向的速度
@@ -78,12 +95,31 @@ public class M_Player : MonoBehaviour
 
     }
 
-    private void OnJump()
+    public void OnThrow(InputAction.CallbackContext context)
     {
-        //跳的时候给一个垂直向上的速度
-        m_rigidbody.velocity = new Vector2(0,indexRecoder.playerJumpSpeed);
+        if(context.started)//如果按下投掷键，表示可以开始控制角度了
+        {
+            canAdjustTheAngle = true;
+        }
+        if(context.canceled)//如果是刚松开投掷键，表示要丢东西了
+        {
+            Throw();
+        }
     }
 
+    public void OnAdjustTheAngle(InputAction.CallbackContext context)
+    {throwingAngleDir = context.ReadValue<float>();}//把收到的轴的值交给角度变化的大小和方向
+
+    private void Throw()
+    {
+        Debug.Log("我投出手上拿着的东西了");
+        Rigidbody2D rigidbodyOfMissile = 
+            Instantiate(missile,throwOffset.position,Quaternion.identity).GetComponent<Rigidbody2D>();
+        rigidbodyOfMissile.velocity = new Vector2(indexRecoder.strengthOfThrowing*Mathf.Cos(throwingAngle),
+                                                  indexRecoder.strengthOfThrowing*Mathf.Sin(throwingAngle));
+    }
+
+    //进入跑步状态的控制代码
     public void OnRun(InputAction.CallbackContext context)
     {
         if(context.started)//如果刚按下跑步键
@@ -136,5 +172,14 @@ public class M_Player : MonoBehaviour
         }
     }
 
+    public void EnterThrowingState()
+    {
+        throwingState = true;//修改自身记录状态变量，表示正式进入投掷状态
+        //1.切换操控地图
+        playerInput.SwitchCurrentActionMap("PlayerInThrowing");
+        //2.动画相关
+        //
+    }
+    public void QuitThrowingsState(){}
 
 }
