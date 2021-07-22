@@ -32,7 +32,10 @@ public class IndexRecoder : MonoBehaviour
     public float shellShadowRangeOfChange;
     [Tooltip("炮弹阴影的Y值偏移")] 
     public float shellShadowPositionYOffSet;
-
+    [Tooltip("玩家投掷角度变化的速度")] 
+    public float rateOfChangeOfThrowingAngle;
+    [Tooltip("抛出投掷物的力度")]
+    public float strengthOfThrowing;
 
     void Start()
     {
