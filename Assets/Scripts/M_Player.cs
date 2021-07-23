@@ -52,11 +52,12 @@ public class M_Player : MonoBehaviour
             throwingAngle += throwingAngleDir//则让现在的抛出角度加上变化的速度
                              * indexRecoder.rateOfChangeOfThrowingAngle//乘以变化的速率
                              * Time.deltaTime;//使其与时间无关
-            Debug.DrawLine(transform.position,
+            Debug.DrawLine(throwOffset.position,
                             new Vector3(transform.position.x + 100*Mathf.Cos(throwingAngle),
                                         transform.position.y + 100*Mathf.Sin(throwingAngle),
                                         transform.position.z),
                             Color.red);
+           DrawPath(); 
         }
     }
 
@@ -112,7 +113,7 @@ public class M_Player : MonoBehaviour
 
     private void Throw()
     {
-        Debug.Log("我投出手上拿着的东西了");
+        //Debug.Log("我投出手上拿着的东西了");
         Rigidbody2D rigidbodyOfMissile = 
             Instantiate(missile,throwOffset.position,Quaternion.identity).GetComponent<Rigidbody2D>();
         rigidbodyOfMissile.velocity = new Vector2(indexRecoder.strengthOfThrowing*Mathf.Cos(throwingAngle),
@@ -181,5 +182,32 @@ public class M_Player : MonoBehaviour
         //
     }
     public void QuitThrowingsState(){}
+
+    //绘制曲线的函数，非常🐂
+    public void DrawPath()
+    {
+        //
+        LineRenderer line = GetComponent<LineRenderer>();//获取组件
+        int segmentCount = 15;//定义点数
+        line.positionCount = segmentCount;//传入点数
+        float gravity=9.8f;//定义重力常量
+        Vector2 fireOffset = new Vector2(throwOffset.position.x - transform.position.x, 
+                                         throwOffset.position.y - transform.position.y);
+        Vector2[] segments = new Vector2[segmentCount];//定义二维向量数组，用来存15个点的位置
+        segments[0].Set(transform.position.x + fireOffset.x, transform.position.y + fireOffset.y);//定义起点
+        line.SetPosition(0, segments[0]);//把起点位置传入线的起点    
+        for (int i = 1; i < segmentCount; i++)//根据时间、循环确定点的位置
+        {
+            float time = i * Time.fixedDeltaTime * 5;//类似时间间隔的定义，也就是抛物线上的x多久取值一次
+            segments[i].x = transform.position.x + //自身位置的x
+                            fireOffset.x + //发射偏移量的x
+                            time * indexRecoder.strengthOfThrowing * Mathf.Cos(throwingAngle);//水平方向位移 = v*t
+            segments[i].y = (transform.position.y + fireOffset.y + //自身位置的y
+                            time * indexRecoder.strengthOfThrowing * Mathf.Sin(throwingAngle) + 
+                            (0.5f * gravity * time * time)*-1);//垂直方向位移 = vt + 1/2 * g * t^2
+            line.SetPosition(i, segments[i]);  //把算好的点传入线的点集     
+        }
+    }
+    //
 
 }
