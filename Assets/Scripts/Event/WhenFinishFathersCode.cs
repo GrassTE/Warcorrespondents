@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Fungus;
 public class WhenFinishFathersCode : Event
 {
     // Start is called before the first frame update
@@ -18,6 +18,7 @@ public class WhenFinishFathersCode : Event
 
     public override void OnCall()
     {
-        Debug.Log("打完了，执行下一步的代码请写这里");
+        Flowchart.BroadcastFungusMessage("玩家打完了父亲教的电码");
+        //Debug.Log("打完了，执行下一步的代码请写这里");
     }
 }
