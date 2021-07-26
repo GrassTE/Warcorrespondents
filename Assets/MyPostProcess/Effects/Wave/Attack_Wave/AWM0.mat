@@ -42,8 +42,8 @@ Material:
     - WaveCount: 50
     - WaveIntensity_1: 0.02
     - WaveIntensity_2: 1
-    - WaveSpread_Value: 11.199994
+    - WaveSpread_Value: 11.7999935
     m_Colors:
-    - Center: {r: 0.4856287, g: 0.3092804, b: 0, a: 0}
+    - Center: {r: 0.78189915, g: 0.29703158, b: 0, a: 0}
     - Vector2_d2d098295fc146f08b921b231b2e5199: {r: 1.6, g: 0.9, b: 0, a: 0}
   m_BuildTextureStacks: []
