@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Mine : MonoBehaviour
 {
+    //地雷系统的地雷类，因为系统还十分不完善，所以没有什么内容🥔
     // Start is called before the first frame update
     void Start()
     {

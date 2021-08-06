@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class IndexRecoder : MonoBehaviour
 {
+    //策划接口类，储存了所有易变的数值，每一项都写了toolTip，谁叫我是小棉袄呢❤对了，电报的字典也写在这里
     // Start is called before the first frame update
     [Tooltip("角色普通移动速度")]
     public float playerMoveSpeed;//角色普通移动速度

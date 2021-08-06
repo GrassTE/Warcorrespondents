@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class TelephoneLine : Interactive
 {
+    //电话线类，控制每一处断裂的电话线
     // Start is called before the first frame update
     private float allNeedTime;
     private float hasReparedTime = 0f;

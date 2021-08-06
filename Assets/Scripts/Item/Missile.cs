@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Missile : Interactive
 {
+    //投掷物类，控制投掷。系统还十分不完善。
     // Start is called before the first frame update
     void Start()
     {

@@ -6,6 +6,7 @@ using Fungus;
 public class Father : NormalInvestableItems
 {
     // Start is called before the first frame update
+    //父亲类，控制父亲作为可对话对象那会儿的父亲
     void Start()
     {
         

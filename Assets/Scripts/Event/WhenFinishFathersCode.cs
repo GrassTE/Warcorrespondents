@@ -5,6 +5,7 @@ using Fungus;
 public class WhenFinishFathersCode : Event
 {
     // Start is called before the first frame update
+    //具体事件：当玩家打完了父亲教的电码
     void Start()
     {
         

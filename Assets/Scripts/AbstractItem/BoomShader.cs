@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class BoomShader : MonoBehaviour
 {
+    //这是控制炸弹爆炸后冲击波产生的脚本，是霄酱写的🤔
     public Material boomMaterial;//爆炸shader的材质
     private Vector2 boomPos;//爆炸坐标
     private bool isBoom = false;//是否爆炸

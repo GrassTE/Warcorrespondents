@@ -7,6 +7,7 @@ using UnityEngine;
     使用方式：将类挂载到需要视差的背景上，将主摄像机赋值给Cam，调节视差率即可
     注意 移动的背景一定要比不移动的面积大
 */
+//视差类，霄酱写的🤔
 public class Parallax : MonoBehaviour
 {
 

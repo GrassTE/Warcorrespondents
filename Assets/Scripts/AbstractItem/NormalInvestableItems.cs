@@ -6,6 +6,7 @@ using Fungus;
 public class NormalInvestableItems : Interactive
 {
     // Start is called before the first frame update
+    //普通可调查对象的类，用在按F可以触发调查对话的对象上💬
     public string itemName;
     void Start()
     {

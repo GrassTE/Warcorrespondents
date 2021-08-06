@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BombingArea : MonoBehaviour
 {
+    //这是轰炸区的脚本，控制轰炸区相关的所有逻辑💣
     // Start is called before the first frame update
     private bool bombing = false;//是否正在轰炸
     public GameObject shell;//炮弹游戏物体

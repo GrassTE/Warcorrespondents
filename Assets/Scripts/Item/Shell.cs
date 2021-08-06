@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Shell : MonoBehaviour
 {
+    //炮弹类，控制轰炸区内的炮弹和炮弹的阴影🎇
     // Start is called before the first frame update
     public GameObject shadow;//阴影游戏物体
     private Transform ground;//地面的位置信息

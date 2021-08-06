@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Machine : Interactive
 {
+    //电报机类。控制电报机的信息和各种功能，非常关键🤖
     private Text codeTextView;//电码TextView，显示目前打了打码
     private IndexRecoder indexRecoder;//策划数值接口
     private AllLinesInfo linesChecker;//路线信息
