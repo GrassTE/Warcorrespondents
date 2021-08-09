@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1107 &-1116240413357958017
 AnimatorStateMachine:
-  serializedVersion: 6
+  serializedVersion: 5
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -11,7 +11,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1259281646917324526}
-    m_Position: {x: 140, y: 120, z: 0}
+    m_Position: {x: 30, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3926615483802031973}
     m_Position: {x: -10, y: 60, z: 0}
@@ -49,7 +49,7 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
 --- !u!1102 &1259281646917324526
 AnimatorState:
-  serializedVersion: 6
+  serializedVersion: 5
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -75,7 +75,7 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1102 &3926615483802031973
 AnimatorState:
-  serializedVersion: 6
+  serializedVersion: 5
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
