@@ -26,12 +26,14 @@ public class M_Player : MonoBehaviour
     public GameObject missile;//投掷物的预制体
     [Tooltip("投掷物抛出点")]
     public Transform throwOffset;//记录一下抛出点的位置
+    private Animator M_Animator;
     void Start()
     {
         indexRecoder = FindObjectOfType<IndexRecoder>();//获取数值记录组件，方便策划修改暴露参数    
         m_rigidbody = GetComponent<Rigidbody2D>();//获取自身刚体组件
         faceDir = 1;//默认面部朝右
         playerInput = GetComponent<PlayerInput>(); //获取自身输入组件
+        //M_Animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -45,6 +47,7 @@ public class M_Player : MonoBehaviour
         Move();
     }
 
+    //调整投掷角度的函数
     private void AdjustTheAngle()
     {
         if(canAdjustTheAngle)//如果玩家正在调整角度
@@ -77,7 +80,7 @@ public class M_Player : MonoBehaviour
             inputDir = -1;
             faceDir = -1;
         }
-        else inputDir = 0;
+        else {inputDir = 0;}
         //修改面部朝向
         transform.localScale = new Vector3(
             Mathf.Abs(transform.localScale.x)*faceDir,
@@ -95,7 +98,15 @@ public class M_Player : MonoBehaviour
                                             );
 
     }
+    // void OnAnimatorMove()//Unity的回调函数，这样做能解决模型无法转向的问题，每帧调用一次
+    // {
+    //     m_rigidbody.MovePosition(m_rigidbody.position + faceDir*M_Animator.deltaPosition.magnitude*Vector2.right);
+    //     Debug.Log(M_Animator.deltaPosition.magnitude);
+    //     //m_RigidBody.MoveRotation(m_Rotation);//当物体有物理组件rigidbody的时候，再修改位置和旋转信息就不要用transfrom了，用刚体自带的Move等方法
+    // }
 
+
+    //监听投掷按键的函数
     public void OnThrow(InputAction.CallbackContext context)
     {
         if(context.started)//如果按下投掷键，表示可以开始控制角度了
@@ -108,9 +119,11 @@ public class M_Player : MonoBehaviour
         }
     }
 
+    //监听修改投掷角度的函数
     public void OnAdjustTheAngle(InputAction.CallbackContext context)
     {throwingAngleDir = context.ReadValue<float>();}//把收到的轴的值交给角度变化的大小和方向
 
+    //控制投掷相关的具体函数
     private void Throw()
     {
         //Debug.Log("我投出手上拿着的东西了");
@@ -133,6 +146,7 @@ public class M_Player : MonoBehaviour
         }
     }
 
+    //监听交互按键的函数
     public void OnInteraction(InputAction.CallbackContext context)
     {
         if(context.started)
@@ -154,6 +168,7 @@ public class M_Player : MonoBehaviour
         }
     }
 
+    //监听打电码的函数
     public void OnCoding(InputAction.CallbackContext context)
     {
         if(context.canceled)
@@ -173,6 +188,7 @@ public class M_Player : MonoBehaviour
         }
     }
 
+    //使自身进入投掷状态的函数
     public void EnterThrowingState()
     {
         throwingState = true;//修改自身记录状态变量，表示正式进入投掷状态
@@ -181,9 +197,11 @@ public class M_Player : MonoBehaviour
         //2.动画相关
         //
     }
+    
+    //等待完善投掷系统
     public void QuitThrowingsState(){}
 
-    //绘制曲线的函数，非常🐂
+    //绘制投掷曲线的函数，非常🐂
     public void DrawPath()
     {
         //
@@ -208,6 +226,5 @@ public class M_Player : MonoBehaviour
             line.SetPosition(i, segments[i]);  //把算好的点传入线的点集     
         }
     }
-    //
 
 }
