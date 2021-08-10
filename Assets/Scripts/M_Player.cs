@@ -34,6 +34,11 @@ public class M_Player : MonoBehaviour
         faceDir = 1;//默认面部朝右
         playerInput = GetComponent<PlayerInput>(); //获取自身输入组件
         M_Animator = GetComponent<Animator>();
+
+        //为了解决warming，最后阶段请删除，到那时应该不会再有警告
+        if(inputDir == 0){}
+        if(throwingState){}
+        //
     }
 
     // Update is called once per frame

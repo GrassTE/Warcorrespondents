@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class IndexRecoder : MonoBehaviour
 {
@@ -37,6 +38,8 @@ public class IndexRecoder : MonoBehaviour
     public float rateOfChangeOfThrowingAngle;
     [Tooltip("抛出投掷物的力度")]
     public float strengthOfThrowing;
+    [SerializeField][Tooltip("演出名称，这个不给你改，这个是我做多态用的，在这里只读")][ReadOnly]
+    public string stageName;
 
     void Start()
     {
@@ -55,6 +58,8 @@ public class IndexRecoder : MonoBehaviour
         codeBook.Add("---..","8");
         codeBook.Add("----.","9");
         codeBook.Add("-----","0");
+
+        stageName = "序章-家中-未打码";
     }
 
     // Update is called once per frame
@@ -62,4 +67,27 @@ public class IndexRecoder : MonoBehaviour
     {
         
     }
+
+    //修改演出名称的函数，在游戏流程推进的时候用
+    public void ChangeStageName(string newName){stageName = newName;}
+
+
+    //制造一个只读的变量，不要动这些
+    public class ReadOnlyAttribute : PropertyAttribute{}
+    [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
+    public class ReadOnlyDrawer : PropertyDrawer
+    {
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            return EditorGUI.GetPropertyHeight(property, label, true);
+        }
+
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            GUI.enabled = false;
+            EditorGUI.PropertyField(position, property, label, true);
+            GUI.enabled = true;
+        }
+    }
+    //
 }
