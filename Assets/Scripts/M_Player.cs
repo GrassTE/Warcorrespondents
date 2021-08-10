@@ -33,7 +33,7 @@ public class M_Player : MonoBehaviour
         m_rigidbody = GetComponent<Rigidbody2D>();//获取自身刚体组件
         faceDir = 1;//默认面部朝右
         playerInput = GetComponent<PlayerInput>(); //获取自身输入组件
-        //M_Animator = GetComponent<Animator>();
+        M_Animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -68,6 +68,7 @@ public class M_Player : MonoBehaviour
     public void OnMoveHorizons(InputAction.CallbackContext context)
     {
         float value = context.ReadValue<float>();
+        M_Animator.SetBool("IsWalking",true);
         //输入只有对移动方向和面部朝向的更改
         if(value > 0)
         {
@@ -80,7 +81,8 @@ public class M_Player : MonoBehaviour
             inputDir = -1;
             faceDir = -1;
         }
-        else {inputDir = 0;}
+        else {inputDir = 0;
+              M_Animator.SetBool("IsWalking",false);}
         //修改面部朝向
         transform.localScale = new Vector3(
             Mathf.Abs(transform.localScale.x)*faceDir,
@@ -90,13 +92,12 @@ public class M_Player : MonoBehaviour
 
     private void Move()
     {
-        //指定水平方向的速度
-        m_rigidbody.velocity = new Vector2(indexRecoder.playerMoveSpeed* //记录文件中的玩家速度乘以
-                                            inputDir*//输入的方向乘以
-                                            runSpeedMultiple,//速度的倍率，对付跑步时候的需要
-                                            m_rigidbody.velocity.y//y轴的速度不变
-                                            );
-
+        // //指定水平方向的速度
+        // m_rigidbody.velocity = new Vector2(indexRecoder.playerMoveSpeed* //记录文件中的玩家速度乘以
+        //                                     inputDir*//输入的方向乘以
+        //                                     runSpeedMultiple,//速度的倍率，对付跑步时候的需要
+        //                                     m_rigidbody.velocity.y//y轴的速度不变
+        //                                     );
     }
     // void OnAnimatorMove()//Unity的回调函数，这样做能解决模型无法转向的问题，每帧调用一次
     // {
