@@ -1839,7 +1839,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 604041686}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.19903, y: -1.2566175, z: -9.900214}
+  m_LocalPosition: {x: 2.0700002, y: -0.86, z: -10}
   m_LocalScale: {x: 40.825, y: 10.626138, z: 1}
   m_Children:
   - {fileID: 2009057140}
@@ -1882,7 +1882,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 0}
+  m_Follow: {fileID: 2658040340377940378}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 4
@@ -3200,7 +3200,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1334261266}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.19903, y: -1.2566175, z: -9.900214}
+  m_LocalPosition: {x: 2.0700002, y: -0.86, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1894615460}
@@ -5338,7 +5338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad980451443d70438faac0bc6c235a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TrackedObjectOffset: {x: 3, y: 0.8, z: 0}
+  m_TrackedObjectOffset: {x: 3, y: -0.92, z: 0}
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0

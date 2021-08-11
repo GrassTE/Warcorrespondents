@@ -28,7 +28,9 @@ public class PolymorphicAdministrator : MonoBehaviour
             {
                 try
                 {
+                    Debug.Log("尝试载入多态： "+ statesEvents[i].name);
                     statesEvents[i].OnCall();//则执行对应事件进行场景的初始化
+                    
                 }
                 catch(System.NullReferenceException e)
                 {

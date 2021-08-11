@@ -1324,7 +1324,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3945938556576538517, guid: 77c170410751adc43b3804b6a3f59d3b, type: 3}
       propertyPath: OKCount
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3945938556576538518, guid: 77c170410751adc43b3804b6a3f59d3b, type: 3}
       propertyPath: m_RootOrder
@@ -1619,6 +1619,7 @@ MonoBehaviour:
   shellShadowPositionYOffSet: 0.3
   rateOfChangeOfThrowingAngle: 1
   strengthOfThrowing: 8
+  stageName: 
 --- !u!4 &1258254500
 Transform:
   m_ObjectHideFlags: 0

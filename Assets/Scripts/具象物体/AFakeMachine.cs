@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AFakeMachine : Interactive
 {
@@ -27,7 +28,10 @@ public class AFakeMachine : Interactive
         {
             //若所有线路OK
             //转到场景“序章-家中”，给记录员发信息，让“序章-家中”表现为正确状态
-            Debug.Log("转到场景“序章-家中”，给记录员发信息，让“序章-家中”表现为正确状态");
+            IndexRecoder indexRecoder = FindObjectOfType<IndexRecoder>();
+            indexRecoder.ChangeStageName("序章-家中-已打码");
+            SceneManager.LoadScene("序章-家中");
+            //Debug.Log("转到场景“序章-家中”，给记录员发信息，让“序章-家中”表现为正确状态");
         }
         else
         {
