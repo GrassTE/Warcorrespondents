@@ -40,6 +40,8 @@ public class IndexRecoder : MonoBehaviour
     public float strengthOfThrowing;
     [SerializeField][Tooltip("演出名称，这个不给你改，这个是我做多态用的，在这里只读")][ReadOnly]
     public string stageName;
+    [Tooltip("CG的淡入淡出时间")]
+    public float CGFadeTime;
 
     void Start()
     {
@@ -59,7 +61,7 @@ public class IndexRecoder : MonoBehaviour
         codeBook.Add("----.","9");
         codeBook.Add("-----","0");
 
-        stageName = "序章-家中-未打码";
+        stageName = "序章-家中-已打码";
     }
 
     // Update is called once per frame

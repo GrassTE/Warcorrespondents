@@ -44,6 +44,6 @@ Material:
     - WaveIntensity_2: 1
     - WaveSpread_Value: 0
     m_Colors:
-    - Center: {r: -0.05737228, g: 0.29588354, b: 0, a: 0}
+    - Center: {r: 0.20606552, g: 0.31144482, b: 0, a: 0}
     - Vector2_d2d098295fc146f08b921b231b2e5199: {r: 1.6, g: 0.9, b: 0, a: 0}
   m_BuildTextureStacks: []
