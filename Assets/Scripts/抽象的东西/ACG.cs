@@ -11,5 +11,9 @@ using UnityEngine;
         public Texture texture;
         [Tooltip("这个CG要显示多长时间")]
         public float time;
+        [Tooltip("CG播放结束时要触发什么事件？")]
+        public Event onEnded;
+
+        public void OnEnded(){onEnded.OnCall();}//触发结束事件，不同CG事件不一样，所以用public自己拖
     }
 

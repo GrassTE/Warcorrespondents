@@ -45,6 +45,8 @@ public class IndexRecoder : MonoBehaviour
 
     void Start()
     {
+        //Destroy(FindObjectOfType<IndexRecoder>().gameObject);
+
         GameObject.DontDestroyOnLoad(gameObject);
         //开发者捷径
         codeBook.Add("..--.","864246511");

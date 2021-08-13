@@ -12,7 +12,7 @@ public class AfterRecollection : Event
         //Vector3(18.8199997,0.0599999987,0)
         //Vector3(19.2399998,0.0599999987,0)
         //1.改变玩家的位置到父亲身边
-        FindObjectOfType<M_Player>().transform.position = new Vector3(19.2399998f,0.0599999987f,0);
+        FindObjectOfType<M_Player>().transform.position = new Vector3(9.30000019f,0.936617672f,0);
         //2.触发对话【回忆之后的对话】
         Flowchart.BroadcastFungusMessage("回忆之后的对话");
     }

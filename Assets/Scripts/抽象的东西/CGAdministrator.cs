@@ -13,10 +13,12 @@ public class CGAdministrator : MonoBehaviour
     [Tooltip("记录这个场景中的所有CG，要加的话直接扩容数组，并往新的CG里面加内容")]
     public ACG[] CGs;
     private IndexRecoder indexRecoder;
+    private ACG playingCG;//正在播放的CG，因为invoke无法传参而存在
     void Start()
     {
         rawImage = GetComponent<RawImage>();
         indexRecoder = FindObjectOfType<IndexRecoder>();
+        rawImage.CrossFadeAlpha(0,0,true);//为了淡入显示，必须先把它的阿尔法值降到0，对吧？
     }
 
     // Update is called once per frame
@@ -37,13 +39,15 @@ public class CGAdministrator : MonoBehaviour
                 Debug.Log("正在显示CG："+CG.name);
                 rawImage.texture = CG.texture;//把CG的内容装载上
                 rawImage.CrossFadeAlpha(1,indexRecoder.CGFadeTime,true);//淡入显示CG
+                playingCG = CG;
                 Invoke("StopIt",CG.time);
             }
         }
     }
 
     //改变标记，使管理员意识到CG该停了
-    private void StopIt(){rawImage.CrossFadeAlpha(0f,indexRecoder.CGFadeTime,true);}//淡出CG
+    private void StopIt(){rawImage.CrossFadeAlpha(0f,indexRecoder.CGFadeTime,true);//淡出CG
+                          playingCG.OnEnded();}//告诉这个CG它结束了，然后触发它的结束事件
 
     //制造一个只读的变量，不要动这些
     public class ReadOnlyAttribute : PropertyAttribute{}
