@@ -14,6 +14,17 @@ using UnityEngine;
         [Tooltip("CG播放结束时要触发什么事件？")]
         public Event onEnded;
 
-        public void OnEnded(){onEnded.OnCall();}//触发结束事件，不同CG事件不一样，所以用public自己拖
+        public void OnEnded()
+        { 
+            try
+            {
+                onEnded.OnCall();//触发结束事件，不同CG事件不一样，所以用public自己拖
+            }
+            catch(System.Exception e)
+            {
+                Debug.Log("要么是这个CG没有结束事件，要么是你这个结束事件里面出错了。什么错？我咋知道（摆烂\n" +
+                          e.ToString());
+            }
+        }
     }
 

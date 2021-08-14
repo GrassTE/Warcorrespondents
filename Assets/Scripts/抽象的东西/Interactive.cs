@@ -21,7 +21,9 @@ public class Interactive : MonoBehaviour
    {
        if(other.tag == "Player")
         {
-            other.GetComponent<M_Player>().catched = null;
+            //如果目前退出当前交互区域的时候，玩家的捕捉物体是自己，才把玩家的捕捉清空。否则说明玩家在推出前就捕捉到了新的
+            //对象。这样是用来解决排布密集的可交互物体的问题
+            if(other.GetComponent<M_Player>().catched == this) other.GetComponent<M_Player>().catched = null;
         }
    }
    //

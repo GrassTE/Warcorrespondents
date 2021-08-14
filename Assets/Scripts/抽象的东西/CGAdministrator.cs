@@ -10,8 +10,8 @@ public class CGAdministrator : MonoBehaviour
     //CG管理员相关代码
 
     private RawImage rawImage;
-    [Tooltip("记录这个场景中的所有CG，要加的话直接扩容数组，并往新的CG里面加内容")]
-    public ACG[] CGs;
+    [Tooltip("记录这个场景中的所有CG，要加的话直接扩容数组，并往新的CG里面加内容")][SerializeField][ReadOnly]
+    private ACG[] CGs;
     private IndexRecoder indexRecoder;
     private ACG playingCG;//正在播放的CG，因为invoke无法传参而存在
     void Start()
@@ -19,6 +19,14 @@ public class CGAdministrator : MonoBehaviour
         rawImage = GetComponent<RawImage>();
         indexRecoder = FindObjectOfType<IndexRecoder>();
         rawImage.CrossFadeAlpha(0,0,true);//为了淡入显示，必须先把它的阿尔法值降到0，对吧？
+
+        //好像可以让它自己找到所有CG
+        CGs = new ACG[transform.childCount];
+        for(int i = 0; i < transform.childCount; i++)
+        {
+            CGs[i] = transform.GetChild(i).GetComponent<ACG>();
+        }
+        //
     }
 
     // Update is called once per frame
