@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Interactive : MonoBehaviour
 {
-    // Start is called before the first frame update
     //这是所有可交互物体的基类
     public GameObject m_interface;//可交互物体一般都和一个UI界面挂钩，这就是那个UI界面
 
@@ -33,7 +32,8 @@ public class Interactive : MonoBehaviour
     //
 
     //以下为针对各具体可交互对象的虚拟函数，在具体物体中重写
-    public virtual void Coding(string temp){}
-    public virtual void StopRepareTheTelephoneLine(){}
+    public virtual void Coding(string temp){}//电报机的打码
+    public virtual void StopRepareTheTelephoneLine(){}//电话线的停止修复（松开按键检测
+    public virtual void Quit(){}//任务书的关闭
     //
 }

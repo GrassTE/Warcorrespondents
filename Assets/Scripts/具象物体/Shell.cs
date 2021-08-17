@@ -14,6 +14,8 @@ public class Shell : MonoBehaviour
     private bool isDroping = false;
     private Transform m_shadow;
     public GameObject boomObj;
+    public BombingArea M_BombingArea;
+    private bool amISpecal = false;//记录自己是不是特殊的的变量。特殊的炮弹才能炸烂石头。
     
     void Start()
     {
@@ -24,7 +26,7 @@ public class Shell : MonoBehaviour
         m_shadow = Instantiate(shadow,//生成一片阴影
                                 new Vector3(transform.position.x,//在这枚炮弹的X
                                             ground.transform.position.y + //地面的Y
-                                                indexRecoder.shellShadowPositionYOffSet,//加上偏移量
+                                            M_BombingArea.shellShadowYOffset,//加上偏移量
                                             0),
                                 Quaternion.identity)
                                 .transform;
@@ -42,6 +44,9 @@ public class Shell : MonoBehaviour
 
         
     }
+
+    public bool AmISpecal(){return amISpecal;}//外部调用，返回这个炮弹是不是特殊的
+    public void YouAreSpecal(){amISpecal = true;}//外部调用，生成炮弹时，给其标记它是特殊的。
 
     private void ShadowShock()
     {
@@ -70,6 +75,12 @@ public class Shell : MonoBehaviour
                 Destroy(m_shadow.gameObject);
                 Destroy(gameObject);
                 Instantiate(boomObj, new Vector2(transform.position.x, transform.position.y),Quaternion.identity);
+                break;
+            case "石头":
+                Destroy(m_shadow.gameObject);
+                Destroy(gameObject);//摧毁炮弹
+                //如果自己是特殊的炮弹，则触发石头的程序段
+                if(amISpecal) other.GetComponent<Stone>().BeHitBySpecalShell();
                 break;
         }
     }

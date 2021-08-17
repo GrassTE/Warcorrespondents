@@ -8,8 +8,9 @@ public class BombingArea : MonoBehaviour
     // Start is called before the first frame update
     private bool bombing = false;//是否正在轰炸
     public GameObject shell;//炮弹游戏物体
-    // [Tooltip("炮弹阴影Y轴的偏移量")]
-    // public float shellShadowYOffset;//炮弹阴影Y轴的偏移量，因为复杂原因，必须使用此变量调整阴影的Y位置
+
+    [Tooltip("炮弹阴影Y轴的偏移量")]
+    public float shellShadowYOffset;//炮弹阴影Y轴的偏移量，因为复杂原因，必须使用此变量调整阴影的Y位置
 
     private float minimumTimeInterval;
     private float maximumTimeInterval;//生成炮弹的最小和最大时间间隔
@@ -46,11 +47,12 @@ public class BombingArea : MonoBehaviour
     {
         if(leftTime <= 0f)
         {
-            Instantiate(shell,//生成炮弹
-                        player.transform.position +  //以玩家位置
-                        new Vector3(Random.Range(-maxOffSetOfShell,maxOffSetOfShell),//加上水平方向的偏移量
-                                                shellHeight,0),//竖直方向给高度
-                        Quaternion.identity);
+            GameObject ThisShell = Instantiate(shell,//生成炮弹
+                                               player.transform.position +  //以玩家位置
+                                               new Vector3(Random.Range(-maxOffSetOfShell,maxOffSetOfShell),//加上水平方向的偏移量
+                                                                        shellHeight,0),//竖直方向给高度
+                                               Quaternion.identity);
+            ThisShell.GetComponent<Shell>().M_BombingArea = this;//给子弹赋以自身，让其好获取Y轴偏移量
             leftTime = Random.Range(minimumTimeInterval,maximumTimeInterval);
         }
         else leftTime -= Time.deltaTime;

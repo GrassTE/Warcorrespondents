@@ -68,7 +68,8 @@ public class Machine : Interactive
     //用来检查电话线的函数，如果电话线全通，返回true，否则返回false
     private bool LinesCheck()
     {
-        if(linesChecker.needCount == linesChecker.OKCount) return true;
+        //if(linesChecker.needCount == linesChecker.OKCount) return true;过时的方法
+        if(linesChecker.AreYouOK()) return true;
         else return false;
     }
 

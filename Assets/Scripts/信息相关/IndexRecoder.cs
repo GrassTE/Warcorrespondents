@@ -32,8 +32,8 @@ public class IndexRecoder : MonoBehaviour
     public float shellFallingTime;
     [Tooltip("炮弹阴影的震动幅度")] 
     public float shellShadowRangeOfChange;
-    [Tooltip("炮弹阴影的Y值偏移")] 
-    public float shellShadowPositionYOffSet;
+    // [Tooltip("炮弹阴影的Y值偏移")] 
+    // public float shellShadowPositionYOffSet;
     [Tooltip("玩家投掷角度变化的速度")] 
     public float rateOfChangeOfThrowingAngle;
     [Tooltip("抛出投掷物的力度")]

@@ -125,6 +125,11 @@ public class M_Player : MonoBehaviour
         }
     }
 
+    public void OnQuit(InputAction.CallbackContext context)
+    {
+        if(context.started) catched.Quit();//如果按下退出按钮，则执行捕捉到物体的退出功能
+    }
+
     //监听修改投掷角度的函数
     public void OnAdjustTheAngle(InputAction.CallbackContext context)
     {throwingAngleDir = context.ReadValue<float>();}//把收到的轴的值交给角度变化的大小和方向

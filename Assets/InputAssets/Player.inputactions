@@ -36,6 +36,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press(behavior=2)"
+                },
+                {
+                    "name": "Quit",
+                    "type": "Button",
+                    "id": "8d490180-d97c-4d4f-836c-a6f7a4392b67",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)"
                 }
             ],
             "bindings": [
@@ -168,6 +176,28 @@
                     "processors": "",
                     "groups": "Player",
                     "action": "Coding",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9fc9a4fc-1140-4bf4-acb9-5e210bf4f365",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player",
+                    "action": "Quit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9bcc3236-8109-4b58-89db-131cb9301bf4",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player",
+                    "action": "Quit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

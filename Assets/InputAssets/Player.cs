@@ -49,6 +49,14 @@ public class @Player : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)""
+                },
+                {
+                    ""name"": ""Quit"",
+                    ""type"": ""Button"",
+                    ""id"": ""8d490180-d97c-4d4f-836c-a6f7a4392b67"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)""
                 }
             ],
             ""bindings"": [
@@ -181,6 +189,28 @@ public class @Player : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Player"",
                     ""action"": ""Coding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9fc9a4fc-1140-4bf4-acb9-5e210bf4f365"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player"",
+                    ""action"": ""Quit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9bcc3236-8109-4b58-89db-131cb9301bf4"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player"",
+                    ""action"": ""Quit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -381,6 +411,7 @@ public class @Player : IInputActionCollection, IDisposable
         m_PlayerNormal_Run = m_PlayerNormal.FindAction("Run", throwIfNotFound: true);
         m_PlayerNormal_Interaction = m_PlayerNormal.FindAction("Interaction", throwIfNotFound: true);
         m_PlayerNormal_Coding = m_PlayerNormal.FindAction("Coding", throwIfNotFound: true);
+        m_PlayerNormal_Quit = m_PlayerNormal.FindAction("Quit", throwIfNotFound: true);
         // NullMap
         m_NullMap = asset.FindActionMap("NullMap", throwIfNotFound: true);
         m_NullMap_Newaction = m_NullMap.FindAction("New action", throwIfNotFound: true);
@@ -442,6 +473,7 @@ public class @Player : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerNormal_Run;
     private readonly InputAction m_PlayerNormal_Interaction;
     private readonly InputAction m_PlayerNormal_Coding;
+    private readonly InputAction m_PlayerNormal_Quit;
     public struct PlayerNormalActions
     {
         private @Player m_Wrapper;
@@ -450,6 +482,7 @@ public class @Player : IInputActionCollection, IDisposable
         public InputAction @Run => m_Wrapper.m_PlayerNormal_Run;
         public InputAction @Interaction => m_Wrapper.m_PlayerNormal_Interaction;
         public InputAction @Coding => m_Wrapper.m_PlayerNormal_Coding;
+        public InputAction @Quit => m_Wrapper.m_PlayerNormal_Quit;
         public InputActionMap Get() { return m_Wrapper.m_PlayerNormal; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -471,6 +504,9 @@ public class @Player : IInputActionCollection, IDisposable
                 @Coding.started -= m_Wrapper.m_PlayerNormalActionsCallbackInterface.OnCoding;
                 @Coding.performed -= m_Wrapper.m_PlayerNormalActionsCallbackInterface.OnCoding;
                 @Coding.canceled -= m_Wrapper.m_PlayerNormalActionsCallbackInterface.OnCoding;
+                @Quit.started -= m_Wrapper.m_PlayerNormalActionsCallbackInterface.OnQuit;
+                @Quit.performed -= m_Wrapper.m_PlayerNormalActionsCallbackInterface.OnQuit;
+                @Quit.canceled -= m_Wrapper.m_PlayerNormalActionsCallbackInterface.OnQuit;
             }
             m_Wrapper.m_PlayerNormalActionsCallbackInterface = instance;
             if (instance != null)
@@ -487,6 +523,9 @@ public class @Player : IInputActionCollection, IDisposable
                 @Coding.started += instance.OnCoding;
                 @Coding.performed += instance.OnCoding;
                 @Coding.canceled += instance.OnCoding;
+                @Quit.started += instance.OnQuit;
+                @Quit.performed += instance.OnQuit;
+                @Quit.canceled += instance.OnQuit;
             }
         }
     }
@@ -588,6 +627,7 @@ public class @Player : IInputActionCollection, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnInteraction(InputAction.CallbackContext context);
         void OnCoding(InputAction.CallbackContext context);
+        void OnQuit(InputAction.CallbackContext context);
     }
     public interface INullMapActions
     {
