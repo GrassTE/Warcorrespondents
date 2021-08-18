@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class M_Player : MonoBehaviour
 {
@@ -12,7 +13,6 @@ public class M_Player : MonoBehaviour
     private Vector2 velocity;//逻辑速度，通过计算获得，最后加在理论速度上
     private Rigidbody2D m_rigidbody;//自身刚体组件
     private int inputDir;//输入方向方向,-1\0\1
-    //public GameObject bullet;//子弹预制体
     private int faceDir;//面部朝向，-1、1
     private float runSpeedMultiple = 1f;//速度倍率，在按下和释放跑步后被修改
     [Tooltip("所捕捉到的可交互对象,不要手动赋值，这个会自己捕捉")]
@@ -37,7 +37,6 @@ public class M_Player : MonoBehaviour
 
         //为了解决warming，最后阶段请删除，到那时应该不会再有警告
         if(inputDir == 0){}
-        if(throwingState){}
         //
     }
 
@@ -47,15 +46,12 @@ public class M_Player : MonoBehaviour
         AdjustTheAngle();
     }
 
-    void FixedUpdate()
-    {
-        Move();
-    }
+    void FixedUpdate(){}
 
     //调整投掷角度的函数
     private void AdjustTheAngle()
     {
-        if(canAdjustTheAngle)//如果玩家正在调整角度
+        if(canAdjustTheAngle)//如果玩家能调整角度
         {
             throwingAngle += throwingAngleDir//则让现在的抛出角度加上变化的速度
                              * indexRecoder.rateOfChangeOfThrowingAngle//乘以变化的速率
@@ -95,23 +91,6 @@ public class M_Player : MonoBehaviour
             transform.localScale.z);
     }
 
-    private void Move()
-    {
-        // //指定水平方向的速度
-        // m_rigidbody.velocity = new Vector2(indexRecoder.playerMoveSpeed* //记录文件中的玩家速度乘以
-        //                                     inputDir*//输入的方向乘以
-        //                                     runSpeedMultiple,//速度的倍率，对付跑步时候的需要
-        //                                     m_rigidbody.velocity.y//y轴的速度不变
-        //                                     );
-    }
-    // void OnAnimatorMove()//Unity的回调函数，这样做能解决模型无法转向的问题，每帧调用一次
-    // {
-    //     m_rigidbody.MovePosition(m_rigidbody.position + faceDir*M_Animator.deltaPosition.magnitude*Vector2.right);
-    //     Debug.Log(M_Animator.deltaPosition.magnitude);
-    //     //m_RigidBody.MoveRotation(m_Rotation);//当物体有物理组件rigidbody的时候，再修改位置和旋转信息就不要用transfrom了，用刚体自带的Move等方法
-    // }
-
-
     //监听投掷按键的函数
     public void OnThrow(InputAction.CallbackContext context)
     {
@@ -121,7 +100,7 @@ public class M_Player : MonoBehaviour
         }
         if(context.canceled)//如果是刚松开投掷键，表示要丢东西了
         {
-            Throw();
+            if(throwingState)Throw();//如果处于投掷阶段，则触发丢
         }
     }
 
@@ -130,6 +109,9 @@ public class M_Player : MonoBehaviour
         if(context.started) catched.Quit();//如果按下退出按钮，则执行捕捉到物体的退出功能
     }
 
+    //如果正处于投掷状态，则退出投掷状态的监听函数
+    public void OnThrowQuit(InputAction.CallbackContext context){if(throwingState)QuitThrowingsState();}
+
     //监听修改投掷角度的函数
     public void OnAdjustTheAngle(InputAction.CallbackContext context)
     {throwingAngleDir = context.ReadValue<float>();}//把收到的轴的值交给角度变化的大小和方向
@@ -137,11 +119,15 @@ public class M_Player : MonoBehaviour
     //控制投掷相关的具体函数
     private void Throw()
     {
-        //Debug.Log("我投出手上拿着的东西了");
-        Rigidbody2D rigidbodyOfMissile = 
-            Instantiate(missile,throwOffset.position,Quaternion.identity).GetComponent<Rigidbody2D>();
+        Rigidbody2D rigidbodyOfMissile = //并且获得这个投掷物身上的刚体组件
+            Instantiate(missile,throwOffset.position,Quaternion.identity).GetComponent<Rigidbody2D>();//生成一个投掷物
+        
+        //给这个投掷物赋予速度，由目前的角度决定
         rigidbodyOfMissile.velocity = new Vector2(indexRecoder.strengthOfThrowing*Mathf.Cos(throwingAngle),
                                                   indexRecoder.strengthOfThrowing*Mathf.Sin(throwingAngle));
+        
+        //扔完后退出投掷状态并且重置相关参数
+        QuitThrowingsState();
     }
 
     //进入跑步状态的控制代码
@@ -210,13 +196,22 @@ public class M_Player : MonoBehaviour
     }
     
     //等待完善投掷系统
-    public void QuitThrowingsState(){}
+    public void QuitThrowingsState()
+    {
+        throwingState = false;//改变自身标记
+        playerInput.SwitchCurrentActionMap("PlayerNormal");//修改自身操控地图
+        throwingAngle = 45f;//恢复投掷角度到45°
+        canAdjustTheAngle = false;//可修改角度标记改为false
+        GetComponent<LineRenderer>().enabled = false;//别画线了
+
+    }
 
     //绘制投掷曲线的函数，非常🐂
     public void DrawPath()
     {
         //
         LineRenderer line = GetComponent<LineRenderer>();//获取组件
+        line.enabled = true;
         int segmentCount = 15;//定义点数
         line.positionCount = segmentCount;//传入点数
         float gravity=9.8f;//定义重力常量
