@@ -3212,7 +3212,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.019539753, y: 0.5}
   m_AnchorMax: {x: 0.47471207, y: 0.73800004}
-  m_AnchoredPosition: {x: 1.6592178, y: 1.7999992}
+  m_AnchoredPosition: {x: 1.6592102, y: 1.7999992}
   m_SizeDelta: {x: -12, y: -10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1071101930
@@ -5910,11 +5910,10 @@ MonoBehaviour:
   shellSpeed: 10
   shellFallingTime: 1
   shellShadowRangeOfChange: 0.1
-  shellShadowPositionYOffSet: 0.3
   rateOfChangeOfThrowingAngle: 1
   strengthOfThrowing: 8
   stageName: 
-  CGFadeTime: 2
+  CGFadeTime: 1
 --- !u!4 &2039349954
 Transform:
   m_ObjectHideFlags: 0
@@ -6343,6 +6342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2125100632}
   - component: {fileID: 2125100633}
+  - component: {fileID: 2125100634}
   m_Layer: 5
   m_Name: "CG\uFF1A\u6682\u75281"
   m_TagString: Untagged
@@ -6377,9 +6377,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CGName: "\u6682\u7528"
-  texture: {fileID: 2800000, guid: b480a137df33db449a8cb87e70f6c8d8, type: 3}
-  time: 3
+  texture: {fileID: 8400000, guid: 9d689b0a195477545944ccc5286d8aea, type: 2}
+  time: 6
   onEnded: {fileID: 1918217529}
+--- !u!328 &2125100634
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125100631}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: 9721c6ab411fa7143b3ccd74e9994c1a, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: 9d689b0a195477545944ccc5286d8aea, type: 2}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: _MainTex
+  m_RenderMode: 2
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 2
+  m_TargetAudioSources:
+  - {fileID: 0}
+  m_DirectAudioVolumes:
+  - 1
+  m_Url: 
+  m_EnabledAudioTracks: 01
+  m_DirectAudioMutes: 00
+  m_ControlledAudioTrackCount: 1
+  m_PlayOnAwake: 0
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
 --- !u!1001 &3945938555803748376
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
+using UnityEngine.Video;
 
 public class CGAdministrator : MonoBehaviour
 {
@@ -27,6 +28,10 @@ public class CGAdministrator : MonoBehaviour
             CGs[i] = transform.GetChild(i).GetComponent<ACG>();
         }
         //
+
+        //
+        //CallACG("暂用");
+        //
     }
 
     // Update is called once per frame
@@ -48,6 +53,14 @@ public class CGAdministrator : MonoBehaviour
                 rawImage.texture = CG.texture;//把CG的内容装载上
                 rawImage.CrossFadeAlpha(1,indexRecoder.CGFadeTime,true);//淡入显示CG
                 playingCG = CG;
+                try
+                {
+                    CG.GetComponent<VideoPlayer>().Play();//开始播放这个CG
+                }
+                catch(System.NullReferenceException)
+                {
+                    Debug.Log("播放CG失败，看看赋值对不对");
+                }
                 Invoke("StopIt",CG.time);
             }
         }
