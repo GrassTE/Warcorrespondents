@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class Patrolman : MonoBehaviour
 {
@@ -19,12 +20,18 @@ public class Patrolman : MonoBehaviour
     private Transform target;//当前目标位置
     private bool isInterrupt = false;//记录目前是否被石头落地的声音所吸引
     private float PVelocity = -1f;//记录上一帧的速度,默认上一帧往右走
+    private Transform auditoryRange;//听觉范围子物体
+    [SerializeField][ReadOnly]
+    private List<Missile> missiles;//投掷物列表，巡逻者会自动往搜索听觉范围内的投掷物
 
     // Start is called before the first frame update
     void Start()
     {
         target = point1;//初始化起始目标为巡逻点1
         speed = walkSpeed;//初始化瞬间速度为走路速度
+        auditoryRange = transform.Find("听觉范围");//找到子物体听觉范围
+        auditoryRange.gameObject.AddComponent<AuditoryRange>();//给子物体听觉范围填上碰撞监测代码
+        missiles = new List<Missile>();//初始化投掷物列表
     }
 
     // Update is called once per frame
@@ -69,5 +76,62 @@ public class Patrolman : MonoBehaviour
         PVelocity = velocity;
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.gameObject.tag == "Player") Debug.Log("玩家进入了监测区");
+    }
 
+    //在听觉范围中调用，加入一个监听中的投掷物
+    public void AddAMissile(Missile missile){missiles.Add(missile);}
+    //在听觉范围中调用，移除一个监听中的投掷物
+    public void RemoveAMissile(Missile missile){missiles.Remove(missile);}
+    // for(int i = 0; i < missiles.Count; i++)
+    // {
+    //     if(missiles[i].Equals(missile))
+    //     {
+    //         missiles.Remove(missile);
+    //     }
+    // }
+
+
+
+    private class AuditoryRange : MonoBehaviour
+    {
+        void OnTriggerEnter2D(Collider2D other)
+        {
+            if(other.tag == "投掷物")
+            {
+                //当有投掷物进入听觉范围，把他加入监控内的投掷物列表
+                GetComponentInParent<Patrolman>().AddAMissile(other.GetComponent<Missile>());
+            }
+        }
+
+        void OnTriggerExit2D(Collider2D other)
+        {
+            if(other.tag == "投掷物")
+            {
+                //当有投掷物离开听觉范围，把他移出监控内的投掷物列表
+                GetComponentInParent<Patrolman>().RemoveAMissile(other.GetComponent<Missile>());
+            }
+        }
+    }
+
+    //制造一个只读的变量，不要动这些
+    public class ReadOnlyAttribute : PropertyAttribute{}
+    [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
+    public class ReadOnlyDrawer : PropertyDrawer
+    {
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            return EditorGUI.GetPropertyHeight(property, label, true);
+        }
+
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            GUI.enabled = false;
+            EditorGUI.PropertyField(position, property, label, true);
+            GUI.enabled = true;
+        }
+    }
+    //
 }

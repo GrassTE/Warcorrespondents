@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4018427281142380166}
   - component: {fileID: 4018427281142380167}
   - component: {fileID: 4018427281142380164}
+  - component: {fileID: 8403612127672763802}
   m_Layer: 0
   m_Name: "\u6295\u63B7\u7269"
   m_TagString: "\u6295\u63B7\u7269"
@@ -121,3 +122,15 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 1}
   m_Direction: 0
+--- !u!114 &8403612127672763802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4018427281142380165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 621395b8c0d84a847a7f7f6e059e43a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
