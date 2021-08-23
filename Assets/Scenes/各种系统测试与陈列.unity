@@ -2429,7 +2429,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 788577770}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -28.36, y: -1.06, z: 0}
+  m_LocalPosition: {x: -27.07, y: -1.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 293805376}
@@ -2763,8 +2763,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   point1: {fileID: 788577771}
   point2: {fileID: 1209357885}
-  walkSpeed: 0
-  rushSpeed: 1
+  walkSpeed: 5
+  rushSpeed: 10
+  speed: 0
   missiles: []
 --- !u!1 &969830747
 GameObject:
@@ -2983,7 +2984,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1209357884}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.22, y: -0.55, z: 0}
+  m_LocalPosition: {x: -19.31, y: -0.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 293805376}
@@ -5495,7 +5496,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.45, y: 1.1}
+  m_Size: {x: 3.8, y: 1.1}
   m_EdgeRadius: 0
 --- !u!1001 &1936744432
 PrefabInstance:
@@ -6527,7 +6528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8233114533063075529, guid: 82d871be611f9d14fbe8c166075c1a37, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -3.9000626
+      value: -3.900055
       objectReference: {fileID: 0}
     - target: {fileID: 8233114533063075529, guid: 82d871be611f9d14fbe8c166075c1a37, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

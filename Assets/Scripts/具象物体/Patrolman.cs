@@ -15,6 +15,7 @@ public class Patrolman : MonoBehaviour
     public float walkSpeed;
     [Tooltip("听见响动，冲锋时的速度")]
     public float rushSpeed;
+    [SerializeField][ReadOnly]
     private float speed;//记录此刻瞬间的速度,不包含方向
     private float velocity;//速度，正值代表向右，用来判断面部朝向
     private Transform target;//当前目标位置
@@ -38,6 +39,25 @@ public class Patrolman : MonoBehaviour
     void Update()
     {
         Move();//每帧朝目标移动
+        CheckMissiles();//检查是否有投掷物落地
+    }
+
+    private void CheckMissiles()
+    {
+        foreach(Missile missile in missiles)
+        {
+            if(missile.AMINoisy() && !missile.AmIBeenChecked())//如果投掷物在发声、且没有被检查过
+            {
+                //将目标位置设定为落点
+                target = missile.transform;
+                //更改速度为跑步速度
+                speed = rushSpeed;
+                //标记该投掷物已被检查
+                missile.YouAreChecked();
+                isInterrupt = true;
+                PVelocity = 0;
+            }
+        }
     }
 
     //朝目标移动函数
@@ -48,12 +68,23 @@ public class Patrolman : MonoBehaviour
         velocity = Mathf.Abs(velocity)/velocity;//把速度标准化为1或者-1，只保留方向
         velocity *= speed;//给速度赋以大小
 
-        //判断是否到达巡逻点
-        if(velocity*PVelocity < 0 && !isInterrupt)//速度相乘得负数，说明方向发生改变
+        //判断是否到达巡逻点或者落点
+        if(velocity*PVelocity < 0)//速度相乘得负数，说明方向发生改变
         {
             //如果计算速度发生改变，且不是因为被石头打断，说明经过了巡逻点，此时更换目标点为另一个
-            if(target.Equals(point1)) target = point2;
-            else target = point1;
+            if(target.Equals(point1) && !isInterrupt) target = point2;
+            else if(target.Equals(point2) && !isInterrupt) target = point1;//不是被投掷物吸引的时候，才这样
+
+            //如果目标是投掷物的落点，恢复速度和目标点
+            if(target.gameObject.tag == "投掷物")
+            {
+                speed = walkSpeed;
+                //target = point2;
+                if(velocity > 0) target = point2;
+                else target = point1;
+                Debug.Log("投掷物触发转向");
+                isInterrupt = false;
+            }
         }
 
         //控制面部朝向
@@ -74,6 +105,7 @@ public class Patrolman : MonoBehaviour
 
         //更新PVelocity
         PVelocity = velocity;
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -85,13 +117,6 @@ public class Patrolman : MonoBehaviour
     public void AddAMissile(Missile missile){missiles.Add(missile);}
     //在听觉范围中调用，移除一个监听中的投掷物
     public void RemoveAMissile(Missile missile){missiles.Remove(missile);}
-    // for(int i = 0; i < missiles.Count; i++)
-    // {
-    //     if(missiles[i].Equals(missile))
-    //     {
-    //         missiles.Remove(missile);
-    //     }
-    // }
 
 
 
