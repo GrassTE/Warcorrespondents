@@ -477,6 +477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_interface: {fileID: 466905106}
   isRepared: 0
+  endEvent: {fileID: 0}
 --- !u!61 &221943872
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -554,6 +555,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &336340668 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1692961902718145226, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
+  m_PrefabInstance: {fileID: 966544878}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e2c1a0de69ef6d468a14db32ebf68fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &363919958
 GameObject:
   m_ObjectHideFlags: 0
@@ -1237,6 +1249,106 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1692961902718145223, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
+      propertyPath: m_NotificationBehavior
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692961902718145223, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
+      propertyPath: m_NeverAutoSwitchControlSchemes
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692961902718145223, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_ActionId
+      value: 078b3370-2cb6-4574-9156-0146ae814573
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692961902718145223, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_ActionId
+      value: 6bab4454-55d6-409c-9736-d1640a407628
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692961902718145223, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionId
+      value: fddd4068-5ae8-4c1a-8498-4c8c30327f57
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692961902718145223, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionId
+      value: 8d490180-d97c-4d4f-836c-a6f7a4392b67
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692961902718145223, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionId
+      value: 7740a478-a400-40d6-96a6-27525d86c2dc
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692961902718145223, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionId
+      value: 43dde524-dc10-473f-b1e8-7ce5297afc88
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692961902718145223, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_ActionName
+      value: PlayerInThrowing/Quit[/Keyboard/k]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692961902718145223, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_ActionName
+      value: PlayerInThrowing/Throw[/Keyboard/shift]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692961902718145223, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionName
+      value: PlayerInThrowing/AdjustTheAngle[/Keyboard/s,/Keyboard/w]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692961902718145223, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionName
+      value: PlayerNormal/Quit[/Keyboard/k,/XInputControllerWindows/buttonEast]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692961902718145223, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionName
+      value: PlayerInCoding/Coding[/Keyboard/space]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692961902718145223, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionName
+      value: PlayerInReparingTheMachine/Comfirm[/Keyboard/f]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692961902718145223, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692961902718145223, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692961902718145223, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692961902718145223, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 336340668}
+    - target: {fileID: 1692961902718145223, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692961902718145223, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnThrowQuit
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692961902718145223, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnThrow
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692961902718145223, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnAdjustTheAngle
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692961902718145223, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnQuit
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692961902718145223, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: M_Player, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1692961902718145223, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3719369086825294709, guid: e0481b76b4057fd4fad09cc46028b53a, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1618,7 +1730,6 @@ MonoBehaviour:
   shellSpeed: 10
   shellFallingTime: 1
   shellShadowRangeOfChange: 0.1
-  shellShadowPositionYOffSet: 0.3
   rateOfChangeOfThrowingAngle: 1
   strengthOfThrowing: 8
   stageName: 
@@ -6957,6 +7068,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_interface: {fileID: 466905106}
   isRepared: 0
+  endEvent: {fileID: 0}
 --- !u!61 &1700859677
 BoxCollider2D:
   m_ObjectHideFlags: 0

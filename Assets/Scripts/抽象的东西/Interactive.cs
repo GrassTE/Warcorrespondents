@@ -35,5 +35,6 @@ public class Interactive : MonoBehaviour
     public virtual void Coding(string temp){}//电报机的打码
     public virtual void StopRepareTheTelephoneLine(){}//电话线的停止修复（松开按键检测
     public virtual void Quit(){}//任务书的关闭
+    public virtual void Comfirm(){}//修复电报机界面按下交互键触发
     //
 }

@@ -43,14 +43,6 @@ public class @Player : IInputActionCollection, IDisposable
                     ""interactions"": ""Press(behavior=2)""
                 },
                 {
-                    ""name"": ""Coding"",
-                    ""type"": ""Button"",
-                    ""id"": ""f7af9390-5dad-4c80-a4a7-83d8314f8e88"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Press(behavior=2)""
-                },
-                {
                     ""name"": ""Quit"",
                     ""type"": ""Button"",
                     ""id"": ""8d490180-d97c-4d4f-836c-a6f7a4392b67"",
@@ -172,28 +164,6 @@ public class @Player : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f934f611-8c36-46c6-ac79-b5cb10f172f8"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Player"",
-                    ""action"": ""Coding"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""eb88999b-e1c9-4d1e-9b74-683dc913e3a1"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Player"",
-                    ""action"": ""Coding"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""9fc9a4fc-1140-4bf4-acb9-5e210bf4f365"",
                     ""path"": ""<Keyboard>/k"",
                     ""interactions"": """",
@@ -223,7 +193,7 @@ public class @Player : IInputActionCollection, IDisposable
                 {
                     ""name"": ""New action"",
                     ""type"": ""Button"",
-                    ""id"": ""beabb251-6f14-495d-9364-88119e0f9bf0"",
+                    ""id"": ""26b56a36-3d1d-4cb2-9efb-beb11a1d5267"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -232,7 +202,7 @@ public class @Player : IInputActionCollection, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""ae26865a-51e7-44ff-aea5-7c92da228cef"",
+                    ""id"": ""9eff2e95-3f55-48f7-9135-a5be0149d9ae"",
                     ""path"": """",
                     ""interactions"": """",
                     ""processors"": """",
@@ -384,6 +354,82 @@ public class @Player : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""PlayerInCoding"",
+            ""id"": ""cf9f6510-ef62-47c2-9169-7097bc6c6b59"",
+            ""actions"": [
+                {
+                    ""name"": ""Coding"",
+                    ""type"": ""Button"",
+                    ""id"": ""7740a478-a400-40d6-96a6-27525d86c2dc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)""
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""ddf24efa-fd79-4857-a09e-67b1843f0e5d"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player"",
+                    ""action"": ""Coding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d7103191-c434-42b6-a74c-50ad51ec6322"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player"",
+                    ""action"": ""Coding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""PlayerInReparingTheMachine"",
+            ""id"": ""d71f6668-2465-4d0b-9fab-d5bc6a92e671"",
+            ""actions"": [
+                {
+                    ""name"": ""Comfirm"",
+                    ""type"": ""Button"",
+                    ""id"": ""43dde524-dc10-473f-b1e8-7ce5297afc88"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""0d7b7b13-bcb1-4c78-aea2-c52004d78d00"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player"",
+                    ""action"": ""Comfirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a1d323fa-54ce-4fd5-90dc-24af8e3f1115"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player"",
+                    ""action"": ""Comfirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -410,7 +456,6 @@ public class @Player : IInputActionCollection, IDisposable
         m_PlayerNormal_MoveHorizons = m_PlayerNormal.FindAction("MoveHorizons", throwIfNotFound: true);
         m_PlayerNormal_Run = m_PlayerNormal.FindAction("Run", throwIfNotFound: true);
         m_PlayerNormal_Interaction = m_PlayerNormal.FindAction("Interaction", throwIfNotFound: true);
-        m_PlayerNormal_Coding = m_PlayerNormal.FindAction("Coding", throwIfNotFound: true);
         m_PlayerNormal_Quit = m_PlayerNormal.FindAction("Quit", throwIfNotFound: true);
         // NullMap
         m_NullMap = asset.FindActionMap("NullMap", throwIfNotFound: true);
@@ -420,6 +465,12 @@ public class @Player : IInputActionCollection, IDisposable
         m_PlayerInThrowing_Quit = m_PlayerInThrowing.FindAction("Quit", throwIfNotFound: true);
         m_PlayerInThrowing_Throw = m_PlayerInThrowing.FindAction("Throw", throwIfNotFound: true);
         m_PlayerInThrowing_AdjustTheAngle = m_PlayerInThrowing.FindAction("AdjustTheAngle", throwIfNotFound: true);
+        // PlayerInCoding
+        m_PlayerInCoding = asset.FindActionMap("PlayerInCoding", throwIfNotFound: true);
+        m_PlayerInCoding_Coding = m_PlayerInCoding.FindAction("Coding", throwIfNotFound: true);
+        // PlayerInReparingTheMachine
+        m_PlayerInReparingTheMachine = asset.FindActionMap("PlayerInReparingTheMachine", throwIfNotFound: true);
+        m_PlayerInReparingTheMachine_Comfirm = m_PlayerInReparingTheMachine.FindAction("Comfirm", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -472,7 +523,6 @@ public class @Player : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerNormal_MoveHorizons;
     private readonly InputAction m_PlayerNormal_Run;
     private readonly InputAction m_PlayerNormal_Interaction;
-    private readonly InputAction m_PlayerNormal_Coding;
     private readonly InputAction m_PlayerNormal_Quit;
     public struct PlayerNormalActions
     {
@@ -481,7 +531,6 @@ public class @Player : IInputActionCollection, IDisposable
         public InputAction @MoveHorizons => m_Wrapper.m_PlayerNormal_MoveHorizons;
         public InputAction @Run => m_Wrapper.m_PlayerNormal_Run;
         public InputAction @Interaction => m_Wrapper.m_PlayerNormal_Interaction;
-        public InputAction @Coding => m_Wrapper.m_PlayerNormal_Coding;
         public InputAction @Quit => m_Wrapper.m_PlayerNormal_Quit;
         public InputActionMap Get() { return m_Wrapper.m_PlayerNormal; }
         public void Enable() { Get().Enable(); }
@@ -501,9 +550,6 @@ public class @Player : IInputActionCollection, IDisposable
                 @Interaction.started -= m_Wrapper.m_PlayerNormalActionsCallbackInterface.OnInteraction;
                 @Interaction.performed -= m_Wrapper.m_PlayerNormalActionsCallbackInterface.OnInteraction;
                 @Interaction.canceled -= m_Wrapper.m_PlayerNormalActionsCallbackInterface.OnInteraction;
-                @Coding.started -= m_Wrapper.m_PlayerNormalActionsCallbackInterface.OnCoding;
-                @Coding.performed -= m_Wrapper.m_PlayerNormalActionsCallbackInterface.OnCoding;
-                @Coding.canceled -= m_Wrapper.m_PlayerNormalActionsCallbackInterface.OnCoding;
                 @Quit.started -= m_Wrapper.m_PlayerNormalActionsCallbackInterface.OnQuit;
                 @Quit.performed -= m_Wrapper.m_PlayerNormalActionsCallbackInterface.OnQuit;
                 @Quit.canceled -= m_Wrapper.m_PlayerNormalActionsCallbackInterface.OnQuit;
@@ -520,9 +566,6 @@ public class @Player : IInputActionCollection, IDisposable
                 @Interaction.started += instance.OnInteraction;
                 @Interaction.performed += instance.OnInteraction;
                 @Interaction.canceled += instance.OnInteraction;
-                @Coding.started += instance.OnCoding;
-                @Coding.performed += instance.OnCoding;
-                @Coding.canceled += instance.OnCoding;
                 @Quit.started += instance.OnQuit;
                 @Quit.performed += instance.OnQuit;
                 @Quit.canceled += instance.OnQuit;
@@ -612,6 +655,72 @@ public class @Player : IInputActionCollection, IDisposable
         }
     }
     public PlayerInThrowingActions @PlayerInThrowing => new PlayerInThrowingActions(this);
+
+    // PlayerInCoding
+    private readonly InputActionMap m_PlayerInCoding;
+    private IPlayerInCodingActions m_PlayerInCodingActionsCallbackInterface;
+    private readonly InputAction m_PlayerInCoding_Coding;
+    public struct PlayerInCodingActions
+    {
+        private @Player m_Wrapper;
+        public PlayerInCodingActions(@Player wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Coding => m_Wrapper.m_PlayerInCoding_Coding;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerInCoding; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerInCodingActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerInCodingActions instance)
+        {
+            if (m_Wrapper.m_PlayerInCodingActionsCallbackInterface != null)
+            {
+                @Coding.started -= m_Wrapper.m_PlayerInCodingActionsCallbackInterface.OnCoding;
+                @Coding.performed -= m_Wrapper.m_PlayerInCodingActionsCallbackInterface.OnCoding;
+                @Coding.canceled -= m_Wrapper.m_PlayerInCodingActionsCallbackInterface.OnCoding;
+            }
+            m_Wrapper.m_PlayerInCodingActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Coding.started += instance.OnCoding;
+                @Coding.performed += instance.OnCoding;
+                @Coding.canceled += instance.OnCoding;
+            }
+        }
+    }
+    public PlayerInCodingActions @PlayerInCoding => new PlayerInCodingActions(this);
+
+    // PlayerInReparingTheMachine
+    private readonly InputActionMap m_PlayerInReparingTheMachine;
+    private IPlayerInReparingTheMachineActions m_PlayerInReparingTheMachineActionsCallbackInterface;
+    private readonly InputAction m_PlayerInReparingTheMachine_Comfirm;
+    public struct PlayerInReparingTheMachineActions
+    {
+        private @Player m_Wrapper;
+        public PlayerInReparingTheMachineActions(@Player wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Comfirm => m_Wrapper.m_PlayerInReparingTheMachine_Comfirm;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerInReparingTheMachine; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerInReparingTheMachineActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerInReparingTheMachineActions instance)
+        {
+            if (m_Wrapper.m_PlayerInReparingTheMachineActionsCallbackInterface != null)
+            {
+                @Comfirm.started -= m_Wrapper.m_PlayerInReparingTheMachineActionsCallbackInterface.OnComfirm;
+                @Comfirm.performed -= m_Wrapper.m_PlayerInReparingTheMachineActionsCallbackInterface.OnComfirm;
+                @Comfirm.canceled -= m_Wrapper.m_PlayerInReparingTheMachineActionsCallbackInterface.OnComfirm;
+            }
+            m_Wrapper.m_PlayerInReparingTheMachineActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Comfirm.started += instance.OnComfirm;
+                @Comfirm.performed += instance.OnComfirm;
+                @Comfirm.canceled += instance.OnComfirm;
+            }
+        }
+    }
+    public PlayerInReparingTheMachineActions @PlayerInReparingTheMachine => new PlayerInReparingTheMachineActions(this);
     private int m_PlayerSchemeIndex = -1;
     public InputControlScheme PlayerScheme
     {
@@ -626,7 +735,6 @@ public class @Player : IInputActionCollection, IDisposable
         void OnMoveHorizons(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnInteraction(InputAction.CallbackContext context);
-        void OnCoding(InputAction.CallbackContext context);
         void OnQuit(InputAction.CallbackContext context);
     }
     public interface INullMapActions
@@ -638,5 +746,13 @@ public class @Player : IInputActionCollection, IDisposable
         void OnQuit(InputAction.CallbackContext context);
         void OnThrow(InputAction.CallbackContext context);
         void OnAdjustTheAngle(InputAction.CallbackContext context);
+    }
+    public interface IPlayerInCodingActions
+    {
+        void OnCoding(InputAction.CallbackContext context);
+    }
+    public interface IPlayerInReparingTheMachineActions
+    {
+        void OnComfirm(InputAction.CallbackContext context);
     }
 }

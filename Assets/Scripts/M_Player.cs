@@ -65,6 +65,12 @@ public class M_Player : MonoBehaviour
         }
     }
 
+    //当玩家在修电报机地图下按下交互键触发
+    public void OnComfirm(InputAction.CallbackContext context)
+    {
+        if(context.started) catched.Comfirm();
+    }
+
     //当水平轴有输入
     public void OnMoveHorizons(InputAction.CallbackContext context)
     {

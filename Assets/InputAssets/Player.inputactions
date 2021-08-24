@@ -30,14 +30,6 @@
                     "interactions": "Press(behavior=2)"
                 },
                 {
-                    "name": "Coding",
-                    "type": "Button",
-                    "id": "f7af9390-5dad-4c80-a4a7-83d8314f8e88",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press(behavior=2)"
-                },
-                {
                     "name": "Quit",
                     "type": "Button",
                     "id": "8d490180-d97c-4d4f-836c-a6f7a4392b67",
@@ -159,28 +151,6 @@
                 },
                 {
                     "name": "",
-                    "id": "f934f611-8c36-46c6-ac79-b5cb10f172f8",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Player",
-                    "action": "Coding",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "eb88999b-e1c9-4d1e-9b74-683dc913e3a1",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Player",
-                    "action": "Coding",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "9fc9a4fc-1140-4bf4-acb9-5e210bf4f365",
                     "path": "<Keyboard>/k",
                     "interactions": "",
@@ -210,7 +180,7 @@
                 {
                     "name": "New action",
                     "type": "Button",
-                    "id": "beabb251-6f14-495d-9364-88119e0f9bf0",
+                    "id": "26b56a36-3d1d-4cb2-9efb-beb11a1d5267",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -219,7 +189,7 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "ae26865a-51e7-44ff-aea5-7c92da228cef",
+                    "id": "9eff2e95-3f55-48f7-9135-a5be0149d9ae",
                     "path": "",
                     "interactions": "",
                     "processors": "",
@@ -369,6 +339,82 @@
                     "action": "AdjustTheAngle",
                     "isComposite": false,
                     "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "PlayerInCoding",
+            "id": "cf9f6510-ef62-47c2-9169-7097bc6c6b59",
+            "actions": [
+                {
+                    "name": "Coding",
+                    "type": "Button",
+                    "id": "7740a478-a400-40d6-96a6-27525d86c2dc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)"
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ddf24efa-fd79-4857-a09e-67b1843f0e5d",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player",
+                    "action": "Coding",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d7103191-c434-42b6-a74c-50ad51ec6322",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player",
+                    "action": "Coding",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "PlayerInReparingTheMachine",
+            "id": "d71f6668-2465-4d0b-9fab-d5bc6a92e671",
+            "actions": [
+                {
+                    "name": "Comfirm",
+                    "type": "Button",
+                    "id": "43dde524-dc10-473f-b1e8-7ce5297afc88",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0d7b7b13-bcb1-4c78-aea2-c52004d78d00",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player",
+                    "action": "Comfirm",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a1d323fa-54ce-4fd5-90dc-24af8e3f1115",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player",
+                    "action": "Comfirm",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
