@@ -174,8 +174,17 @@ public class M_Player : MonoBehaviour
     //监听打电码的函数
     public void OnCoding(InputAction.CallbackContext context)
     {
+        if(context.started)
+        {
+            //如果刚按下打码，把电报机UI图片的把手替换成按下的
+            catched.ChangeHandleTo(true);
+        }
+
         if(context.canceled)
         {
+            //如果刚松开打码，把电报机UI图片的把手换成松开的
+            catched.ChangeHandleTo(false);
+            //根据按下期间时长发送打出来的码给电报机
             if(catched != null)
             {
                 if(context.duration < indexRecoder.dotRoLineTime)//如果小于界限时间

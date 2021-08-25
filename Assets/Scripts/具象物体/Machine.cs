@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class Machine : Interactive
 {
@@ -17,12 +18,29 @@ public class Machine : Interactive
     public Event m_Event;//机器电码打完后的事件，由于不同的机器打完后触发的东西不一样，所以用事件像拼图一样把这个函数写在外面
     [Tooltip("界面展示需要打的句子的TextView数组，请把对应的显示句子的TextView们拖进来。就算后面两行不够，也直接加就行。但是要记得和sentencs数组的长度相同！")]
     public Text[] sentencesTextView;//界面展示需要打的句子的TextView数组
+    private RectTransform handleUp;
+    private RectTransform handleDown;//电报机UI把手弹起和按下的图片
 
     void Start()
     {
         codeTextView = m_interface.GetComponentInChildren<Text>();
         indexRecoder = FindObjectOfType<IndexRecoder>();
         linesChecker = FindObjectOfType<AllLinesInfo>();
+
+
+        handleUp = m_interface.
+                     GetComponent<RectTransform>().
+                     Find("电报机图片").
+                     Find("把手-抬起").
+                     GetComponent<RectTransform>();//根据路径和名称找到把手图片
+
+        handleDown = m_interface.
+                     GetComponent<RectTransform>().
+                     Find("电报机图片").
+                     Find("把手-按下").
+                     GetComponent<RectTransform>();//根据路径和名称找到把手图片
+
+
     }
 
     //电报机界面被打开的时候调用
@@ -33,11 +51,19 @@ public class Machine : Interactive
             m_interface.SetActive(true);//把这个交互对象的界面打开，这里是电报机界面
             ShwoTheSentencesInfo();//初始化展示电报机界面的需要打的句子
             UpdateTheSentencesTextViewStates();//更新一下显示句子TextView的颜色状态
+            //更换玩家操作地图，使玩家操作电报机的时候只监听交互键
+            FindObjectOfType<M_Player>().GetComponent<PlayerInput>().SwitchCurrentActionMap("PlayerInCoding");
         }
         else
         {
             Debug.Log("还有线路没通");
         }
+    }
+
+    public override void ChangeHandleTo(bool isDown)
+    {
+            handleUp.gameObject.SetActive(!isDown);
+            handleDown.gameObject.SetActive(isDown);
     }
 
     //更新界面句子们的颜色信息的函数，黄色代表该句正在打，绿色代表该句已经完成，红色代表该句等待打

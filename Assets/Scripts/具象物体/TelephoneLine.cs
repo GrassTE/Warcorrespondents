@@ -40,6 +40,7 @@ public class TelephoneLine : Interactive
                 FindObjectOfType<AllLinesInfo>().OKCount++;//找到总线信息，给好了的电话线+1
                 Debug.Log("满了，这个修好了");
                 OnStopReparing();//关下UI
+                GetComponent<SpriteRenderer>().enabled = true;//打开修好的的图片素材
                 if(endEvent != null) endEvent.OnCall();//如果有结束事件，那触发一下结束事件
             }
             //还要更新UI上的进度条

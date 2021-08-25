@@ -26,10 +26,10 @@ public class Father : NormalInvestableItems
 
     public void OnTalkToSonEnd()
     {
-        //Debug.Log("对话结束，打开电报机页面");
-        m_interface.SetActive(true);
-        M_Player player = FindObjectOfType<M_Player>();
-        player.catched = m_interface.GetComponent<Machine>();
-        m_interface.GetComponent<Machine>().OnCall();
+        //当父亲和儿子第一次对话结束
+        m_interface.SetActive(true);//打开电报机界面
+        M_Player player = FindObjectOfType<M_Player>();//找到玩家
+        player.catched = m_interface.GetComponent<Machine>();//把电报机塞给玩家
+        m_interface.GetComponent<Machine>().OnCall();//呼出电报机
     }
 }
