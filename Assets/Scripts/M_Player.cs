@@ -157,7 +157,15 @@ public class M_Player : MonoBehaviour
             //可交互对象都有UI界面。当按下交互键后，显示交互界面
             if(catched != null)
             {
+                //触发交互函数，在具象物体中重写这个虚拟功能
                 catched.OnCall();
+                //如果捕捉对象是电话线
+                if(catched.tag == "电话线") 
+                {
+                    //获取其电话线组件，如果其未修好，则执行修理动画
+                    if(!catched.GetComponent<TelephoneLine>().HasTheBePrepared())
+                    M_Animator.SetBool("IsReparing", true);
+                }
             }
         }
 
@@ -167,9 +175,18 @@ public class M_Player : MonoBehaviour
             if(catched != null)
             {
                 catched.StopRepareTheTelephoneLine();
+                //如果捕捉对象是电话线，停止修电话线动画
+                if(catched.tag == "电话线") M_Animator.SetBool("IsReparing", false);
             }
         }
     }
+
+    //当修好了一个电话线，强制打断修电话线动画
+    public void HasReparedATelephone()
+    {
+        M_Animator.SetBool("IsReparing", false);
+    }
+
 
     //监听打电码的函数
     public void OnCoding(InputAction.CallbackContext context)

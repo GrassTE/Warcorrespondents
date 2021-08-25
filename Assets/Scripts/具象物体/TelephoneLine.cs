@@ -41,6 +41,7 @@ public class TelephoneLine : Interactive
                 Debug.Log("满了，这个修好了");
                 OnStopReparing();//关下UI
                 GetComponent<SpriteRenderer>().enabled = true;//打开修好的的图片素材
+                FindObjectOfType<M_Player>().HasReparedATelephone();//告诉玩家自己被修好，打断修理动画
                 if(endEvent != null) endEvent.OnCall();//如果有结束事件，那触发一下结束事件
             }
             //还要更新UI上的进度条
@@ -77,6 +78,7 @@ public class TelephoneLine : Interactive
         m_interface.SetActive(false);//关闭修电话线的UI
     }
 
+    public bool HasTheBePrepared(){return isRepared;}
     
     
     //制造一个只读的变量，不要动这些
