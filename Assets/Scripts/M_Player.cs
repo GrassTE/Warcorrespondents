@@ -48,6 +48,31 @@ public class M_Player : MonoBehaviour
 
     void FixedUpdate(){}
 
+    // void OnAnimatorMove()//Unity的回调函数，这样做能解决模型无法转向的问题，每帧调用一次
+    // {
+    //     //Debug.Log(playerAnimator.deltaPosition.magnitude);
+    //     m_rigidbody.MovePosition(m_rigidbody.position + (Vector2)(M_Animator.deltaPosition));
+    //     //m_RigidBody.MoveRotation(m_Rotation);//当物体有物理组件rigidbody的时候，再修改位置和旋转信息就不要用transfrom了，用刚体自带的Move等方法
+    // }
+
+    //返回面部朝向的函数，在上下坑点调用，用来判断是否执行上下坑动画
+    public int ReturnFaceDir(){return faceDir;}
+
+    //播放上坑动画
+    public void PlayUpAnimation(){M_Animator.SetBool("IsUp",true);}
+
+    //播放下坑动画的函数，在下坑点调用
+    public void PlayDownAnimation(){M_Animator.SetBool("IsDown",true);}
+
+    //关闭下坑条件，在动画中添加Event来执行，避免下坑动画重复执行
+    public void StopIsDown(){M_Animator.SetBool("IsDown",false);}
+
+    //给自生刚体一个向上的速度，不然无法解决动画上坑y轴被重力控制的问题
+    public void GiveAUpForce(){m_rigidbody.velocity = new Vector2(0,6);}
+
+    //关闭上坑条件，避免重复触发
+    public void StopIsUp(){M_Animator.SetBool("IsUp",false);}
+
     //调整投掷角度的函数
     private void AdjustTheAngle()
     {
@@ -142,10 +167,12 @@ public class M_Player : MonoBehaviour
         if(context.started)//如果刚按下跑步键
         {
             runSpeedMultiple = indexRecoder.runSpeedMultiple;//把本地的速度倍率变成数值记录器中的倍率
+            M_Animator.SetBool("IsRunning",true);//播放跑步动画
         }
         else if(context.canceled)//如果刚松开跑步键
         {
             runSpeedMultiple = 1f;//恢复本地速度倍率为1
+            M_Animator.SetBool("IsRunning",false);//关闭跑步动画
         }
     }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fungus;
+using UnityEngine.InputSystem;
 
 public class NormalInvestableItems : Interactive
 {
@@ -22,5 +23,7 @@ public class NormalInvestableItems : Interactive
     {
         Debug.Log("我触发了"+ gameObject.name +"的对话");
         Flowchart.BroadcastFungusMessage("谈论" + itemName);
+        //修改玩家操作地图为空，解决玩家在对话时还能移动的问题
+        FindObjectOfType<M_Player>().GetComponent<PlayerInput>().SwitchCurrentActionMap("NullMap");
     }
 }

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Fungus;
+using UnityEngine.InputSystem;
 
 public class OpenDoorStage : Event
 {
@@ -10,7 +12,7 @@ public class OpenDoorStage : Event
         Debug.Log("正在启动多态【开门演出】");
 
         M_Player player = FindObjectOfType<M_Player>();//找到玩家
-        player.transform.position = new Vector3(12.8999996f,0.936617672f,0);//改变玩家位置
+        player.transform.position = new Vector3(12.8999996f,0.685016334f,0);//改变玩家位置
 
         player.transform.localScale = new Vector3(
             Mathf.Abs(transform.localScale.x)*-1,
@@ -22,6 +24,12 @@ public class OpenDoorStage : Event
         watertank.GetComponentInChildren<NormalInvestableItems>().itemName = "父亲离开后的水缸";
 
         Destroy(FindObjectOfType<Father>().gameObject);//摧毁父亲这个游戏物体
+        Destroy(GameObject.Find("电报机"));//摧毁电报机这个游戏物体
+
+        //设置玩家操作地图为空
+        player.GetComponent<PlayerInput>().SwitchCurrentActionMap("NullMap");
+        //呼出开门演出开幕对话
+        Flowchart.BroadcastFungusMessage("开门演出开幕");
 
     }
 }

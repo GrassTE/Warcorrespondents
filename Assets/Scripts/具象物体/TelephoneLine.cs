@@ -56,7 +56,8 @@ public class TelephoneLine : Interactive
         //象征着按下交互键了，如果这个还没被修好，即刻开始修复电话线
         if(!isRepared)
         {
-            m_interface.SetActive(true);  
+            m_interface.SetActive(true);//打开UI
+            m_interface.transform.position = Camera.main.WorldToScreenPoint(transform.position);
             StartRepareTheTelephoneLine();
         }
     }

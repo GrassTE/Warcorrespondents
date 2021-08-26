@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fungus;
+using UnityEngine.InputSystem;
 
 public class Father : NormalInvestableItems
 {
@@ -22,6 +23,8 @@ public class Father : NormalInvestableItems
     {
         //Debug.Log("我触发了和父亲的对话");
         Flowchart.BroadcastFungusMessage("与父亲对话");
+        //关闭玩家的操作地图
+        FindObjectOfType<M_Player>().GetComponent<PlayerInput>().SwitchCurrentActionMap("NullMap");
     }
 
     public void OnTalkToSonEnd()
