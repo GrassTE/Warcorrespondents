@@ -30,6 +30,8 @@ public class OpenDoorStage : Event
         player.GetComponent<PlayerInput>().SwitchCurrentActionMap("NullMap");
         //呼出开门演出开幕对话
         Flowchart.BroadcastFungusMessage("开门演出开幕");
+        //删除那个假电报机
+        Destroy(FindObjectOfType<AReadyMachine>().gameObject);
 
     }
 }

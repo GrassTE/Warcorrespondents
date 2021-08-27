@@ -187,7 +187,7 @@ public class M_Player : MonoBehaviour
                 //触发交互函数，在具象物体中重写这个虚拟功能
                 catched.OnCall();
                 //如果捕捉对象是电话线
-                if(catched.tag == "电话线") 
+                if(catched != null && catched.tag == "电话线") 
                 {
                     //获取其电话线组件，如果其未修好，则执行修理动画
                     if(!catched.GetComponent<TelephoneLine>().HasTheBePrepared())
