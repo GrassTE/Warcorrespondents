@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MissionBook : Interactive
 {
@@ -12,6 +13,16 @@ public class MissionBook : Interactive
     {
         bookUI = canvas.Find("任务书").gameObject;//找到任务书UI，因为其默认隐藏，所以必须用这种方式找到
     }
-    public override void OnCall(){bookUI.SetActive(true);}//当被唤醒，直接显示任务书的UI
-    public override void Quit(){bookUI.SetActive(false);}//当触发退出按钮，直接关闭任务书UI
+    public override void OnCall()
+    {
+        bookUI.SetActive(true);//当被唤醒，直接显示任务书的UI
+        //随后关闭玩家操控地图
+        FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("PlayerInMissionBook");
+    }
+    public override void Quit()
+    {
+        bookUI.SetActive(false);//当触发退出按钮，直接关闭任务书UI
+        //同时打开玩家操控地图
+        FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("PlayerNormal");
+    }
 }

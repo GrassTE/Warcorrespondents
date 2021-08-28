@@ -417,6 +417,44 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "PlayerInMissionBook",
+            "id": "fc5b786d-017d-4ed3-97f8-cb2cd03a606b",
+            "actions": [
+                {
+                    "name": "Quit",
+                    "type": "Button",
+                    "id": "4d4b3e51-6a09-47af-84d0-6c113e870633",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)"
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2cec3d75-a26d-40af-bdd6-006ee4386738",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player",
+                    "action": "Quit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "51d166a5-9d42-461c-9da2-d14d84af00a5",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Player",
+                    "action": "Quit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

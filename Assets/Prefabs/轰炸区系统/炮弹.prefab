@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6293088924721911991}
   - component: {fileID: 8924545551766045615}
   - component: {fileID: 7607195361720575763}
+  - component: {fileID: -366894749825469504}
   m_Layer: 0
   m_Name: "\u70AE\u5F39"
   m_TagString: "\u70AE\u5F39"
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dcb387599efee8040907b50b83625078, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,6 +100,8 @@ MonoBehaviour:
   shadow: {fileID: 3566358762308528686, guid: 73f23d723f100f54db8c58c86da940eb, type: 3}
   boomObj: {fileID: 7911349319489194765, guid: 299f21a72c405984780245234d765a50, type: 3}
   M_BombingArea: {fileID: 0}
+  MaxShadowSize: 1.7
+  MinShadowSize: 1.3
 --- !u!61 &7607195361720575763
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -112,16 +115,35 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.04, y: -0.55}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.71, y: 2.17}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.51, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &-366894749825469504
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6293088924721911990}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6c79b0d669df6a945a085ad512287fd1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

@@ -16,6 +16,12 @@ public class Shell : MonoBehaviour
     public GameObject boomObj;
     public BombingArea M_BombingArea;
     private bool amISpecal = false;//记录自己是不是特殊的的变量。特殊的炮弹才能炸烂石头。
+    private Animator animator;
+    private delegate float BuildAFitX(float deleta);
+    [Tooltip("请填入阴影的最大值")]
+    public float MaxShadowSize;
+    [Tooltip("请填入阴影的最小值")]
+    public float MinShadowSize;
     
     void Start()
     {
@@ -31,12 +37,14 @@ public class Shell : MonoBehaviour
                                 Quaternion.identity)
                                 .transform;
         Invoke("Drop",fallingTime);
+
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        ShadowShock();
+        if(m_shadow != null) ShadowShock();
         if(isDroping)
         {
             transform.position -= new Vector3(0,shellSpeed*Time.deltaTime,0);
@@ -48,11 +56,29 @@ public class Shell : MonoBehaviour
     public bool AmISpecal(){return amISpecal;}//外部调用，返回这个炮弹是不是特殊的
     public void YouAreSpecal(){amISpecal = true;}//外部调用，生成炮弹时，给其标记它是特殊的。
 
+    //控制阴影变化的函数，每帧调用一次
     private void ShadowShock()
     {
-        m_shadow.transform.localScale = new Vector3(m_shadow.localScale.x +
-                                                    Random.Range(-indexRecoder.shellShadowRangeOfChange,
-                                                                indexRecoder.shellShadowRangeOfChange),
+        //首先构造一个本帧变化x
+        BuildAFitX buildAFitX = (float deleta)
+        =>
+        {
+            float newX = m_shadow.transform.localScale.x + deleta;
+            if(newX > MinShadowSize && newX < MaxShadowSize)
+            {return newX;}
+            else return m_shadow.transform.localScale.x;
+        };
+        float x = buildAFitX(Random.Range(-indexRecoder.shellShadowRangeOfChange, 
+                                          indexRecoder.shellShadowRangeOfChange));
+        //使得本地大小改变为
+        m_shadow.transform.localScale = new Vector3(
+                                                    //x
+                                                    // m_shadow.localScale.x +
+                                                    // Random.Range(-indexRecoder.shellShadowRangeOfChange,
+                                                    //             indexRecoder.shellShadowRangeOfChange),
+                                                    x
+                                                    ,
+                                                    //y，z不变
                                                     m_shadow.localScale.y,
                                                     m_shadow.localScale.z);
     }
@@ -60,6 +86,12 @@ public class Shell : MonoBehaviour
     private void Drop()
     {
         isDroping = true;
+    }
+
+    public void DestroySelf()
+    {
+        //动画中调用，爆炸动画结束后删除自身和阴影
+        Destroy(gameObject);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -72,9 +104,12 @@ public class Shell : MonoBehaviour
                 //玩家被炮弹击中
                 break;
             case "地面":
-                Destroy(m_shadow.gameObject);
-                Destroy(gameObject);
+                //Destroy(m_shadow.gameObject);
+                //Destroy(gameObject);
                 Instantiate(boomObj, new Vector2(transform.position.x, transform.position.y),Quaternion.identity);
+                animator.SetBool("IsBoom",true);
+                Destroy(m_shadow.gameObject);
+                isDroping = false;
                 break;
             case "石头":
                 Destroy(m_shadow.gameObject);

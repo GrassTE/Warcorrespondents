@@ -430,6 +430,44 @@ public class @Player : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""PlayerInMissionBook"",
+            ""id"": ""fc5b786d-017d-4ed3-97f8-cb2cd03a606b"",
+            ""actions"": [
+                {
+                    ""name"": ""Quit"",
+                    ""type"": ""Button"",
+                    ""id"": ""4d4b3e51-6a09-47af-84d0-6c113e870633"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)""
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""2cec3d75-a26d-40af-bdd6-006ee4386738"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player"",
+                    ""action"": ""Quit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""51d166a5-9d42-461c-9da2-d14d84af00a5"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Player"",
+                    ""action"": ""Quit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -471,6 +509,9 @@ public class @Player : IInputActionCollection, IDisposable
         // PlayerInReparingTheMachine
         m_PlayerInReparingTheMachine = asset.FindActionMap("PlayerInReparingTheMachine", throwIfNotFound: true);
         m_PlayerInReparingTheMachine_Comfirm = m_PlayerInReparingTheMachine.FindAction("Comfirm", throwIfNotFound: true);
+        // PlayerInMissionBook
+        m_PlayerInMissionBook = asset.FindActionMap("PlayerInMissionBook", throwIfNotFound: true);
+        m_PlayerInMissionBook_Quit = m_PlayerInMissionBook.FindAction("Quit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -721,6 +762,39 @@ public class @Player : IInputActionCollection, IDisposable
         }
     }
     public PlayerInReparingTheMachineActions @PlayerInReparingTheMachine => new PlayerInReparingTheMachineActions(this);
+
+    // PlayerInMissionBook
+    private readonly InputActionMap m_PlayerInMissionBook;
+    private IPlayerInMissionBookActions m_PlayerInMissionBookActionsCallbackInterface;
+    private readonly InputAction m_PlayerInMissionBook_Quit;
+    public struct PlayerInMissionBookActions
+    {
+        private @Player m_Wrapper;
+        public PlayerInMissionBookActions(@Player wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Quit => m_Wrapper.m_PlayerInMissionBook_Quit;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerInMissionBook; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PlayerInMissionBookActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerInMissionBookActions instance)
+        {
+            if (m_Wrapper.m_PlayerInMissionBookActionsCallbackInterface != null)
+            {
+                @Quit.started -= m_Wrapper.m_PlayerInMissionBookActionsCallbackInterface.OnQuit;
+                @Quit.performed -= m_Wrapper.m_PlayerInMissionBookActionsCallbackInterface.OnQuit;
+                @Quit.canceled -= m_Wrapper.m_PlayerInMissionBookActionsCallbackInterface.OnQuit;
+            }
+            m_Wrapper.m_PlayerInMissionBookActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Quit.started += instance.OnQuit;
+                @Quit.performed += instance.OnQuit;
+                @Quit.canceled += instance.OnQuit;
+            }
+        }
+    }
+    public PlayerInMissionBookActions @PlayerInMissionBook => new PlayerInMissionBookActions(this);
     private int m_PlayerSchemeIndex = -1;
     public InputControlScheme PlayerScheme
     {
@@ -754,5 +828,9 @@ public class @Player : IInputActionCollection, IDisposable
     public interface IPlayerInReparingTheMachineActions
     {
         void OnComfirm(InputAction.CallbackContext context);
+    }
+    public interface IPlayerInMissionBookActions
+    {
+        void OnQuit(InputAction.CallbackContext context);
     }
 }
