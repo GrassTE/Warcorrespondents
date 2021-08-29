@@ -17,6 +17,8 @@ public class TelephoneLine : Interactive
     private float process = 0f;
     [Tooltip("特殊电话线用，拖入这个电话线修好后的事件")]
     public Event endEvent;
+    
+    public GameObject spark;//获取火花的对象
 
     void Start()
     {
@@ -36,6 +38,7 @@ public class TelephoneLine : Interactive
             //检查是否满了
             if(process >= 1f)
             {
+                spark.SetActive(false);//将火花对象隐藏
                 isRepared = true;//标记自己已经被修好
                 FindObjectOfType<AllLinesInfo>().OKCount++;//找到总线信息，给好了的电话线+1
                 Debug.Log("满了，这个修好了");
