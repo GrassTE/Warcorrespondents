@@ -44,14 +44,6 @@ Material:
     - WaveIntensity_2: 1
     - WaveSpread_Value: 0
     m_Colors:
-<<<<<<< HEAD
-<<<<<<< HEAD
-    - Center: {r: 0.56684387, g: 0.49269864, b: 0, a: 0}
-=======
-    - Center: {r: 0.25187644, g: 0.20082444, b: 0, a: 0}
->>>>>>> a13c05b3eab9e2a66d92a816f6ef2f1a55ad0d78
-=======
     - Center: {r: -0.32060638, g: 0.25792563, b: 0, a: 0}
->>>>>>> 6695d40b997c7ac29d2761c9a2352f7df13beaa2
     - Vector2_d2d098295fc146f08b921b231b2e5199: {r: 1.6, g: 0.9, b: 0, a: 0}
   m_BuildTextureStacks: []
