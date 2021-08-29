@@ -18,13 +18,14 @@ public class TelephoneLine : Interactive
     [Tooltip("特殊电话线用，拖入这个电话线修好后的事件")]
     public Event endEvent;
     
-    public GameObject spark;//获取火花的对象
+    private GameObject spark;//获取火花的对象
 
     void Start()
     {
         indexRecoder = FindObjectOfType<IndexRecoder>();
         allNeedTime = indexRecoder.TelephoneNeedTime;
         m_interface = GameObject.Find("Canvas").transform.Find("修电话线界面").gameObject;
+        spark = transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame

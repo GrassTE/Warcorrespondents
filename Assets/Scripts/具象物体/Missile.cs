@@ -8,15 +8,22 @@ public class Missile : MonoBehaviour
     // Start is called before the first frame update
     private bool amINoisy = false;//记录自己是否落地发出声音的变量
     private bool amIBeenChecked = false;//记录自己是否已经被敌人检查过
+    private Rigidbody2D m_rigidbody;
     void Start()
     {
-        
+        m_rigidbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //使得自身旋转角度匹配速度，像一支箭矢
+        if(m_rigidbody != null)
+        {
+            float angle = Vector2.Angle(m_rigidbody.velocity,Vector2.right);
+            if(m_rigidbody.velocity.y > 0)  m_rigidbody.SetRotation(angle);
+            else m_rigidbody.SetRotation(-angle);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -28,7 +35,7 @@ public class Missile : MonoBehaviour
             //同时，摧毁自身的刚体组件，阻止其滚动
             Destroy(GetComponent<Rigidbody2D>()); 
             //再摧毁自身碰撞体
-            Destroy(GetComponent<BoxCollider2D>());
+            Destroy(GetComponent<CapsuleCollider2D>());
         }
     }
 

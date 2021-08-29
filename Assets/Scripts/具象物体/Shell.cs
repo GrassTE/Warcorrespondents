@@ -29,13 +29,16 @@ public class Shell : MonoBehaviour
         shellSpeed = indexRecoder.shellSpeed;
         fallingTime = indexRecoder.shellFallingTime;
         ground = GameObject.FindWithTag("地面").transform;
-        m_shadow = Instantiate(shadow,//生成一片阴影
-                                new Vector3(transform.position.x,//在这枚炮弹的X
-                                            ground.transform.position.y + //地面的Y
-                                            M_BombingArea.shellShadowYOffset,//加上偏移量
-                                            0),
-                                Quaternion.identity)
-                                .transform;
+        if(!amISpecal)//特殊炮弹不予阴影
+        {
+            m_shadow = Instantiate(shadow,//生成一片阴影
+                                    new Vector3(transform.position.x,//在这枚炮弹的X
+                                                ground.transform.position.y + //地面的Y
+                                                M_BombingArea.shellShadowYOffset,//加上偏移量
+                                                0),
+                                    Quaternion.identity)
+                                    .transform;
+        }
         Invoke("Drop",fallingTime);
 
         animator = GetComponent<Animator>();
@@ -52,7 +55,6 @@ public class Shell : MonoBehaviour
 
         
     }
-
     public bool AmISpecal(){return amISpecal;}//外部调用，返回这个炮弹是不是特殊的
     public void YouAreSpecal(){amISpecal = true;}//外部调用，生成炮弹时，给其标记它是特殊的。
 
@@ -108,12 +110,15 @@ public class Shell : MonoBehaviour
                 //Destroy(gameObject);
                 Instantiate(boomObj, new Vector2(transform.position.x, transform.position.y),Quaternion.identity);
                 animator.SetBool("IsBoom",true);
-                Destroy(m_shadow.gameObject);
+                if(m_shadow != null) Destroy(m_shadow.gameObject);
                 isDroping = false;
                 break;
             case "石头":
-                Destroy(m_shadow.gameObject);
-                Destroy(gameObject);//摧毁炮弹
+                // Destroy(m_shadow.gameObject);
+                // Destroy(gameObject);//摧毁炮弹
+                animator.SetBool("IsBoom",true);
+                //Destroy(m_shadow.gameObject);
+                isDroping = false;
                 //如果自己是特殊的炮弹，则触发石头的程序段
                 if(amISpecal) other.GetComponent<Stone>().BeHitBySpecalShell();
                 break;

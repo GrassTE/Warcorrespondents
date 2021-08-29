@@ -128,10 +128,16 @@ public class M_Player : MonoBehaviour
         if(context.started)//如果按下投掷键，表示可以开始控制角度了
         {
             canAdjustTheAngle = true;
+            //动画：进入准备丢的动画
+            M_Animator.SetBool("ReadyToThrow", true);
         }
         if(context.canceled)//如果是刚松开投掷键，表示要丢东西了
         {
-            if(throwingState)Throw();//如果处于投掷阶段，则触发丢
+            if(throwingState)
+            {
+                M_Animator.SetBool("NowThrow",true);//动画：执行丢这个动作
+                Throw();//如果处于投掷阶段，则触发丢
+            }
         }
     }
 
@@ -141,7 +147,7 @@ public class M_Player : MonoBehaviour
     }
 
     //如果正处于投掷状态，则退出投掷状态的监听函数
-    public void OnThrowQuit(InputAction.CallbackContext context){if(throwingState)QuitThrowingsState();}
+    public void OnThrowQuit(InputAction.CallbackContext context){if(throwingState)StartCoroutine("QuitThrowingsState");}
 
     //监听修改投掷角度的函数
     public void OnAdjustTheAngle(InputAction.CallbackContext context)
@@ -158,7 +164,7 @@ public class M_Player : MonoBehaviour
                                                   indexRecoder.strengthOfThrowing*Mathf.Sin(throwingAngle));
         
         //扔完后退出投掷状态并且重置相关参数
-        QuitThrowingsState();
+        StartCoroutine("QuitThrowingsState");
     }
 
     //进入跑步状态的控制代码
@@ -251,18 +257,23 @@ public class M_Player : MonoBehaviour
         //1.切换操控地图
         playerInput.SwitchCurrentActionMap("PlayerInThrowing");
         //2.动画相关
-        //
+        M_Animator.SetBool("throwingState",true);//使自身进入捡石动画
     }
     
-    //等待完善投掷系统
-    public void QuitThrowingsState()
+    //退出投掷状态的时候
+    public IEnumerator QuitThrowingsState()
     {
         throwingState = false;//改变自身标记
         playerInput.SwitchCurrentActionMap("PlayerNormal");//修改自身操控地图
         throwingAngle = 45f;//恢复投掷角度到45°
         canAdjustTheAngle = false;//可修改角度标记改为false
         GetComponent<LineRenderer>().enabled = false;//别画线了
-
+        //关闭动画条件
+        M_Animator.SetBool("throwingState",false);
+        M_Animator.SetBool("ReadyToThrow",false);
+        //为了解决问题需要到下一帧关闭丢出动画指令
+        yield return new WaitForEndOfFrame();
+        M_Animator.SetBool("NowThrow",false);
     }
 
     //绘制投掷曲线的函数，非常🐂
@@ -271,7 +282,7 @@ public class M_Player : MonoBehaviour
         //
         LineRenderer line = GetComponent<LineRenderer>();//获取组件
         line.enabled = true;
-        int segmentCount = 15;//定义点数
+        int segmentCount = 18;//定义点数
         line.positionCount = segmentCount;//传入点数
         float gravity=9.8f;//定义重力常量
         Vector2 fireOffset = new Vector2(throwOffset.position.x - transform.position.x, 
