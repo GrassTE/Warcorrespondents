@@ -7,9 +7,12 @@ public class MachineGunner : MonoBehaviour
     //机枪手类，控制检测前方一片区域的敌人
     // Start is called before the first frame update
     private bool hasBeHit = false;//是否已被打中
+    private Animator person;
+    private Animator gun;//声明两个部件的动画组件
     void Start()
     {
-        
+        person = transform.Find("敌人").GetComponent<Animator>();
+        gun = transform.Find("机枪").GetComponent<Animator>();//找到两个部件的动画组件
     }
 
     // Update is called once per frame
@@ -23,7 +26,10 @@ public class MachineGunner : MonoBehaviour
     {
         if(other.tag == "Player" && !hasBeHit)//同时需要满足未被击中这个条件
         {
-            GetComponent<SpriteRenderer>().color = Color.red;
+            //GetComponent<SpriteRenderer>().color = Color.red;
+            //播放开火动画
+            person.SetBool("IsFiring",true);
+            gun.SetBool("IsFiring",true);
         }
     }
     //当玩家退出检测区域，停止射击状态,变为通常状态，现在用白色表示
@@ -31,7 +37,10 @@ public class MachineGunner : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            GetComponent<SpriteRenderer>().color = Color.white;
+            //GetComponent<SpriteRenderer>().color = Color.white;
+            //关闭开火动画
+            person.SetBool("IsFiring",false);
+            gun.SetBool("IsFiring",false);
         }
     }
     //碰撞体是机枪手自身的碰撞体，如果被投掷物砸中，则陷入昏迷状态，目前用绿色表示

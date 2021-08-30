@@ -68,7 +68,8 @@ public class M_Player : MonoBehaviour
     public void StopIsDown(){M_Animator.SetBool("IsDown",false);}
 
     //给自生刚体一个向上的速度，不然无法解决动画上坑y轴被重力控制的问题
-    public void GiveAUpForce(){m_rigidbody.velocity = new Vector2(0,6);}
+    public void GiveAUpForce(){m_rigidbody.velocity = new Vector2(0,8);}
+
 
     //关闭上坑条件，避免重复触发
     public void StopIsUp(){M_Animator.SetBool("IsUp",false);}
@@ -88,6 +89,16 @@ public class M_Player : MonoBehaviour
                             Color.red);
            DrawPath(); 
         }
+    }
+
+    public void ChangeInputMapToNull()
+    {
+        playerInput.SwitchCurrentActionMap("NullMap");
+    }
+
+    public void ChangeInputMapToNormal()
+    {
+        playerInput.SwitchCurrentActionMap("PlayerNormal");
     }
 
     //当玩家在修电报机地图下按下交互键触发
