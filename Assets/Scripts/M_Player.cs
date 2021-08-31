@@ -27,6 +27,7 @@ public class M_Player : MonoBehaviour
     [Tooltip("投掷物抛出点")]
     public Transform throwOffset;//记录一下抛出点的位置
     private Animator M_Animator;
+    private float strengthOfThrowing;//投掷力度，每次和投掷物堆交互，都会更新这个数值
     void Start()
     {
         indexRecoder = FindObjectOfType<IndexRecoder>();//获取数值记录组件，方便策划修改暴露参数    
@@ -68,7 +69,12 @@ public class M_Player : MonoBehaviour
     public void StopIsDown(){M_Animator.SetBool("IsDown",false);}
 
     //给自生刚体一个向上的速度，不然无法解决动画上坑y轴被重力控制的问题
-    public void GiveAUpForce(){m_rigidbody.velocity = new Vector2(0,8);}
+    public void GiveAUpForce(){
+        if(gameObject.name == "他爸")
+        m_rigidbody.velocity = new Vector2(0,6);
+        else
+        m_rigidbody.velocity = new Vector2(0,8);//匹配不同的两个坑
+    }
 
 
     //关闭上坑条件，避免重复触发
@@ -171,11 +177,16 @@ public class M_Player : MonoBehaviour
             Instantiate(missile,throwOffset.position,Quaternion.identity).GetComponent<Rigidbody2D>();//生成一个投掷物
         
         //给这个投掷物赋予速度，由目前的角度决定
-        rigidbodyOfMissile.velocity = new Vector2(indexRecoder.strengthOfThrowing*Mathf.Cos(throwingAngle),
-                                                  indexRecoder.strengthOfThrowing*Mathf.Sin(throwingAngle));
+        rigidbodyOfMissile.velocity = new Vector2(strengthOfThrowing*Mathf.Cos(throwingAngle),
+                                                  strengthOfThrowing*Mathf.Sin(throwingAngle));
         
         //扔完后退出投掷状态并且重置相关参数
         StartCoroutine("QuitThrowingsState");
+    }
+    //在投掷物堆中调用，每次呼叫投掷物堆，都针对此堆更新投掷力度
+    public void ChangeStrengthOfThrowingTo(float num)
+    {
+        strengthOfThrowing = num;
     }
 
     //进入跑步状态的控制代码
@@ -287,6 +298,10 @@ public class M_Player : MonoBehaviour
         M_Animator.SetBool("NowThrow",false);
     }
 
+    //播放上下楼动画的函数，在楼梯边的触发器调用
+    public void PlayDownStairAnimation(){M_Animator.SetBool("IsDownStair",true);}
+    public void PlayUpStairAnimation(){}
+
     //绘制投掷曲线的函数，非常🐂
     public void DrawPath()
     {
@@ -306,9 +321,9 @@ public class M_Player : MonoBehaviour
             float time = i * Time.fixedDeltaTime * 5;//类似时间间隔的定义，也就是抛物线上的x多久取值一次
             segments[i].x = transform.position.x + //自身位置的x
                             fireOffset.x + //发射偏移量的x
-                            time * indexRecoder.strengthOfThrowing * Mathf.Cos(throwingAngle);//水平方向位移 = v*t
+                            time * strengthOfThrowing * Mathf.Cos(throwingAngle);//水平方向位移 = v*t
             segments[i].y = (transform.position.y + fireOffset.y + //自身位置的y
-                            time * indexRecoder.strengthOfThrowing * Mathf.Sin(throwingAngle) + 
+                            time * strengthOfThrowing * Mathf.Sin(throwingAngle) + 
                             (0.5f * gravity * time * time)*-1);//垂直方向位移 = vt + 1/2 * g * t^2
             line.SetPosition(i, segments[i]);  //把算好的点传入线的点集     
         }

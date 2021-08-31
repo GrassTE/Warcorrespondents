@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/CG动画纹理.meta
+guid: 88ea1c223471b9342adcb4697e929fda
+=======
 guid: 0df21f9e5ece7064ab8bcb653278a9b9
+>>>>>>> 3b5e1df3526800951a3ee1bffe1bdbb55b6a1789:Assets/Prefabs/敌人.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

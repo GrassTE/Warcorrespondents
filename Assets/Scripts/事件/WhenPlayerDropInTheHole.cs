@@ -39,7 +39,7 @@ public class WhenPlayerDropInTheHole : Event
         if(other.tag == "Player")
         {
             //当玩家进入事件范围内
-            target = new Vector3(6.5f,0.25999999f,-10f);
+            target = new Vector3(7.85360003f,3.38889599f,-10);
         }
     }
 

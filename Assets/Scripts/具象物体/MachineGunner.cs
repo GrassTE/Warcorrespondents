@@ -9,10 +9,20 @@ public class MachineGunner : MonoBehaviour
     private bool hasBeHit = false;//是否已被打中
     private Animator person;
     private Animator gun;//声明两个部件的动画组件
+    private Animator groundFireAnimation;
+    private Animator groundFireAnimation2;
+    private Animator gunFireAnimation;
+    [Tooltip("请拖入第二个上坑点的游戏物体，将在敌人被击晕后激活这个上坑点")]
+    public GameObject UpPoint2;
+
+
     void Start()
     {
         person = transform.Find("敌人").GetComponent<Animator>();
-        gun = transform.Find("机枪").GetComponent<Animator>();//找到两个部件的动画组件
+        gun = transform.Find("机枪").GetComponent<Animator>();
+        groundFireAnimation = transform.Find("地面枪光").GetComponent<Animator>();
+        groundFireAnimation2 = transform.Find("地面枪光2").GetComponent<Animator>();
+        gunFireAnimation = transform.Find("枪口枪光").GetComponent<Animator>();//找到部件的动画组件
     }
 
     // Update is called once per frame
@@ -30,6 +40,9 @@ public class MachineGunner : MonoBehaviour
             //播放开火动画
             person.SetBool("IsFiring",true);
             gun.SetBool("IsFiring",true);
+            groundFireAnimation.SetBool("IsFiring",true);
+            groundFireAnimation2.SetBool("IsFiring",true);
+            gunFireAnimation.SetBool("IsFiring",true);
         }
     }
     //当玩家退出检测区域，停止射击状态,变为通常状态，现在用白色表示
@@ -41,6 +54,9 @@ public class MachineGunner : MonoBehaviour
             //关闭开火动画
             person.SetBool("IsFiring",false);
             gun.SetBool("IsFiring",false);
+            groundFireAnimation.SetBool("IsFiring",false);
+            groundFireAnimation2.SetBool("IsFiring",false);
+            gunFireAnimation.SetBool("IsFiring",false);
         }
     }
     //碰撞体是机枪手自身的碰撞体，如果被投掷物砸中，则陷入昏迷状态，目前用绿色表示
@@ -49,9 +65,18 @@ public class MachineGunner : MonoBehaviour
         if(other.gameObject.tag == "投掷物")
         {
             hasBeHit = true;//标记自身已被击中
-            GetComponent<SpriteRenderer>().color = Color.green;
+            //关闭开火动画
+            gun.SetBool("IsFiring",false);
+            groundFireAnimation.SetBool("IsFiring",false);
+            groundFireAnimation2.SetBool("IsFiring",false);
+            gunFireAnimation.SetBool("IsFiring",false);
+            //播放死亡动画
+            person.SetBool("IsDead",true);
+            //把上坑点2激活
+            UpPoint2.SetActive(true);
         }
     }
-
+    
+    public bool AreYouOK(){return !hasBeHit;}//返回机枪手状态是否良好，如果被打，则返回状态不好
 
 }
