@@ -74,6 +74,11 @@ public class MachineGunner : MonoBehaviour
             person.SetBool("IsDead",true);
             //把上坑点2激活
             UpPoint2.SetActive(true);
+            //关闭自身碰撞体
+            foreach(BoxCollider2D collider in GetComponents<BoxCollider2D>())
+            {
+                collider.enabled = false;
+            }
         }
     }
     

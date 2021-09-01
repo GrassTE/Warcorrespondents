@@ -122,6 +122,11 @@ public class Shell : MonoBehaviour
                 //如果自己是特殊的炮弹，则触发石头的程序段
                 if(amISpecal) other.GetComponent<Stone>().BeHitBySpecalShell();
                 break;
+            case "老兵":
+                animator.SetBool("IsBoom",true);
+                isDroping = false;
+                other.transform.Find("老兵").GetComponent<Animator>().SetBool("IsBoomingDead",true);//执行老兵被炸死动画
+                break;
         }
     }
     

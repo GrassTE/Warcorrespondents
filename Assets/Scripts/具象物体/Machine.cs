@@ -20,6 +20,8 @@ public class Machine : Interactive
     public Text[] sentencesTextView;//界面展示需要打的句子的TextView数组
     private RectTransform handleUp;
     private RectTransform handleDown;//电报机UI把手弹起和按下的图片
+    [Tooltip("请拖入翻页动画的那个游戏物体")]
+    public Animator turnPagesAnimation;
 
     void Start()
     {
@@ -103,7 +105,7 @@ public class Machine : Interactive
     public override void Coding(string temp)
     {
         code += temp;
-        if(code.Length >= 5) ClearChecker(code);//当长度超过5位，每打一位就检查一下是否有特殊字符
+        if(code.Length >= 5) StartCoroutine("ClearChecker");//当长度超过5位，每打一位就检查一下是否有特殊字符
         if(code.Length % 5 == 0) 
         {
             Translate(code);//每输入五位就翻译一下
@@ -167,15 +169,17 @@ public class Machine : Interactive
 
     //清除检查者函数。从自身Codeing函数调用，每次有新字符输入的时候就调用。
     //检查输入总体中是否存在连续的八个点，有则清空当前输入的所有东西
-    private void ClearChecker(string code)
+    IEnumerator ClearChecker()
     {
         int hasClearer = code.IndexOf(".-.-.");
         if(hasClearer != -1)
         {
             Debug.Log("检查到特殊码，清除所有输入内容");
-            // tempTranslateResult = "";
-            // this.code = "";
             ClearTheInputAndTempResult();
+            //播放翻页动画
+            turnPagesAnimation.SetBool("IsDelete",true);
+            yield return new WaitForEndOfFrame();
+            turnPagesAnimation.SetBool("IsDelete",false);
         }
     }
 

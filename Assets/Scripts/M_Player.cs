@@ -301,6 +301,14 @@ public class M_Player : MonoBehaviour
     //播放上下楼动画的函数，在楼梯边的触发器调用
     public void PlayDownStairAnimation(){M_Animator.SetBool("IsDownStair",true);}
     public void PlayUpStairAnimation(){}
+    //外部调用，让玩家转身
+    public void TurnAround()
+    {
+        transform.localScale = new Vector3(
+            transform.localScale.x*-1,
+            transform.localScale.y,
+            transform.localScale.z);//让玩家转身
+    }
 
     //绘制投掷曲线的函数，非常🐂
     public void DrawPath()
