@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Blockhouse : MonoBehaviour
 {
@@ -10,6 +11,20 @@ public class Blockhouse : MonoBehaviour
     public float firingInterval;
     private ShootingArea[] shootingAreas;
     private bool isShooting;//记录此时自己是否正在射击
+    [Tooltip("需要因为碉堡开火触发开火动画的都拖进来")]
+    public Animator[] fireAnimations;
+    [Tooltip("请拖入碉堡警告UI")]
+    public Image warningUI;
+    [Tooltip("拖入准备图片")]
+    public Sprite ready;
+    [Tooltip("拖入挥旗图片")]
+    public Sprite done;
+    private bool isStartedToShowUI = false;//记录自己是否正在准备启动警告UI
+    private bool isCencledToShowUI = false;//记录自己是否正在准备关闭警告UI
+    [Tooltip("请填入UI出现的速度")]
+    public float speed;
+    [Tooltip("请填入提前时间，即在警告后多少时间开枪")]
+    public float advanceTime;
 
     void Start()
     {
@@ -24,7 +39,15 @@ public class Blockhouse : MonoBehaviour
 
     void Update()
     {
-        if(isShooting) Shooting();
+        if(isShooting) Shooting();//如果正在射击，每帧检查射击区
+        if(isStartedToShowUI && warningUI.fillAmount < 1)//如果正在启动UI，每帧加一点fill直到加满
+        {
+            warningUI.fillAmount += speed*Time.deltaTime;
+        }
+        if(isCencledToShowUI && warningUI.fillAmount > 0)//如果正在关闭UI，每帧减一点fill直到清空
+        {
+            warningUI.fillAmount -= speed*Time.deltaTime;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -33,13 +56,23 @@ public class Blockhouse : MonoBehaviour
         {
             //当玩家进入监视区，开始每隔时间进行扫射
             InvokeRepeating("ShootOrStopShoot",firingInterval,firingInterval);
+            //启动警告UI
+            isCencledToShowUI = false;
+            isStartedToShowUI = true;
+            //每隔一定时间进行警告，即替换UI图片
+            InvokeRepeating("ReplaceWarningUIImage",firingInterval - advanceTime,firingInterval);
+        }
+    }
 
-            //
-            foreach(ShootingArea s in shootingAreas)
-            {
-                s.GetComponent<SpriteRenderer>().color = Color.yellow;
-            }
-            //
+    void ReplaceWarningUIImage()
+    {
+        if(!isShooting)
+        {
+            warningUI.sprite = done;
+        }
+        else
+        {
+            warningUI.sprite = ready;
         }
     }
 
@@ -49,13 +82,10 @@ public class Blockhouse : MonoBehaviour
         {
             //当玩家退出监视区，取消扫射的Invoke
             CancelInvoke("ShootOrStopShoot");
-
-            //
-            foreach(ShootingArea s in shootingAreas)
-            {
-                s.GetComponent<SpriteRenderer>().color = Color.white;
-            }
-            //
+            CancelInvoke("ReplaceWarningUIImage");
+            isCencledToShowUI = true;
+            isStartedToShowUI = false;
+            warningUI.sprite = ready;
         }
 
 
@@ -64,27 +94,24 @@ public class Blockhouse : MonoBehaviour
     //定时触发，反正就是更改射击状态，射到不射或者不射到射
     private void ShootOrStopShoot()
     {
-        if(isShooting) 
+        if(isShooting)//如果在开火
         {
-            isShooting = false;
-
-            //
-            foreach(ShootingArea s in shootingAreas)
+            isShooting = false;//别让它开了
+            //关闭所有动画组件的开火动画
+            foreach(Animator fire in fireAnimations)
             {
-                s.GetComponent<SpriteRenderer>().color = Color.yellow;
+                fire.SetBool("IsFiring",false);
             }
-            //
         }
-        else 
+        else//如果没在开火
         {
-            isShooting = true;
+            isShooting = true;//标记让它开火
 
-            //
-            foreach(ShootingArea s in shootingAreas)
+            //打开所有动画组件的开火动画
+            foreach(Animator fire in fireAnimations)
             {
-                s.GetComponent<SpriteRenderer>().color = Color.red;
+                fire.SetBool("IsFiring",true);
             }
-            //
         }
     }
     //正在射击的时候触发，每帧检测是否被击中

@@ -19,6 +19,7 @@ public class VeteranSacrifice : Event
     public GameObject shell;
     [Tooltip("召唤的炮弹需要知道自己属于哪个轰炸区，请拖入其轰炸区")]
     public BombingArea bombingArea;
+    private bool hasBeenOnCall;//记录事件是否被触发的变量
 
 
 
@@ -44,6 +45,15 @@ public class VeteranSacrifice : Event
     {
         //1.关闭玩家操作地图
         FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("NullMap");
+        //*让老兵转个身放置牺牲后穿模
+        FindObjectOfType<Veteran>().transform.localScale = new Vector3(
+            //x
+            FindObjectOfType<Veteran>().transform.localScale.x*-1,
+            //y
+            FindObjectOfType<Veteran>().transform.localScale.y,
+            //z
+            FindObjectOfType<Veteran>().transform.localScale.z
+        );
         //2.移动相机至老兵位置
         target = new Vector3(-19.8600006f,-0.600000024f,-10f)*3;
         //3.召唤一颗导弹在老兵头顶
@@ -61,6 +71,8 @@ public class VeteranSacrifice : Event
         FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("PlayerNormal");
         //8.关闭老兵碰撞体方便玩家回头查看
         FindObjectOfType<Veteran>().GetComponent<BoxCollider2D>().isTrigger = true;
+        //9.标记自己已经被触发过
+        hasBeenOnCall = true;
     }
 
      void OnTriggerEnter2D(Collider2D other)
@@ -68,7 +80,7 @@ public class VeteranSacrifice : Event
         if(other.tag == "Player")
         {
             //当玩家进入事件范围内
-            StartCoroutine("SelfOnCall");
+            if(!hasBeenOnCall)StartCoroutine("SelfOnCall");
         }
     }
 }
