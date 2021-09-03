@@ -161,6 +161,11 @@ public class Patrolman : MonoBehaviour
     //在听觉范围中调用，移除一个监听中的投掷物
     public void RemoveAMissile(Missile missile){missiles.Remove(missile);}
 
+    public void ChangeTargetTo(Transform newTarget)
+    {
+        target = newTarget;
+    }
+
 
 
     private class AuditoryRange : MonoBehaviour

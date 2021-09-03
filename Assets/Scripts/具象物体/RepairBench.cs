@@ -99,7 +99,7 @@ public class RepairBench : Interactive
             {
                 //如果全都完成
                 //关闭界面
-                m_interface.SetActive(false);
+                //m_interface.SetActive(false);
                 //触发结束事件
                 endEvent.OnCall();
             }

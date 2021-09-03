@@ -165,7 +165,10 @@ public class M_Player : MonoBehaviour
 
     public void OnQuit(InputAction.CallbackContext context)
     {
-        if(context.started) catched.Quit();//如果按下退出按钮，则执行捕捉到物体的退出功能
+        if(context.started) 
+        {
+            if(catched != null) catched.Quit();//如果按下退出按钮，则执行捕捉到物体的退出功能
+        }
     }
 
     //如果正处于投掷状态，则退出投掷状态的监听函数
