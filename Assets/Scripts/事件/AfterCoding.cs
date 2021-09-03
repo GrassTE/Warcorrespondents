@@ -15,7 +15,7 @@ public class AfterCoding : Event
     public GameObject BlackUI;
     void Start()
     {
-        OnCall();
+        //OnCall();
     }
     public override void OnCall()
     {

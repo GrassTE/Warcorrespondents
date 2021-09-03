@@ -14,7 +14,6 @@ public class InitStage2 : MonoBehaviour
     private IEnumerator OpenReadyMachine()
     {
         yield return new WaitForSeconds(0.1f);
-        Debug.Log("打开损坏电报机的碰撞体");
         FindObjectOfType<AReadyMachine>().GetComponent<BoxCollider2D>().enabled = true;//打开损坏电报机的碰撞体
     }
 

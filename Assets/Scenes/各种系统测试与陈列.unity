@@ -1435,7 +1435,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 461367559}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -21.64097, y: -0.69661766, z: -39.88551}
+  m_LocalPosition: {x: -21.73, y: -0.69661766, z: -39.88551}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1894615460}
@@ -3360,6 +3360,7 @@ MonoBehaviour:
   catched: {fileID: 0}
   missile: {fileID: 4018427281142380165, guid: 628f0c1ef857ddd4687c94b8ba9b1aa6, type: 3}
   throwOffset: {fileID: 0}
+  machineAudio: {fileID: 0}
 --- !u!50 &1272973350
 Rigidbody2D:
   serializedVersion: 4

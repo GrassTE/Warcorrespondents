@@ -19,7 +19,8 @@ public class M_Player : MonoBehaviour
     public Interactive catched;//所捕捉到的可交互对象
     private bool throwingState = false;//记录当前是否在投掷状态
     private PlayerInput playerInput;//自身输入组件，用来切换操控地图
-    private bool canAdjustTheAngle = false;//记录此时自己是否能调整投掷角度
+    private bool canAdjustTheAngle = false;//记录此时自己是否能调整投掷角
+    [SerializeField]
     private float throwingAngle = 45f;//记录投掷的角度.默认是45°
     private float throwingAngleDir;//记录此时投掷角度变化的速度，包括大小和方向，-1~1表示
     [Tooltip("投掷物的预制体")]
@@ -28,6 +29,8 @@ public class M_Player : MonoBehaviour
     public Transform throwOffset;//记录一下抛出点的位置
     private Animator M_Animator;
     private float strengthOfThrowing;//投掷力度，每次和投掷物堆交互，都会更新这个数值
+    public AudioSource machineAudio;
+    private bool isCovered = false;//记录自身现在是否被掩护，挡板中使用
     void Start()
     {
         indexRecoder = FindObjectOfType<IndexRecoder>();//获取数值记录组件，方便策划修改暴露参数    
@@ -137,6 +140,8 @@ public class M_Player : MonoBehaviour
             Mathf.Abs(transform.localScale.x)*faceDir,
             transform.localScale.y,
             transform.localScale.z);
+        if(faceDir == -1)throwingAngle = 46f;
+        else throwingAngle = 45f;
     }
 
     //监听投掷按键的函数
@@ -248,12 +253,14 @@ public class M_Player : MonoBehaviour
     {
         if(context.started)
         {
+            machineAudio.Play();
             //如果刚按下打码，把电报机UI图片的把手替换成按下的
             catched.ChangeHandleTo(true);
         }
 
         if(context.canceled)
         {
+            machineAudio.Stop();
             //如果刚松开打码，把电报机UI图片的把手换成松开的
             catched.ChangeHandleTo(false);
             //根据按下期间时长发送打出来的码给电报机
@@ -287,7 +294,8 @@ public class M_Player : MonoBehaviour
     {
         throwingState = false;//改变自身标记
         playerInput.SwitchCurrentActionMap("PlayerNormal");//修改自身操控地图
-        throwingAngle = 45f;//恢复投掷角度到45°
+        if(faceDir == 1) throwingAngle = 45f;//恢复投掷角度到45°
+        else throwingAngle = 46f;
         canAdjustTheAngle = false;//可修改角度标记改为false
         GetComponent<LineRenderer>().enabled = false;//别画线了
         //关闭动画条件
@@ -309,6 +317,22 @@ public class M_Player : MonoBehaviour
             transform.localScale.y,
             transform.localScale.z);//让玩家转身
     }
+
+    public void YouAreShooting()
+    {
+        // 当玩家被射中时调用
+        M_Animator.SetBool("IsShootDead",true);
+        StartCoroutine("StopShootingAnimation");//此帧结束后关闭死亡动画条件
+    }    
+    private IEnumerator StopShootingAnimation()
+    {
+        yield return new WaitForSeconds(0.1f);
+        M_Animator.SetBool("IsShootDead",false);
+    }
+
+    public void YouAreCovered(){isCovered = true;}
+    public void YouAreLosingCover(){isCovered = false;}
+    public bool AreYouCovered(){return isCovered;}
 
     //绘制投掷曲线的函数，非常🐂
     public void DrawPath()

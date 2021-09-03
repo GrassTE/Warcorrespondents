@@ -125,7 +125,7 @@ public class Shell : MonoBehaviour
             case "老兵":
                 animator.SetBool("IsBoom",true);
                 isDroping = false;
-                other.transform.Find("老兵").GetComponent<Animator>().SetBool("IsBoomingDead",true);//执行老兵被炸死动画
+                other.transform.Find("老兵").GetComponent<Animator>().SetBool("IsBoomDead",true);//执行老兵被炸死动画
                 break;
             case "电报机":
                 animator.SetBool("IsBoom",true);

@@ -55,6 +55,9 @@ TagManager:
   - name: player
     uniqueID: 840293209
     locked: 0
+  - name: "player\uFF08\u906E\u5149\uFF09"
+    uniqueID: 4143298193
+    locked: 0
   - name: front
     uniqueID: 2192700093
     locked: 0

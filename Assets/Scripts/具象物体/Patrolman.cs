@@ -18,12 +18,14 @@ public class Patrolman : MonoBehaviour
     [SerializeField][ReadOnly]
     private float speed;//记录此刻瞬间的速度,不包含方向
     private float velocity;//速度，正值代表向右，用来判断面部朝向
+    [SerializeField]
     private Transform target;//当前目标位置
     private bool isInterrupt = false;//记录目前是否被石头落地的声音所吸引
     private float PVelocity = -1f;//记录上一帧的速度,默认上一帧往右走
     private Transform auditoryRange;//听觉范围子物体
     [SerializeField][ReadOnly]
     private List<Missile> missiles;//投掷物列表，巡逻者会自动往搜索听觉范围内的投掷物
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +35,8 @@ public class Patrolman : MonoBehaviour
         auditoryRange = transform.Find("听觉范围");//找到子物体听觉范围
         auditoryRange.gameObject.AddComponent<AuditoryRange>();//给子物体听觉范围填上碰撞监测代码
         missiles = new List<Missile>();//初始化投掷物列表
+        animator = GetComponent<Animator>();
+        animator.SetBool("IsWalk",true);
     }
 
     // Update is called once per frame
@@ -46,8 +50,10 @@ public class Patrolman : MonoBehaviour
     {
         foreach(Missile missile in missiles)
         {
+            //Debug.Log(missile.AMINoisy());
             if(missile.AMINoisy() && !missile.AmIBeenChecked())//如果投掷物在发声、且没有被检查过
             {
+                Debug.Log("听见了");
                 //将目标位置设定为落点
                 target = missile.transform;
                 //更改速度为跑步速度
@@ -56,8 +62,20 @@ public class Patrolman : MonoBehaviour
                 missile.YouAreChecked();
                 isInterrupt = true;
                 PVelocity = 0;
+
+                //执行听见动画
+                animator.SetBool("IsListen",true);
+                StartCoroutine("StopListen");//取消听见动画条件
             }
         }
+    }
+
+    private IEnumerator StopListen()
+    {
+        yield return new WaitForSeconds(0.1f);
+        animator.SetBool("IsListen",false);
+        animator.SetBool("IsRush",true);//开启跑步条件
+        animator.SetBool("IsWalk",true);//关闭走路条件
     }
 
     //朝目标移动函数
@@ -69,6 +87,7 @@ public class Patrolman : MonoBehaviour
         velocity *= speed;//给速度赋以大小
 
         //判断是否到达巡逻点或者落点
+        //Debug.Log(velocity*PVelocity);
         if(velocity*PVelocity < 0)//速度相乘得负数，说明方向发生改变
         {
             //如果计算速度发生改变，且不是因为被石头打断，说明经过了巡逻点，此时更换目标点为另一个
@@ -84,6 +103,12 @@ public class Patrolman : MonoBehaviour
                 else target = point1;
                 Debug.Log("投掷物触发转向");
                 isInterrupt = false;
+                
+                //动画
+                animator.SetBool("IsCheck",true);
+                animator.SetBool("IsWalk",true);
+                animator.SetBool("IsRush",false);
+                StartCoroutine("StopCheckAnimation");
             }
         }
 
@@ -91,26 +116,44 @@ public class Patrolman : MonoBehaviour
         if(velocity > 0) transform.rotation = Quaternion.Euler(0,0,0);
         else transform.rotation = Quaternion.Euler(0,180f,0);
 
-        //移动
-        transform.position = new Vector3(
-            //x
-            transform.position.x +//自身此刻位置 加上
-            velocity * //构造好的速度乘以
-            Time.deltaTime,//使其与时间无关
+        // //移动（改用动画移动）
+        // transform.position = new Vector3(
+        //     //x
+        //     transform.position.x +//自身此刻位置 加上
+        //     velocity * //构造好的速度乘以
+        //     Time.deltaTime,//使其与时间无关
             
-            //y和z不变
-            transform.position.y,
-            transform.position.z
-        );
+        //     //y和z不变
+        //     transform.position.y,
+        //     transform.position.z
+        // );
 
         //更新PVelocity
         PVelocity = velocity;
 
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    private IEnumerator StopCheckAnimation()
     {
-        if(other.gameObject.tag == "Player") Debug.Log("玩家进入了监测区");
+        yield return new WaitForSeconds(0.1f);
+        animator.SetBool("IsCheck",false);
+    }
+
+    //开枪动画中调用，告诉玩家你被射死了
+    public void OnShoot()
+    {
+        FindObjectOfType<M_Player>().YouAreShooting();
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if(other.gameObject.tag == "Player")
+        {
+            if(!other.GetComponent<M_Player>().AreYouCovered())
+            {
+                animator.SetBool("IsFire",true);
+            }
+        }
     }
 
     //在听觉范围中调用，加入一个监听中的投掷物

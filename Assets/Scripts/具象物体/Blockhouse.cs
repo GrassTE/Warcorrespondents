@@ -26,6 +26,8 @@ public class Blockhouse : MonoBehaviour
     [Tooltip("请填入提前时间，即在警告后多少时间开枪")]
     public float advanceTime;
 
+    public AudioSource blockHouseAudio;//获取音频对象
+
     void Start()
     {
         shootingAreas = new ShootingArea[transform.childCount];
@@ -68,10 +70,12 @@ public class Blockhouse : MonoBehaviour
     {
         if(!isShooting)
         {
+            blockHouseAudio.Stop();//取消播放
             warningUI.sprite = done;
         }
         else
         {
+            blockHouseAudio.Play();//开始播放
             warningUI.sprite = ready;
         }
     }

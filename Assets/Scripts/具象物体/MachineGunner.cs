@@ -15,6 +15,8 @@ public class MachineGunner : MonoBehaviour
     [Tooltip("请拖入第二个上坑点的游戏物体，将在敌人被击晕后激活这个上坑点")]
     public GameObject UpPoint2;
 
+    public AudioSource gunnerAudio;//获取机枪音效
+
 
     void Start()
     {
@@ -64,6 +66,7 @@ public class MachineGunner : MonoBehaviour
     {
         if(other.gameObject.tag == "投掷物")
         {
+            gunnerAudio.Stop();//关闭音效
             hasBeHit = true;//标记自身已被击中
             //关闭开火动画
             gun.SetBool("IsFiring",false);

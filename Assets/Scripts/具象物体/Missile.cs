@@ -6,6 +6,7 @@ public class Missile : MonoBehaviour
 {
     //投掷物类，用来控制投掷物
     // Start is called before the first frame update
+    [SerializeField]
     private bool amINoisy = false;//记录自己是否落地发出声音的变量
     private bool amIBeenChecked = false;//记录自己是否已经被敌人检查过
     private Rigidbody2D m_rigidbody;
@@ -35,7 +36,8 @@ public class Missile : MonoBehaviour
             //同时，摧毁自身的刚体组件，阻止其滚动
             Destroy(GetComponent<Rigidbody2D>()); 
             //再摧毁自身碰撞体
-            Destroy(GetComponent<CapsuleCollider2D>());
+            //Destroy(GetComponent<CapsuleCollider2D>());
+            GetComponent<CapsuleCollider2D>().isTrigger = true;
         }
     }
 
