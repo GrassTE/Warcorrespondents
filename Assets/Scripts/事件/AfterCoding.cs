@@ -15,7 +15,7 @@ public class AfterCoding : Event
     public GameObject BlackUI;
     void Start()
     {
-        //OnCall();
+        OnCall();
     }
     public override void OnCall()
     {
@@ -24,10 +24,11 @@ public class AfterCoding : Event
         //1.关闭电报机界面
         FindObjectOfType<Machine>().m_interface.SetActive(false);
         //2.在玩家旁边生成一颗导弹
-        Shell thisShell = Instantiate(shell,new Vector3(119.539998f,5.96999979f,-4.01295185f),Quaternion.identity).
+        Shell thisShell = Instantiate(shell,new Vector3(116.539998f,5.96999979f,-4.01295185f),Quaternion.identity).
         GetComponent<Shell>();
         thisShell.M_BombingArea = bombingArea;
         thisShell.YouAreSpecal();
+        thisShell.target = FindObjectOfType<M_Player>().GetComponent<Animator>();
         //3.导弹爆炸后触发玩家死亡动画，这一段写在导弹类里面
     }
     //4.玩家被炸死开始执行后触发此段，镜头开始缓慢聚焦到主角

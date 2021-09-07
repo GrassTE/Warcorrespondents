@@ -11,7 +11,7 @@ public class CGAdministrator : MonoBehaviour
     //CG管理员相关代码
 
     private RawImage rawImage;
-    [Tooltip("记录这个场景中的所有CG，要加的话直接扩容数组，并往新的CG里面加内容")][SerializeField][ReadOnly]
+    [Tooltip("记录这个场景中的所有CG，要加的话直接扩容数组，并往新的CG里面加内容")][SerializeField]
     private ACG[] CGs;
     private IndexRecoder indexRecoder;
     private ACG playingCG;//正在播放的CG，因为invoke无法传参而存在
@@ -70,23 +70,23 @@ public class CGAdministrator : MonoBehaviour
     private void StopIt(){rawImage.CrossFadeAlpha(0f,indexRecoder.CGFadeTime,true);//淡出CG
                           playingCG.OnEnded();}//告诉这个CG它结束了，然后触发它的结束事件
 
-    //制造一个只读的变量，不要动这些
-    public class ReadOnlyAttribute : PropertyAttribute{}
-    [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
-    public class ReadOnlyDrawer : PropertyDrawer
-    {
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-        {
-            return EditorGUI.GetPropertyHeight(property, label, true);
-        }
+    // //制造一个只读的变量，不要动这些
+    // public class ReadOnlyAttribute : PropertyAttribute{}
+    // [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
+    // public class ReadOnlyDrawer : PropertyDrawer
+    // {
+    //     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+    //     {
+    //         return EditorGUI.GetPropertyHeight(property, label, true);
+    //     }
 
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-        {
-            GUI.enabled = false;
-            EditorGUI.PropertyField(position, property, label, true);
-            GUI.enabled = true;
-        }
-    }
-    //
+    //     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    //     {
+    //         GUI.enabled = false;
+    //         EditorGUI.PropertyField(position, property, label, true);
+    //         GUI.enabled = true;
+    //     }
+    // }
+    // //
 
 }

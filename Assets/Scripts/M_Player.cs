@@ -345,7 +345,7 @@ public class M_Player : MonoBehaviour
         line.enabled = true;
         int segmentCount = 18;//定义点数
         line.positionCount = segmentCount;//传入点数
-        float gravity=9.8f;//定义重力常量
+        float gravity=9.8f*2;//定义重力常量
         Vector2 fireOffset = new Vector2(throwOffset.position.x - transform.position.x, 
                                          throwOffset.position.y - transform.position.y);
         Vector2[] segments = new Vector2[segmentCount];//定义二维向量数组，用来存15个点的位置

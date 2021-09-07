@@ -11,7 +11,7 @@ public class TelephoneLine : Interactive
     private float allNeedTime;
     private float hasReparedTime = 0f;
     private bool isReparing = false;
-    [SerializeField][ReadOnly]
+    [SerializeField]
     private bool isRepared = false;
     IndexRecoder indexRecoder;
     private float process = 0f;
@@ -86,22 +86,22 @@ public class TelephoneLine : Interactive
     public bool HasTheBePrepared(){return isRepared;}
     
     
-    //制造一个只读的变量，不要动这些
-    public class ReadOnlyAttribute : PropertyAttribute{}
-    [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
-    public class ReadOnlyDrawer : PropertyDrawer
-    {
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-        {
-            return EditorGUI.GetPropertyHeight(property, label, true);
-        }
+    // //制造一个只读的变量，不要动这些
+    // public class ReadOnlyAttribute : PropertyAttribute{}
+    // [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
+    // public class ReadOnlyDrawer : PropertyDrawer
+    // {
+    //     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+    //     {
+    //         return EditorGUI.GetPropertyHeight(property, label, true);
+    //     }
 
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-        {
-            GUI.enabled = false;
-            EditorGUI.PropertyField(position, property, label, true);
-            GUI.enabled = true;
-        }
-    }
-    //
+    //     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    //     {
+    //         GUI.enabled = false;
+    //         EditorGUI.PropertyField(position, property, label, true);
+    //         GUI.enabled = true;
+    //     }
+    // }
+    // //
 }

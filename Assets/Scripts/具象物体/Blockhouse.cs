@@ -70,12 +70,10 @@ public class Blockhouse : MonoBehaviour
     {
         if(!isShooting)
         {
-            blockHouseAudio.Stop();//取消播放
             warningUI.sprite = done;
         }
         else
         {
-            blockHouseAudio.Play();//开始播放
             warningUI.sprite = ready;
         }
     }
@@ -100,6 +98,7 @@ public class Blockhouse : MonoBehaviour
     {
         if(isShooting)//如果在开火
         {
+            blockHouseAudio.Stop();
             isShooting = false;//别让它开了
             //关闭所有动画组件的开火动画
             foreach(Animator fire in fireAnimations)
@@ -109,6 +108,7 @@ public class Blockhouse : MonoBehaviour
         }
         else//如果没在开火
         {
+            blockHouseAudio.Play();
             isShooting = true;//标记让它开火
 
             //打开所有动画组件的开火动画

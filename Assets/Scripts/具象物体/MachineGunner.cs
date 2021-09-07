@@ -16,6 +16,8 @@ public class MachineGunner : MonoBehaviour
     public GameObject UpPoint2;
 
     public AudioSource gunnerAudio;//获取机枪音效
+    [Tooltip("请拖入挡墙石头的碰撞体")]
+    public PolygonCollider2D stone;//
 
 
     void Start()
@@ -82,6 +84,8 @@ public class MachineGunner : MonoBehaviour
             {
                 collider.enabled = false;
             }
+            //关闭挡枪石头的碰撞体
+            stone.enabled = false;
         }
     }
     

@@ -45,7 +45,7 @@ public class VeteranSacrifice : Event
     {
         //1.关闭玩家操作地图
         FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("NullMap");
-        //*让老兵转个身放置牺牲后穿模
+        //*让老兵转个身防止牺牲后穿模
         FindObjectOfType<Veteran>().transform.localScale = new Vector3(
             //x
             FindObjectOfType<Veteran>().transform.localScale.x*-1,
@@ -57,12 +57,14 @@ public class VeteranSacrifice : Event
         //2.移动相机至老兵位置
         target = new Vector3(-19.8600006f,-0.600000024f,-10f)*3;
         //3.召唤一颗导弹在老兵头顶
-        Shell thisShell = Instantiate(shell,new Vector3(43.9799995f,10.01999998f,0),Quaternion.identity).
+        Shell thisShell = Instantiate(shell,new Vector3(46.9799995f,10.01999998f,0),Quaternion.identity).
         GetComponent<Shell>();
         thisShell.M_BombingArea = bombingArea;
         thisShell.YouAreSpecal();
-        //4.打开老兵的碰撞体，等待播放完毕老兵死亡动画
-        FindObjectOfType<Veteran>().GetComponent<BoxCollider2D>().isTrigger = false;
+        // //4.打开老兵的碰撞体，等待播放完毕老兵死亡动画
+        // FindObjectOfType<Veteran>().GetComponent<BoxCollider2D>().isTrigger = false;
+        //*修改：给炸弹的爆炸瞬间，在此给这个炸弹赋予Animator的值，然后在事件中触发对象的死亡动画
+        thisShell.target = FindObjectOfType<Veteran>().GetComponentInChildren<Animator>();
         //5.若干秒后，使镜头返回主角，顺便让主角转个身
         yield return new WaitForSeconds(5f);
         FindObjectOfType<M_Player>().TurnAround();

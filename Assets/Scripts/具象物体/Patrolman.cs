@@ -15,7 +15,7 @@ public class Patrolman : MonoBehaviour
     public float walkSpeed;
     [Tooltip("听见响动，冲锋时的速度")]
     public float rushSpeed;
-    [SerializeField][ReadOnly]
+    [SerializeField]
     private float speed;//记录此刻瞬间的速度,不包含方向
     private float velocity;//速度，正值代表向右，用来判断面部朝向
     [SerializeField]
@@ -23,7 +23,7 @@ public class Patrolman : MonoBehaviour
     private bool isInterrupt = false;//记录目前是否被石头落地的声音所吸引
     private float PVelocity = -1f;//记录上一帧的速度,默认上一帧往右走
     private Transform auditoryRange;//听觉范围子物体
-    [SerializeField][ReadOnly]
+    [SerializeField]
     private List<Missile> missiles;//投掷物列表，巡逻者会自动往搜索听觉范围内的投掷物
     private Animator animator;
 
@@ -142,7 +142,7 @@ public class Patrolman : MonoBehaviour
     //开枪动画中调用，告诉玩家你被射死了
     public void OnShoot()
     {
-        FindObjectOfType<M_Player>().YouAreShooting();
+        //FindObjectOfType<M_Player>().YouAreShooting();
     }
 
     void OnTriggerStay2D(Collider2D other)
@@ -189,22 +189,22 @@ public class Patrolman : MonoBehaviour
         }
     }
 
-    //制造一个只读的变量，不要动这些
-    public class ReadOnlyAttribute : PropertyAttribute{}
-    [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
-    public class ReadOnlyDrawer : PropertyDrawer
-    {
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-        {
-            return EditorGUI.GetPropertyHeight(property, label, true);
-        }
+    // //制造一个只读的变量，不要动这些
+    // public class ReadOnlyAttribute : PropertyAttribute{}
+    // [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
+    // public class ReadOnlyDrawer : PropertyDrawer
+    // {
+    //     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+    //     {
+    //         return EditorGUI.GetPropertyHeight(property, label, true);
+    //     }
 
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-        {
-            GUI.enabled = false;
-            EditorGUI.PropertyField(position, property, label, true);
-            GUI.enabled = true;
-        }
-    }
-    //
+    //     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    //     {
+    //         GUI.enabled = false;
+    //         EditorGUI.PropertyField(position, property, label, true);
+    //         GUI.enabled = true;
+    //     }
+    // }
+    // //
 }

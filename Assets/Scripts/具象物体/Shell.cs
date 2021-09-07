@@ -22,6 +22,7 @@ public class Shell : MonoBehaviour
     public float MaxShadowSize;
     [Tooltip("请填入阴影的最小值")]
     public float MinShadowSize;
+    public Animator target;//如果是特殊炮弹，则有targe这个变量，当这个炮弹爆炸，触发目标的死亡动画
     
     void Start()
     {
@@ -40,6 +41,7 @@ public class Shell : MonoBehaviour
                                     .transform;
         }
         Invoke("Drop",fallingTime);
+        Invoke("DestroySelf",10f);
 
         animator = GetComponent<Animator>();
     }
@@ -99,11 +101,12 @@ public class Shell : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         //Debug.Log(other.name);
-        //当玩家被炮弹击中
+        //当炮弹爆炸，根据目标物体的tag分化
         switch (other.tag)
         {
             case "Player":
                 //玩家被炮弹击中
+                Debug.Log("玩家被炮弹击中");
                 break;
             case "地面":
                 //Destroy(m_shadow.gameObject);
@@ -127,13 +130,22 @@ public class Shell : MonoBehaviour
                 isDroping = false;
                 other.transform.Find("老兵").GetComponent<Animator>().SetBool("IsBoomDead",true);//执行老兵被炸死动画
                 break;
-            case "电报机":
+            // case "电报机":
+            //     animator.SetBool("IsBoom",true);
+            //     isDroping = false;//播放爆炸动画
+            //     FindObjectOfType<M_Player>().GetComponent<Animator>().
+            //     SetBool("IsBoomDead",true);//播放玩家被炸死动画
+            //     FindObjectOfType<AfterCoding>().OnDeadAnimation();
+            //     break;
+            case "爆炸点":
                 animator.SetBool("IsBoom",true);
                 isDroping = false;//播放爆炸动画
-                FindObjectOfType<M_Player>().GetComponent<Animator>().
-                SetBool("IsBoomDead",true);//播放玩家被炸死动画
                 FindObjectOfType<AfterCoding>().OnDeadAnimation();
                 break;
+        }
+        if(amISpecal)
+        {
+            if(target!=null)target.SetBool("IsBoomDead",true);
         }
     }
     

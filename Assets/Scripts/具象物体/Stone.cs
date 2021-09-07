@@ -28,7 +28,7 @@ public class Stone : MonoBehaviour
         MissileHeap heap = Instantiate(missile,
                     down(transform.position),
                     Quaternion.identity).GetComponent<MissileHeap>();//原地生成投掷物堆，并获取其投掷物堆控制组件
-        heap.srengthOfThrowing = 10;
+        heap.srengthOfThrowing = 15;//修改生成投掷物堆的力度
         Destroy(gameObject);
     }
 }
