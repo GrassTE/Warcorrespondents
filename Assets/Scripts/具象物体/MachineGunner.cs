@@ -19,6 +19,8 @@ public class MachineGunner : MonoBehaviour
     [Tooltip("请拖入挡墙石头的碰撞体")]
     public PolygonCollider2D stone;//
 
+    public GunLight gunLight;//枪口的光闪烁控制脚本
+
 
     void Start()
     {
@@ -68,6 +70,7 @@ public class MachineGunner : MonoBehaviour
     {
         if(other.gameObject.tag == "投掷物")
         {
+            gunLight.Gundead();
             gunnerAudio.Stop();//关闭音效
             hasBeHit = true;//标记自身已被击中
             //关闭开火动画

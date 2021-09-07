@@ -21,6 +21,8 @@ public class VeteranSacrifice : Event
     public BombingArea bombingArea;
     private bool hasBeenOnCall;//记录事件是否被触发的变量
 
+    public WVParallax parallax;
+
 
 
     void Start()
@@ -43,6 +45,7 @@ public class VeteranSacrifice : Event
     }
     public IEnumerator SelfOnCall()
     {
+        parallax.canParallax = false;
         //1.关闭玩家操作地图
         FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("NullMap");
         //*让老兵转个身防止牺牲后穿模
@@ -75,6 +78,7 @@ public class VeteranSacrifice : Event
         FindObjectOfType<Veteran>().GetComponent<BoxCollider2D>().isTrigger = true;
         //9.标记自己已经被触发过
         hasBeenOnCall = true;
+        parallax.canParallax = true;
     }
 
      void OnTriggerEnter2D(Collider2D other)

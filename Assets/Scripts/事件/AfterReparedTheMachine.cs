@@ -23,6 +23,8 @@ public class AfterReparedTheMachine : Event
     private int leftTime = 10;
     public GameObject blackUI;
     private Machine machine;
+
+    public WVParallax parallax;
     void Start()
     {
         repairBench = FindObjectOfType<RepairBench>();
@@ -39,6 +41,7 @@ public class AfterReparedTheMachine : Event
 
     private IEnumerator Process()
     {
+        parallax.canParallax = false;
         //1.关闭玩家操作地图
         FindObjectOfType<PlayerInput>().
         SwitchCurrentActionMap("NullMap");

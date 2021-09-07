@@ -23,7 +23,9 @@ public class Shell : MonoBehaviour
     [Tooltip("请填入阴影的最小值")]
     public float MinShadowSize;
     public Animator target;//如果是特殊炮弹，则有targe这个变量，当这个炮弹爆炸，触发目标的死亡动画
-    
+
+    public AudioSource boomAudio;//航弹爆炸音效
+    public GameObject boomLight;//航弹爆炸光效
     void Start()
     {
         indexRecoder = FindObjectOfType<IndexRecoder>();
@@ -109,6 +111,8 @@ public class Shell : MonoBehaviour
                 Debug.Log("玩家被炮弹击中");
                 break;
             case "地面":
+                boomAudio.Play();
+                boomLight.SetActive(true);
                 //Destroy(m_shadow.gameObject);
                 //Destroy(gameObject);
                 Instantiate(boomObj, new Vector2(transform.position.x, transform.position.y),Quaternion.identity);
@@ -119,6 +123,8 @@ public class Shell : MonoBehaviour
             case "石头":
                 // Destroy(m_shadow.gameObject);
                 // Destroy(gameObject);//摧毁炮弹
+                boomAudio.Play();
+                boomLight.SetActive(true);
                 animator.SetBool("IsBoom",true);
                 //Destroy(m_shadow.gameObject);
                 isDroping = false;
@@ -127,6 +133,8 @@ public class Shell : MonoBehaviour
                 break;
             case "老兵":
                 animator.SetBool("IsBoom",true);
+                boomAudio.Play();
+                boomLight.SetActive(true);
                 isDroping = false;
                 other.transform.Find("老兵").GetComponent<Animator>().SetBool("IsBoomDead",true);//执行老兵被炸死动画
                 break;
@@ -138,6 +146,8 @@ public class Shell : MonoBehaviour
             //     FindObjectOfType<AfterCoding>().OnDeadAnimation();
             //     break;
             case "爆炸点":
+                boomAudio.Play();
+                boomLight.SetActive(true);
                 animator.SetBool("IsBoom",true);
                 isDroping = false;//播放爆炸动画
                 FindObjectOfType<AfterCoding>().OnDeadAnimation();
