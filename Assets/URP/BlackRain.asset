@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de640fe3d0db1804a85f9fc8f5cadab6, type: 3}
-  m_Name: ScreenShader
+  m_Name: BlackRain
   m_EditorClassIdentifier: 
   m_RendererFeatures:
-  - {fileID: 2263787296079455196}
-  m_RendererFeatureMap: dca3db3d8d966a1f
+  - {fileID: 6397648210890085461}
+  m_RendererFeatureMap: 555404d02603c958
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
   shaders:
@@ -43,7 +43,7 @@ MonoBehaviour:
   m_ShadowTransparentReceive: 1
   m_RenderingMode: 0
   m_AccurateGbufferNormals: 0
---- !u!114 &2263787296079455196
+--- !u!114 &6397648210890085461
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,6 +58,6 @@ MonoBehaviour:
   m_Active: 1
   settings:
     renderPassEvent: 400
-    mMat: {fileID: 2100000, guid: 1ce8c61d862814d0684180a38dc3c953, type: 2}
+    mMat: {fileID: 2100000, guid: 1862d66bb4f005a4aa7dc0203cd1ba93, type: 2}
     destination: 0
     textureId: _ScreenTexture

@@ -44,6 +44,8 @@ public class MachineGunner : MonoBehaviour
         {
             //GetComponent<SpriteRenderer>().color = Color.red;
             //播放开火动画
+            gunnerAudio.Play();
+            gunLight.isFire = true;
             person.SetBool("IsFiring",true);
             gun.SetBool("IsFiring",true);
             groundFireAnimation.SetBool("IsFiring",true);
@@ -70,7 +72,7 @@ public class MachineGunner : MonoBehaviour
     {
         if(other.gameObject.tag == "投掷物")
         {
-            gunLight.Gundead();
+            gunLight.isFire = false;
             gunnerAudio.Stop();//关闭音效
             hasBeHit = true;//标记自身已被击中
             //关闭开火动画

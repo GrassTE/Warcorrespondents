@@ -31,6 +31,8 @@ public class M_Player : MonoBehaviour
     private float strengthOfThrowing;//投掷力度，每次和投掷物堆交互，都会更新这个数值
     public AudioSource machineAudio;
     private bool isCovered = false;//记录自身现在是否被掩护，挡板中使用
+    [Tooltip("请拖入跑步时的脚上的粒子系统")]
+    public GameObject runFootsDust;
     void Start()
     {
         indexRecoder = FindObjectOfType<IndexRecoder>();//获取数值记录组件，方便策划修改暴露参数    
@@ -140,8 +142,37 @@ public class M_Player : MonoBehaviour
             Mathf.Abs(transform.localScale.x)*faceDir,
             transform.localScale.y,
             transform.localScale.z);
+        // //修改灰尘朝向
+        // runFootsDust.transform.localScale = new Vector3(
+        //     Mathf.Abs(runFootsDust.transform.localScale.x)*faceDir,
+        //     runFootsDust.transform.localScale.y,
+        //     runFootsDust.transform.localScale.z);
+        //转身时修改默认投掷角度
         if(faceDir == -1)throwingAngle = 46f;
         else throwingAngle = 45f;
+    }
+    
+    public void OnRunFootTouched()
+    {
+        Debug.Log("执行了动画事件");
+        //动画中调用，当跑步中的主角脚着地时
+        GameObject theDust =    Instantiate(runFootsDust,
+                                new Vector3(transform.position.x,
+                                            transform.position.y ,
+                                            transform.position.z),
+                                Quaternion.identity);
+        theDust.AddComponent<DestoryYourSelfComponent>();
+    }
+    public class DestoryYourSelfComponent:MonoBehaviour
+    {
+        void Start()
+        {
+            Invoke("DestoryYourSelf",0.5f);
+        }
+        public void DestoryYourSelf()
+        {
+            Destroy(gameObject);
+        }
     }
 
     //监听投掷按键的函数
@@ -204,11 +235,13 @@ public class M_Player : MonoBehaviour
         {
             runSpeedMultiple = indexRecoder.runSpeedMultiple;//把本地的速度倍率变成数值记录器中的倍率
             M_Animator.SetBool("IsRunning",true);//播放跑步动画
+            // runFootsDust.SetActive(true);//播放脚上灰尘粒子特效
         }
         else if(context.canceled)//如果刚松开跑步键
         {
             runSpeedMultiple = 1f;//恢复本地速度倍率为1
             M_Animator.SetBool("IsRunning",false);//关闭跑步动画
+            // runFootsDust.SetActive(false);//关闭脚上灰尘粒子特效
         }
     }
 

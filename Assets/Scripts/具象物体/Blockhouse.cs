@@ -27,6 +27,7 @@ public class Blockhouse : MonoBehaviour
     public float advanceTime;
 
     public AudioSource blockHouseAudio;//获取音频对象
+    public BlackHouseGunLight blackHouseGunLight;//获取碉堡枪光的脚本
 
     void Start()
     {
@@ -99,6 +100,7 @@ public class Blockhouse : MonoBehaviour
         if(isShooting)//如果在开火
         {
             blockHouseAudio.Stop();
+            blackHouseGunLight.isFire = false;
             isShooting = false;//别让它开了
             //关闭所有动画组件的开火动画
             foreach(Animator fire in fireAnimations)
@@ -109,6 +111,7 @@ public class Blockhouse : MonoBehaviour
         else//如果没在开火
         {
             blockHouseAudio.Play();
+            blackHouseGunLight.isFire = true;
             isShooting = true;//标记让它开火
 
             //打开所有动画组件的开火动画

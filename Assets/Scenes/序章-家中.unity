@@ -2715,7 +2715,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 66
     y: 69
-    width: 112.4
+    width: 111
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -2742,10 +2742,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: -8, y: 70}
+  scrollPos: {x: 39, y: 178}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
-  blockViewHeight: 457
+  blockViewHeight: 436
   zoom: 1
   scrollViewRect:
     serializedVersion: 2
@@ -2756,7 +2756,7 @@ MonoBehaviour:
   selectedBlocks:
   - {fileID: 775073760}
   selectedCommands:
-  - {fileID: 775073765}
+  - {fileID: 775073762}
   variables: []
   description: 
   stepPause: 0
@@ -2851,7 +2851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 3
   indentLevel: 0
-  storyText: "\u9ED1\u7ECF\u534A\u591C\u4E86\u90FD\uFF0C\u7761\u89C9\u5427\uFF0C\u7B49\u6211\u56DE\u6765\u4EE5\u540E\u7EE7\u7EED\u7ED9\u4F60\u8BB2\u3002"
+  storyText: "\u4E09\u66F4\u534A\u591C\u4E86\u90FD\uFF0C\u7761\u89C9\u5427\uFF0C\u7B49\u6211\u56DE\u6765\u4EE5\u540E\u7EE7\u7EED\u7ED9\u4F60\u8BB2\u3002"
   description: 
   character: {fileID: 1851675996}
   portrait: {fileID: 21300000, guid: 8bb7d99df9dd41b4c867ac425157c287, type: 3}
@@ -3149,6 +3149,7 @@ MonoBehaviour:
   missile: {fileID: 0}
   throwOffset: {fileID: 0}
   machineAudio: {fileID: 891250825}
+  runFootsDust: {fileID: 0}
 --- !u!50 &798428062
 Rigidbody2D:
   serializedVersion: 4
@@ -3719,8 +3720,7 @@ MonoBehaviour:
     height: 859
   selectedBlocks:
   - {fileID: 866289585}
-  selectedCommands:
-  - {fileID: 866289596}
+  selectedCommands: []
   variables: []
   description: 
   stepPause: 0
@@ -6018,7 +6018,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 67
     y: 70
-    width: 112.4
+    width: 111
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -6043,7 +6043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 0, y: 0}
+  scrollPos: {x: 38, y: 177}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 291.25
@@ -6056,8 +6056,7 @@ MonoBehaviour:
     height: 859
   selectedBlocks:
   - {fileID: 1366529689}
-  selectedCommands:
-  - {fileID: 1366529692}
+  selectedCommands: []
   variables: []
   description: 
   stepPause: 0
@@ -7763,7 +7762,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1861856986}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.870555, y: -0.618639, z: -10}
+  m_LocalPosition: {x: -10.125249, y: -0.618407, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 716192431}
@@ -7899,7 +7898,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 67
     y: 70
-    width: 112.4
+    width: 111
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
   useCustomTint: 0
@@ -7926,7 +7925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  scrollPos: {x: 38, y: 183}
+  scrollPos: {x: 38, y: 180}
   variablesScrollPos: {x: 0, y: 0}
   variablesExpanded: 1
   blockViewHeight: 376.8
@@ -7939,8 +7938,7 @@ MonoBehaviour:
     height: 859
   selectedBlocks:
   - {fileID: 1971227292}
-  selectedCommands:
-  - {fileID: 1971227294}
+  selectedCommands: []
   variables: []
   description: 
   stepPause: 0

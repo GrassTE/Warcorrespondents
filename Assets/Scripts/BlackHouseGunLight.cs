@@ -2,21 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class GunLight : MonoBehaviour
+public class BlackHouseGunLight : MonoBehaviour
 {
     private bool upLight = true;
     public GameObject light1;
-    //public GameObject light2;
+    public GameObject light2;
 
     public bool isFire = false;
 
     public bool isInvoke = false;
-    
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("ChangeLight",1f,0.05f);
+        
     }
 
     // Update is called once per frame
@@ -33,6 +31,7 @@ public class GunLight : MonoBehaviour
             CancelInvoke();
             isInvoke = false;
             light1.SetActive(false);
+            light2.SetActive(false);
         }
     }
     void ChangeLight()
@@ -40,13 +39,13 @@ public class GunLight : MonoBehaviour
         if (upLight)
         {
             light1.SetActive(upLight);
-           // light2.SetActive(upLight);
+            light2.SetActive(upLight);
             upLight = false;
         }
 
         else
         {
-          //  light2.SetActive(upLight);
+            light2.SetActive(upLight);
             light1.SetActive(upLight);
             upLight = true;
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Shell : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class Shell : MonoBehaviour
 
     public AudioSource boomAudio;//航弹爆炸音效
     public GameObject boomLight;//航弹爆炸光效
+    private CinemachineImpulseSource impulseSource;//镜头震动呼出者
     void Start()
     {
         indexRecoder = FindObjectOfType<IndexRecoder>();
@@ -46,6 +48,8 @@ public class Shell : MonoBehaviour
         Invoke("DestroySelf",10f);
 
         animator = GetComponent<Animator>();
+
+        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     // Update is called once per frame
@@ -153,10 +157,11 @@ public class Shell : MonoBehaviour
                 FindObjectOfType<AfterCoding>().OnDeadAnimation();
                 break;
         }
-        if(amISpecal)
+        if(amISpecal) //如果自己是特殊炸弹，则要考虑触发目标的死亡动画
         {
             if(target!=null)target.SetBool("IsBoomDead",true);
         }
+        impulseSource.GenerateImpulse();
     }
     
 

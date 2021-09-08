@@ -25,6 +25,7 @@ public class AfterReparedTheMachine : Event
     private Machine machine;
 
     public WVParallax parallax;
+    public AudioSource gunAudio;
     void Start()
     {
         repairBench = FindObjectOfType<RepairBench>();
@@ -85,6 +86,11 @@ public class AfterReparedTheMachine : Event
             //当倒计时结束
             blackUI.SetActive(true);
         }
+    }
+
+    private void PlayGunAudio()
+    {
+        gunAudio.Play();
     }
 
 }
