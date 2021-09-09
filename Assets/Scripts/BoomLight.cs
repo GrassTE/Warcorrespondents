@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BoomLight : MonoBehaviour
 {
-    public GameObject light;
+    public GameObject m_light;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +21,6 @@ public class BoomLight : MonoBehaviour
 
     public void DesLight()
     {
-        Destroy(light);
+        Destroy(m_light);
     }
 }

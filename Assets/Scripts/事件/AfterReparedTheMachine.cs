@@ -85,6 +85,7 @@ public class AfterReparedTheMachine : Event
         {
             //当倒计时结束
             blackUI.SetActive(true);
+            Invoke("PlayGunAudio",1.5f);
         }
     }
 

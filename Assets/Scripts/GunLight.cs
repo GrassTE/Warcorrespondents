@@ -16,7 +16,8 @@ public class GunLight : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("ChangeLight",1f,0.05f);
+        if(isFire)
+          InvokeRepeating("ChangeLight",1f,0.05f);
     }
 
     // Update is called once per frame

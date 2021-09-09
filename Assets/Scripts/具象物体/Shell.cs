@@ -28,6 +28,7 @@ public class Shell : MonoBehaviour
     public AudioSource boomAudio;//航弹爆炸音效
     public GameObject boomLight;//航弹爆炸光效
     private CinemachineImpulseSource impulseSource;//镜头震动呼出者
+    
     void Start()
     {
         indexRecoder = FindObjectOfType<IndexRecoder>();
@@ -101,6 +102,16 @@ public class Shell : MonoBehaviour
     public void DestroySelf()
     {
         //动画中调用，爆炸动画结束后删除自身和阴影
+        //由于音效需要，等炮弹动画结束后两秒才销毁物体
+        Invoke("DestoryInvoke",2f);
+        //销毁前还会存在一段时间。所以要关闭自身的触发器和图片
+        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<SpriteRenderer>().enabled = false;
+        //还得把灯关了
+        boomLight.SetActive(false);
+    }
+    private void DestoryInvoke()
+    {
         Destroy(gameObject);
     }
 

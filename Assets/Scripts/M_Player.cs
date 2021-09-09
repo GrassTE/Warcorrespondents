@@ -31,8 +31,22 @@ public class M_Player : MonoBehaviour
     private float strengthOfThrowing;//投掷力度，每次和投掷物堆交互，都会更新这个数值
     public AudioSource machineAudio;
     private bool isCovered = false;//记录自身现在是否被掩护，挡板中使用
-    [Tooltip("请拖入跑步时的脚上的粒子系统")]
-    public GameObject runFootsDust;
+    [Tooltip("请拖入走路音效")]
+    public AudioClip[] walkSEs;
+    [Tooltip("请拖入跑步音效")]
+    public AudioClip[] RunSEs;
+    private AudioSource audioPlayer;
+    [Tooltip("拖入修复电报线的音效")]
+    public AudioClip ReapareTelephoneLineSE;
+    [Tooltip("拖入爬出坑的音效")]
+    public AudioClip upHoleSE;
+    [Tooltip("拖入掉入坑的音效")]
+    public AudioClip dropHoleSE;
+    [Tooltip("拖入捡东西的音效")]
+    public AudioClip pickSE;
+    [Tooltip("拖入丢东西的音效")]
+    public AudioClip throwSE;
+
     void Start()
     {
         indexRecoder = FindObjectOfType<IndexRecoder>();//获取数值记录组件，方便策划修改暴露参数    
@@ -44,6 +58,8 @@ public class M_Player : MonoBehaviour
         //为了解决warming，最后阶段请删除，到那时应该不会再有警告
         if(inputDir == 0){}
         //
+
+        audioPlayer = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -52,14 +68,20 @@ public class M_Player : MonoBehaviour
         AdjustTheAngle();
     }
 
-    void FixedUpdate(){}
-
-    // void OnAnimatorMove()//Unity的回调函数，这样做能解决模型无法转向的问题，每帧调用一次
-    // {
-    //     //Debug.Log(playerAnimator.deltaPosition.magnitude);
-    //     m_rigidbody.MovePosition(m_rigidbody.position + (Vector2)(M_Animator.deltaPosition));
-    //     //m_RigidBody.MoveRotation(m_Rotation);//当物体有物理组件rigidbody的时候，再修改位置和旋转信息就不要用transfrom了，用刚体自带的Move等方法
-    // }
+    //动画中调用，播放捡拾东西的音效
+    public void OnPickSE()
+    {
+        audioPlayer.clip =  pickSE;
+        audioPlayer.volume = 0.8f;
+        audioPlayer.Play();
+    }
+    //动画中调用，播放丢出东西的音效
+    public void OnThrowSE()
+    {
+        audioPlayer.clip =  throwSE;
+        audioPlayer.volume = 0.8f;
+        audioPlayer.Play();
+    }
 
     //返回面部朝向的函数，在上下坑点调用，用来判断是否执行上下坑动画
     public int ReturnFaceDir(){return faceDir;}
@@ -152,27 +174,24 @@ public class M_Player : MonoBehaviour
         else throwingAngle = 45f;
     }
     
+    private int shouldBePlayedRunSEID = 0;
     public void OnRunFootTouched()
     {
-        Debug.Log("执行了动画事件");
-        //动画中调用，当跑步中的主角脚着地时
-        GameObject theDust =    Instantiate(runFootsDust,
-                                new Vector3(transform.position.x,
-                                            transform.position.y ,
-                                            transform.position.z),
-                                Quaternion.identity);
-        theDust.AddComponent<DestoryYourSelfComponent>();
+        //跑步动画中脚着地触发
+        audioPlayer.clip = RunSEs[shouldBePlayedRunSEID % RunSEs.Length];
+        audioPlayer.volume = 0.2f;
+        audioPlayer.Play();
+        shouldBePlayedRunSEID++;
+
     }
-    public class DestoryYourSelfComponent:MonoBehaviour
+    private int shouldBePlayedWalkSEID = 0;
+    public void OnWalkFootTouched()
     {
-        void Start()
-        {
-            Invoke("DestoryYourSelf",0.5f);
-        }
-        public void DestoryYourSelf()
-        {
-            Destroy(gameObject);
-        }
+        //走路动画中脚着地触发
+        audioPlayer.clip = walkSEs[shouldBePlayedWalkSEID % walkSEs.Length];
+        audioPlayer.volume = 0.2f;
+        audioPlayer.Play();
+        shouldBePlayedWalkSEID++;
     }
 
     //监听投掷按键的函数
@@ -261,6 +280,11 @@ public class M_Player : MonoBehaviour
                     //获取其电话线组件，如果其未修好，则执行修理动画
                     if(!catched.GetComponent<TelephoneLine>().HasTheBePrepared())
                     M_Animator.SetBool("IsReparing", true);
+                    //播放修复电话线音效
+                    audioPlayer.clip = ReapareTelephoneLineSE;
+                    audioPlayer.volume = 0.8f;
+                    audioPlayer.loop = true;
+                    audioPlayer.Play();
                 }
             }
         }
@@ -268,11 +292,14 @@ public class M_Player : MonoBehaviour
         if(context.canceled)
         {
             //可交互对象电话线比较特殊，需要额外检测按钮松开的瞬间
-            if(catched != null)
+            if(catched != null && catched.tag == "电话线")
             {
                 catched.StopRepareTheTelephoneLine();
                 //如果捕捉对象是电话线，停止修电话线动画
                 if(catched.tag == "电话线") M_Animator.SetBool("IsReparing", false);
+                //停止修复电话线音效
+                audioPlayer.Stop();
+                audioPlayer.loop = false;
             }
         }
     }
@@ -314,6 +341,22 @@ public class M_Player : MonoBehaviour
            
         }
     }
+
+    //动画内调用，当玩家掉下坑后，主要用来播放音效
+    public void OnDropTheHole()
+    {
+        audioPlayer.volume = 0.8f;
+        audioPlayer.clip = dropHoleSE;
+        audioPlayer.Play();
+    }
+    //动画内调用，当玩家爬上坑后，主要用来播放音效
+    public void OnOutTheHole()
+    {
+        audioPlayer.volume = 0.8f;
+        audioPlayer.clip = upHoleSE;
+        audioPlayer.Play();
+    }
+
 
     //使自身进入投掷状态的函数
     public void EnterThrowingState()

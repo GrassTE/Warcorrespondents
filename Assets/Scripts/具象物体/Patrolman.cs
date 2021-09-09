@@ -26,6 +26,11 @@ public class Patrolman : MonoBehaviour
     [SerializeField]
     private List<Missile> missiles;//投掷物列表，巡逻者会自动往搜索听觉范围内的投掷物
     private Animator animator;
+    public AudioClip[] RunSEs;
+    public AudioClip[] walkSEs;
+    private AudioSource audioPlayer;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +42,7 @@ public class Patrolman : MonoBehaviour
         missiles = new List<Missile>();//初始化投掷物列表
         animator = GetComponent<Animator>();
         animator.SetBool("IsWalk",true);
+        audioPlayer = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -45,6 +51,27 @@ public class Patrolman : MonoBehaviour
         Move();//每帧朝目标移动
         CheckMissiles();//检查是否有投掷物落地
     }
+
+    private int shouldBePlayedWalkSEID = 0;
+    public void OnWalkFootTouched()
+    {
+        //走路动画中脚着地触发
+        audioPlayer.clip = walkSEs[shouldBePlayedWalkSEID % walkSEs.Length];
+        audioPlayer.volume = 0.2f;
+        audioPlayer.Play();
+        shouldBePlayedWalkSEID++;
+    }
+    private int shouldBePlayedRunSEID = 0;
+    public void OnRunFootTouched()
+    {
+        //跑步动画中脚着地触发
+        audioPlayer.clip = RunSEs[shouldBePlayedRunSEID % RunSEs.Length];
+        audioPlayer.volume = 0.2f;
+        audioPlayer.Play();
+        shouldBePlayedRunSEID++;
+
+    }
+
 
     private void CheckMissiles()
     {

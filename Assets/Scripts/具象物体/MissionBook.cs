@@ -18,6 +18,8 @@ public class MissionBook : Interactive
         bookUI.SetActive(true);//当被唤醒，直接显示任务书的UI
         //随后关闭玩家操控地图
         FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("PlayerInMissionBook");
+        //播放音效
+        GetComponent<AudioSource>().Play();
     }
     public override void Quit()
     {

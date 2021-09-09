@@ -38,6 +38,8 @@ public class Missile : MonoBehaviour
             //再摧毁自身碰撞体
             //Destroy(GetComponent<CapsuleCollider2D>());
             GetComponent<CapsuleCollider2D>().isTrigger = true;
+            //播放着地音效
+            GetComponent<AudioSource>().Play();
         }
     }
 
