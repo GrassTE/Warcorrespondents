@@ -74,24 +74,4 @@ public class IndexRecoder : MonoBehaviour
 
     //修改演出名称的函数，在游戏流程推进的时候用
     public void ChangeStageName(string newName){stageName = newName;}
-
-
-    // //制造一个只读的变量，不要动这些
-    // public class ReadOnlyAttribute : PropertyAttribute{}
-    // [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
-    // public class ReadOnlyDrawer : PropertyDrawer
-    // {
-    //     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-    //     {
-    //         return EditorGUI.GetPropertyHeight(property, label, true);
-    //     }
-
-    //     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-    //     {
-    //         GUI.enabled = false;
-    //         EditorGUI.PropertyField(position, property, label, true);
-    //         GUI.enabled = true;
-    //     }
-    // }
-    // //
 }

@@ -10,6 +10,9 @@ public class AllLinesInfo : MonoBehaviour
     [SerializeField]
     private int needCount;
     public int OKCount = 0;
+    private bool hasPlayed = false;//是否已经触发过修完事件
+    [Tooltip("请拖入修完所有电线后的事件")]
+    public Event endEvent;
     void Start()
     {
         needCount = transform.childCount;
@@ -18,27 +21,13 @@ public class AllLinesInfo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(needCount == OKCount && !hasPlayed)//如果数值表示修完并且没有触发过结束事件
+        {
+            if(endEvent != null)endEvent.OnCall();//触发结束事件
+            hasPlayed = true;//标记为已经触发过结束事件
+        }
     }
 
     public bool AreYouOK(){return (needCount == OKCount);}//返回完成量是不是等于需求量
 
-    // //制造一个只读的变量，不要动这些
-    // public class ReadOnlyAttribute : PropertyAttribute{}
-    // [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
-    // public class ReadOnlyDrawer : PropertyDrawer
-    // {
-    //     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-    //     {
-    //         return EditorGUI.GetPropertyHeight(property, label, true);
-    //     }
-
-    //     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-    //     {
-    //         GUI.enabled = false;
-    //         EditorGUI.PropertyField(position, property, label, true);
-    //         GUI.enabled = true;
-    //     }
-    // }
-    // //
 }

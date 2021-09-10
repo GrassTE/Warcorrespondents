@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
+using UnityEngine.InputSystem.Processors;
 
 public class VeteranSacrifice : Event
 {
@@ -22,6 +23,8 @@ public class VeteranSacrifice : Event
     private bool hasBeenOnCall;//记录事件是否被触发的变量
 
     public WVParallax parallax;
+
+    public AudioSource deadAudio;
 
 
 
@@ -46,6 +49,7 @@ public class VeteranSacrifice : Event
     public IEnumerator SelfOnCall()
     {
         parallax.canParallax = false;
+        deadAudio.Play();
         //1.关闭玩家操作地图
         FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("NullMap");
         //*让老兵转个身防止牺牲后穿模

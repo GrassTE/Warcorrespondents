@@ -72,14 +72,14 @@ public class M_Player : MonoBehaviour
     public void OnPickSE()
     {
         audioPlayer.clip =  pickSE;
-        audioPlayer.volume = 0.8f;
+        audioPlayer.volume = 1f;
         audioPlayer.Play();
     }
     //动画中调用，播放丢出东西的音效
     public void OnThrowSE()
     {
         audioPlayer.clip =  throwSE;
-        audioPlayer.volume = 0.8f;
+        audioPlayer.volume = 1f;
         audioPlayer.Play();
     }
 

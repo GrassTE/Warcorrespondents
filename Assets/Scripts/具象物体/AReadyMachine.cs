@@ -16,9 +16,13 @@ public class AReadyMachine : Interactive
         //交互后，改变玩家形象
         FindObjectOfType<M_Player>().transform.Find("包").gameObject.SetActive(true);
         FindObjectOfType<M_Player>().transform.Find("包带").gameObject.SetActive(true);
+        //播放穿上行囊的音效
+        GetComponent<AudioSource>().Play();
 
-        //随后删除自己
+        //随后删除自己(不要删！不然音效放不出来，我们直接关闭这个物体的碰撞体和图片就可以了)
         FindObjectOfType<M_Player>().catched = null;
-        Destroy(gameObject);
+        // Destroy(gameObject);
+        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<SpriteRenderer>().enabled = false;
     }
 }

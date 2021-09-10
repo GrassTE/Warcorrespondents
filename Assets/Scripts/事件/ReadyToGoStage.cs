@@ -13,6 +13,8 @@ public class ReadyToGoStage : Event
     public GameObject playerOld;
     [Tooltip("拖入摄像机")]
     public CinemachineVirtualCamera Vcamera;
+    [Tooltip("请拖入镜子")]
+    public NormalInvestableItems kagami;
     //多态：玩家准备触发前往第一关时候的多态
     public override void OnCall()
     {
@@ -42,5 +44,8 @@ public class ReadyToGoStage : Event
         //水缸相关
         GameObject watertank = GameObject.Find("水缸");//找到水缸
         watertank.GetComponentInChildren<NormalInvestableItems>().itemName = "准备出发时的水缸";
+
+        //修改镜子的itemName，使得其在改多态下不再能够被触发
+        kagami.itemName = "准备出发幕的镜子";
     }
 }

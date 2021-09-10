@@ -40,8 +40,10 @@ public class NormalInvestableItems : Interactive
             //这项比较特殊，只能这样单独写了，我有罪，这是屎山代码
             isMoving = true;
             FindObjectOfType<AReadyMachine>().m_Collider.enabled = true;
+            //播放移动水缸的音效
+            GetComponent<AudioSource>().Play();
         }
-        else
+        else if(itemName != "准备出发幕的镜子")
         {
             Debug.Log("我触发了"+ gameObject.name +"的对话");
             Flowchart.BroadcastFungusMessage("谈论" + itemName);

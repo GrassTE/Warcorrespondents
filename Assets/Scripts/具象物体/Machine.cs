@@ -23,6 +23,9 @@ public class Machine : Interactive
     [Tooltip("请拖入翻页动画的那个游戏物体")]
     public Animator turnPagesAnimation;
 
+    public AudioSource tearAudio;//撕纸音效
+    public AudioSource OnAudio;//电报机开机音效
+
     void Start()
     {
         codeTextView = m_interface.GetComponentInChildren<Text>();
@@ -51,6 +54,7 @@ public class Machine : Interactive
         if(LinesCheck())//如果线路全通
         {
             m_interface.SetActive(true);//把这个交互对象的界面打开，这里是电报机界面
+            OnAudio.Play();
             ShwoTheSentencesInfo();//初始化展示电报机界面的需要打的句子
             UpdateTheSentencesTextViewStates();//更新一下显示句子TextView的颜色状态
             //更换玩家操作地图，使玩家操作电报机的时候只监听交互键
@@ -174,6 +178,7 @@ public class Machine : Interactive
         int hasClearer = code.IndexOf(".-.-.");
         if(hasClearer != -1)
         {
+            tearAudio.Play();
             Debug.Log("检查到特殊码，清除所有输入内容");
             ClearTheInputAndTempResult();
             //播放翻页动画

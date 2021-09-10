@@ -42,7 +42,7 @@ public class AfterReparedTheMachine : Event
 
     private IEnumerator Process()
     {
-        parallax.canParallax = false;
+        //parallax.canParallax = false;
         //1.关闭玩家操作地图
         FindObjectOfType<PlayerInput>().
         SwitchCurrentActionMap("NullMap");

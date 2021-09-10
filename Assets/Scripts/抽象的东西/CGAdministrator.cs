@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
 using UnityEngine.Video;
+using UnityEngine.InputSystem;
 
 public class CGAdministrator : MonoBehaviour
 {
@@ -56,6 +57,7 @@ public class CGAdministrator : MonoBehaviour
                 try
                 {
                     CG.GetComponent<VideoPlayer>().Play();//开始播放这个CG
+                    FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("NullMap");//使玩家无法操作
                 }
                 catch(System.NullReferenceException)
                 {
