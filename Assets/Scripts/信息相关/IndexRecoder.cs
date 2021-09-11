@@ -42,6 +42,8 @@ public class IndexRecoder : MonoBehaviour
     public string stageName;
     [Tooltip("CG的淡入淡出时间")]
     public float CGFadeTime;
+    [Tooltip("该项决定所有黑幕的持续时间")]
+    public float blackUITime;
 
     void Start()
     {

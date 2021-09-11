@@ -28,7 +28,11 @@ public class Patrolman : MonoBehaviour
     private Animator animator;
     public AudioClip[] RunSEs;
     public AudioClip[] walkSEs;
+    [Tooltip("请拖入敌人被投掷物吸引后的音效")]
+    public AudioClip[] interruptSEs;
     private AudioSource audioPlayer;
+    [Tooltip("拖入父级物体")]
+    public AudioSource interruptSEPlayer;
 
 
 
@@ -93,6 +97,10 @@ public class Patrolman : MonoBehaviour
                 //执行听见动画
                 animator.SetBool("IsListen",true);
                 StartCoroutine("StopListen");//取消听见动画条件
+                //播放听见音效
+                interruptSEPlayer.clip = interruptSEs[(int)Random.Range(0,interruptSEs.Length)];
+                interruptSEPlayer.volume = 0.5f;
+                interruptSEPlayer.Play();
             }
         }
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.UIElements;
 
 public class BackBoom : MonoBehaviour
@@ -32,7 +33,8 @@ public class BackBoom : MonoBehaviour
     void AddLight()
     {
         Vector2 pos = new Vector2(Random.Range(left.position.x,right.position.x),Random.Range(up.position.y,down.position.y));
-        Instantiate(boomLight, pos, Quaternion.identity);
+        var light2D = Instantiate(boomLight, pos, Quaternion.identity).GetComponent<Light2D>();
+        light2D.pointLightInnerRadius = Random.Range(3f, 5.79f);
     }
     
 }

@@ -9,6 +9,8 @@ public class AFakeMachine : Interactive
     //一个假的电报机类，因为“序章-战场”中的电报机不需要实际打码功能，为了方便我这里单独写一些代码
     //继承可交互物体基类
     public AudioSource onAudio;
+    [Tooltip("拖入黑幕游戏物体")]
+    public GameObject blackUI;
     void Start()
     {
         
@@ -32,8 +34,8 @@ public class AFakeMachine : Interactive
             IndexRecoder indexRecoder = FindObjectOfType<IndexRecoder>();
             indexRecoder.ChangeStageName("序章-家中-已打码");
             onAudio.Play();
-            Invoke("loadSceneHome",1.5f);
-            //Debug.Log("转到场景“序章-家中”，给记录员发信息，让“序章-家中”表现为正确状态");
+            blackUI.SetActive(true);
+            Invoke("loadSceneHome",indexRecoder.blackUITime);
         }
         else
         {

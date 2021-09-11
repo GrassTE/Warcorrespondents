@@ -8,6 +8,8 @@ using UnityEngine.InputSystem;
 public class Door : Interactive
 {
     //可交互对象：门的控制类
+    [Tooltip("拖入黑幕")]
+    public GameObject blackUI;
     public override void OnCall()
     {
         //在开门演出的多态，当门被唤醒，显示CG
@@ -22,8 +24,10 @@ public class Door : Interactive
         {
             if(FindObjectOfType<M_Player>().transform.Find("包").gameObject.activeSelf)//如果已经捡起背包
             {
-                //加载第一关场景
-                SceneManager.LoadScene("第一关");
+                // //加载第一关场景
+                // SceneManager.LoadScene("第一关");
+                blackUI.SetActive(true);
+                Invoke("LoadScenen",FindObjectOfType<IndexRecoder>().blackUITime);
             }
             else
             {
@@ -32,5 +36,10 @@ public class Door : Interactive
                 FindObjectOfType<M_Player>().GetComponent<PlayerInput>().SwitchCurrentActionMap("NullMap");
             }
         }
+    }
+
+    private void LoadScenen()
+    {
+        SceneManager.LoadScene("第一关");
     }
 }

@@ -28,6 +28,8 @@ public class Blockhouse : MonoBehaviour
 
     public AudioSource blockHouseAudio;//获取音频对象
     public BlackHouseGunLight blackHouseGunLight;//获取碉堡枪光的脚本
+    private AudioSource audioPlayer;
+    public AudioClip[] warningSounds;
 
     void Start()
     {
@@ -38,6 +40,7 @@ public class Blockhouse : MonoBehaviour
                                 gameObject.AddComponent<ShootingArea>();//给每个子物体挂上射击区的脚本
             //并且把它的脚本送到数组里面，免去以后再遍历拖慢速度
         }
+        audioPlayer = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -67,11 +70,16 @@ public class Blockhouse : MonoBehaviour
         }
     }
 
+    //invoke执行，每隔一段时间改变警示UI的图片
     void ReplaceWarningUIImage()
     {
-        if(!isShooting)
+        if(!isShooting)//如果没在开枪,则把图片改为挥下的
         {
             warningUI.sprite = done;
+            //播放警告音效
+            audioPlayer.clip = warningSounds[(int)Random.Range(0,warningSounds.Length)];
+            audioPlayer.volume = 0.8f;
+            audioPlayer.Play();
         }
         else
         {
