@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using Fungus;
 
 public class Machine : Interactive
 {
@@ -62,7 +63,9 @@ public class Machine : Interactive
         }
         else
         {
-            Debug.Log("还有线路没通");
+            //如果还有线路没通，弹出对话【没修完呢】
+            FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("NullMap");
+            Flowchart.BroadcastFungusMessage("没修完呢");
         }
     }
 
@@ -169,6 +172,10 @@ public class Machine : Interactive
         }
         Debug.Log("翻译的结果是："+result);
         tempTranslateResult = result;
+
+        //开发者捷径，如果翻译结果为"..--.","864246511"，直接判定为打完所有句子
+        if(result == "864246511") OnAllSentenceClear();
+        //
     }
 
     //清除检查者函数。从自身Codeing函数调用，每次有新字符输入的时候就调用。

@@ -9,6 +9,7 @@ public class Veteran : Interactive
     //控制老兵的类
     private MachineGunner gunner;
     private bool hasCalledChat1 = false;//记录自己是否已经呼叫过对话1，即【你想送命？】
+    public bool isDead = false;//记录自己是否已经牺牲
     void Start()
     {
         gunner = FindObjectOfType<MachineGunner>();
@@ -51,9 +52,18 @@ public class Veteran : Interactive
 
     public override void OnCall()
     {
-        //如果能运行到这里，说明敌人已经被击晕了，直接触发对话【你还挺有能耐】
-        FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("NullMap");
-        Flowchart.BroadcastFungusMessage("你还挺有能耐");
+        if(!isDead)//如果还没牺牲，触发对话【你还挺有能耐】
+        {
+            //如果能运行到这里，说明敌人已经被击晕了，直接触发对话【你还挺有能耐】
+            FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("NullMap");
+            Flowchart.BroadcastFungusMessage("你还挺有能耐");
+        }
+        else//若已经牺牲
+        {
+            FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("NullMap");
+            Flowchart.BroadcastFungusMessage("同志安息");
+        }
+       
     }
 
 }

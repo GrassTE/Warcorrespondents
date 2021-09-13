@@ -10,6 +10,8 @@ public class WhenTheCodeAndConversationAreCompleted : Event
     [Tooltip("请拖入黑幕游戏物体")]
     public GameObject blackUI;
     private IndexRecoder indexRecoder;
+    [Tooltip("请拖入序章-战场的BGM")]
+    public AudioClip clip;
     void Start()
     {
         indexRecoder = FindObjectOfType<IndexRecoder>();
@@ -24,6 +26,7 @@ public class WhenTheCodeAndConversationAreCompleted : Event
     public override void  OnCall()
     {
         blackUI.SetActive(true);
+        FindObjectOfType<BGMPlayer>().ChangedTheBGM(clip);
         Invoke("LoadScene",indexRecoder.blackUITime);
     }
 

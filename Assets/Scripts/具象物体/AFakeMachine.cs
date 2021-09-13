@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Fungus;
+using UnityEngine.InputSystem;
 
 public class AFakeMachine : Interactive
 {
@@ -11,6 +13,8 @@ public class AFakeMachine : Interactive
     public AudioSource onAudio;
     [Tooltip("拖入黑幕游戏物体")]
     public GameObject blackUI;
+    [Tooltip("请拖入序章家中前两幕的背景音乐")]
+    public AudioClip clip;
     void Start()
     {
         
@@ -35,12 +39,16 @@ public class AFakeMachine : Interactive
             indexRecoder.ChangeStageName("序章-家中-已打码");
             onAudio.Play();
             blackUI.SetActive(true);
+            FindObjectOfType<BGMPlayer>().ChangedTheBGM(clip);
             Invoke("loadSceneHome",indexRecoder.blackUITime);
         }
         else
         {
             //若还没OK，之后等策划编写新的内容
             Debug.Log("还有线路没有联通");
+            FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("NullMap");
+            Flowchart.BroadcastFungusMessage("没修完呢");
+
         }
     }
 

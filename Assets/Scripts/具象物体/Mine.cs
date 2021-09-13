@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Mine : MonoBehaviour
 {
@@ -8,10 +9,12 @@ public class Mine : MonoBehaviour
     private Animator animator;
 
     public AudioSource boomAudio;//地雷爆炸音效
+    private CinemachineImpulseSource cinemachineImpulseSource;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     // Update is called once per frame
@@ -35,13 +38,16 @@ public class Mine : MonoBehaviour
                 Debug.Log("玩家踩到地雷了");
                 animator.SetBool("IsBoom",true);
                 boomAudio.Play();
+                cinemachineImpulseSource.GenerateImpulse();
                 break;
             case "投掷物"://如果是投掷物，销毁投掷物和自己
                 Debug.Log("投掷物砸到地雷了");
                 Destroy(other.gameObject);
                 animator.SetBool("IsBoom",true);
                 boomAudio.Play();
+                cinemachineImpulseSource.GenerateImpulse();
                 break;
         }
+
     }
 }

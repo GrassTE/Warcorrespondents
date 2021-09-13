@@ -65,7 +65,7 @@ public class IndexRecoder : MonoBehaviour
         codeBook.Add("----.","9");
         codeBook.Add("-----","0");
 
-        stageName = "";
+        stageName = "序章-家中-未打码";
     }
 
     // Update is called once per frame

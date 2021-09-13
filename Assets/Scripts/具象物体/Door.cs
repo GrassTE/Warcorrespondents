@@ -10,6 +10,8 @@ public class Door : Interactive
     //可交互对象：门的控制类
     [Tooltip("拖入黑幕")]
     public GameObject blackUI;
+    [Tooltip("拖入第一关的BGM")]
+    public AudioClip clip;
     public override void OnCall()
     {
         //在开门演出的多态，当门被唤醒，显示CG
@@ -27,6 +29,7 @@ public class Door : Interactive
                 // //加载第一关场景
                 // SceneManager.LoadScene("第一关");
                 blackUI.SetActive(true);
+                FindObjectOfType<BGMPlayer>().ChangedTheBGM(clip);
                 Invoke("LoadScenen",FindObjectOfType<IndexRecoder>().blackUITime);
             }
             else

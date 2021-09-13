@@ -20,6 +20,10 @@ public class MachineGunner : MonoBehaviour
     public PolygonCollider2D stone;//
 
     public GunLight gunLight;//枪口的光闪烁控制脚本
+    [Tooltip("拖入老兵旁边的投掷物堆")]
+    public BoxCollider2D heap;
+
+    public Shake shake;
 
 
     void Start()
@@ -45,6 +49,7 @@ public class MachineGunner : MonoBehaviour
             //GetComponent<SpriteRenderer>().color = Color.red;
             //播放开火动画
             gunnerAudio.Play();
+            shake.is_shake = true;
             gunLight.isFire = true;
             person.SetBool("IsFiring",true);
             gun.SetBool("IsFiring",true);
@@ -72,6 +77,7 @@ public class MachineGunner : MonoBehaviour
     {
         if(other.gameObject.tag == "投掷物")
         {
+            shake.is_shake = false;//控制石堆震动
             gunLight.isFire = false;
             gunnerAudio.Stop();//关闭音效
             hasBeHit = true;//标记自身已被击中
@@ -91,7 +97,37 @@ public class MachineGunner : MonoBehaviour
             }
             //关闭挡枪石头的碰撞体
             stone.enabled = false;
+            //关闭投掷物堆的触发器
+            heap.enabled = false;
+            
         }
+    }
+
+    //由于机枪手这里大改，必须重新写底层代码了。这里是炸弹引爆后的环节
+    public void BoomerHasBoom()
+    {
+        gunLight.isFire = false;
+        shake.is_shake = false;//控制石堆震动
+        gunnerAudio.Stop();//关闭音效
+        hasBeHit = true;//标记自身已被击中
+        //关闭开火动画
+        gun.SetBool("IsFiring",false);
+        groundFireAnimation.SetBool("IsFiring",false);
+        groundFireAnimation2.SetBool("IsFiring",false);
+        gunFireAnimation.SetBool("IsFiring",false);
+        //播放死亡动画
+        person.SetBool("IsDead",true);
+        //把上坑点2激活
+        UpPoint2.SetActive(true);
+        //关闭自身碰撞体
+        foreach(BoxCollider2D collider in GetComponents<BoxCollider2D>())
+        {
+            collider.enabled = false;
+        }
+        //关闭挡枪石头的碰撞体
+        stone.enabled = false;
+        //关闭投掷物堆的触发器
+        heap.enabled = false;
     }
     
     public bool AreYouOK(){return !hasBeHit;}//返回机枪手状态是否良好，如果被打，则返回状态不好

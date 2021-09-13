@@ -13,6 +13,8 @@ public class AfterCoding : Event
     public BombingArea bombingArea;
     [Tooltip("请拖入黑幕")]
     public GameObject BlackUI;
+    [Tooltip("请拖第二关BGM")]
+    public AudioClip clip;
     void Start()
     {
         OnCall();
@@ -48,6 +50,7 @@ public class AfterCoding : Event
         yield return new WaitForSeconds(1.1f + 3f);//炸死动画1.1秒 + 3秒留给玩家反应
         //黑屏（一张铺满的黑色UI显示）
         BlackUI.SetActive(true);
+        FindObjectOfType<BGMPlayer>().ChangedTheBGM(clip);
         yield return new WaitForSeconds(2f);//两秒后，转移场景
         SceneManager.LoadScene("第二关");
     }

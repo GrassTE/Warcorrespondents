@@ -78,8 +78,9 @@ public class VeteranSacrifice : Event
         target = origin;
         //7.恢复玩家操作地图
         FindObjectOfType<PlayerInput>().SwitchCurrentActionMap("PlayerNormal");
-        //8.关闭老兵碰撞体方便玩家回头查看
+        //8.打开老兵触发器方便玩家回头查看
         FindObjectOfType<Veteran>().GetComponent<BoxCollider2D>().isTrigger = true;
+        FindObjectOfType<Veteran>().isDead = true;
         //9.标记自己已经被触发过
         hasBeenOnCall = true;
         parallax.canParallax = true;

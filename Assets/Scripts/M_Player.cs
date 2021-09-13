@@ -381,7 +381,7 @@ public class M_Player : MonoBehaviour
         M_Animator.SetBool("throwingState",false);
         M_Animator.SetBool("ReadyToThrow",false);
         //为了解决问题需要到下一帧关闭丢出动画指令
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(1f);
         M_Animator.SetBool("NowThrow",false);
     }
 

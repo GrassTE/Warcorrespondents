@@ -78,7 +78,7 @@ public class Blockhouse : MonoBehaviour
             warningUI.sprite = done;
             //播放警告音效
             audioPlayer.clip = warningSounds[(int)Random.Range(0,warningSounds.Length)];
-            audioPlayer.volume = 0.8f;
+            audioPlayer.volume = 0.5f;
             audioPlayer.Play();
         }
         else
